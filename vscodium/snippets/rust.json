@@ -1,0 +1,39 @@
+{
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+    // Placeholders with the same ids are connected.
+	"for cycle": {
+		"prefix": "for",
+		"body": [
+			"for $1 in $2 {",
+			"    $0",
+			"}",
+		],
+		"description": "For cycle"
+	},
+	"println!": {
+		"prefix": "println!",
+		"body": [
+			"println!(\"{$1}\"$2);",
+		],
+		"description": "Print a new line"
+	},
+	"test_result": {
+		"prefix": "test_result",
+		"body": [
+			"#[test]",
+			"fn test_$1() -> Result<(), String> {",
+			"\t$0\n}",
+		],
+		"description": "Test template that returns Result<(), String>"
+	},
+	"test": {
+		"prefix": "test",
+		"body": [
+			"#[test]",
+			"fn test_$1() {",
+			"\t$0",
+			"}"
+		],
+		"description": "Test template"
+	},
+}

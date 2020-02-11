@@ -1,0 +1,197 @@
+{
+    /// Extensions:
+    // Customize UI
+    // EditorConfig
+    // Highlight
+    // Hungry Delete
+    // Markdown preview enhanced
+    // TabOut
+    //
+    /// Themes:
+    // Tokyo Night
+    // Yi light
+    //
+    /// Language specific:
+    //
+    // (RUST)     ra-lsp
+    // (HASKELL)  Haskelly, Haskell Syntax Highlighting
+    //
+    //
+    // ----
+    //  RA
+    // ----
+    "rust-analyzer.enableCargoWatchOnStartup": "enabled",
+    "rust-analyzer.enableEnhancedTyping": false,
+    "rust-analyzer.displayInlayHints": false,
+    "rust-analyzer.cargo-watch.command": "clippy",
+    "rust-analyzer.featureFlags": {
+        // Automatically insert `()` and `<>` when completing functions and types.
+        "completion.insertion.add-call-parenthesis": true,
+        // Enable completions like `.if`, `.match`, etc.
+        "completion.enable-postfix": true,
+        // Show notification when workspace is fully loaded
+        "notifications.workspace-loaded": false
+    },
+    // ---------------------------
+    //  Telemetry && Auto-updates
+    // ---------------------------
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "extensions.autoUpdate": false,
+    "extensions.autoCheckUpdates": false,
+    "update.mode": "manual",
+    "update.showReleaseNotes": false,
+    "telemetry.enableCrashReporter": false,
+    "npm.fetchOnlinePackageInfo": false,
+    // ----------
+    //  Terminal
+    // ----------
+    "terminal.integrated.drawBoldTextInBrightColors": false,
+    "terminal.integrated.rendererType": "canvas",
+    "terminal.integrated.cursorStyle": "block",
+    "terminal.integrated.fontSize": 16,
+    "terminal.fontFamily": "Fira Mono Retina",
+    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.fontWeight": "200",
+    "terminal.integrated.fontWeightBold": "400",
+    // --------
+    //  Window
+    // --------
+    "window.restoreWindows": "all",
+    "window.menuBarVisibility": "toggle",
+    "window.zoomLevel": 0,
+    "window.titleBarStyle": "custom",
+    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}",
+    "window.enableMenuBarMnemonics": false,
+    // -----------
+    //  Workbench
+    // -----------
+    "workbench.startupEditor": "none",
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.panel.defaultLocation": "right",
+    "workbench.editor.enablePreview": false,
+    "workbench.activityBar.visible": false,
+    "workbench.statusBar.visible": true,
+    "workbench.settings.editor": "json",
+    "workbench.settings.useSplitJSON": false,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.colorTheme": "Tokyo Night Storm",
+    "workbench.colorCustomizations": {
+        "[Tokyo Night Storm]": {
+            "terminal.ansiBrightBlack": "#da0000"
+        }
+    },
+    // ----------
+    //  Explorer
+    // ----------
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "vendor": true,
+        "**/dist": true,
+        "**/target/**": true
+    },
+    "breadcrumbs.enabled": true,
+    // --------
+    //  Editor
+    // --------
+    "editor.cursorBlinking": "solid",
+    "editor.cursorStyle": "block",
+    "editor.snippetSuggestions": "inline",
+    "editor.formatOnSave": true,
+    "editor.multiCursorPaste": "spread",
+    "editor.folding": true,
+    "editor.scrollBeyondLastLine": true,
+    "editor.codeLens": true,
+    "editor.lightbulb.enabled": false,
+    "editor.minimap.enabled": false,
+    "editor.fontFamily": "Fira Code Retina",
+    "editor.fontSize": 16,
+    "editor.fontLigatures": true,
+    "editor.tokenColorCustomizations": {
+        "[Yi Light]": {
+            "comments": "#be2020",
+        },
+        "[Tokyo Night Storm]": {
+            "comments": "#b5dbe8"
+        },
+    },
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.verticalScrollbarSize": 0,
+    // -------------
+    //  CustomizeUI
+    // -------------
+    "customizeUI.font.monospace": "Fira Code",
+    "customizeUI.font.regular": "Fira Code",
+    "customizeUI.fontSizeMap": {
+        "13px": "14px",
+        "monospace": "14px"
+    },
+    "customizeUI.stylesheet": {
+        ".tabs-container .tab": "height: 40px !important",
+        ".tabs": "height: 35px !important",
+        "[aria-label='Editor actions']": "display: none !important;",
+    },
+    // -----
+    //  Vim
+    // -----
+    "editor.lineNumbers": "relative",
+    "vim.camelCaseMotion.enable": true,
+    "vim.highlightedyank.enable": true,
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+    ],
+    // -----------
+    //  Highlight
+    // -----------
+    "highlight.regexes": {
+        "(// ?TODO:?)(.*)": [
+            {
+                "overviewRulerColor": "#ddcc00",
+                "backgroundColor": "#ddcc00",
+                "color": "#1f1f1f",
+                "fontWeight": "bold"
+            },
+            {
+                "backgroundColor": "#ddcc00",
+                "color": "#1f1f1f"
+            }
+        ],
+        "(// ?FIXME:?)(.*)": [
+            {
+                "overviewRulerColor": "#dd0000",
+                "backgroundColor": "#dd0000",
+                "color": "#1f1f1f",
+                "fontWeight": "bold"
+            },
+            {
+                "backgroundColor": "#dd0000",
+                "color": "#1f1f1f"
+            }
+        ],
+        "(// )(@\\w+)": [
+            {},
+            {
+                "color": "#4de0ff"
+            }
+        ]
+    },
+}
