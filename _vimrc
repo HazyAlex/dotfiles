@@ -1,23 +1,13 @@
-" Install Vim (x64!) with :echo has('python3') for Rust auto-complete!
-
 " Set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'altercation/vim-colors-solarized'
-    Plugin 'ycm-core/YouCompleteMe'           "Rust
-    Plugin 'prabirshrestha/async.vim'         "Rust
-    Plugin 'prabirshrestha/vim-lsp'           "Rust
+
+    Plugin 'tpope/vim-surround'
 call vundle#end()
 
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-        \ 'whitelist': ['rust'],
-        \ })
-endif
 
 
 " -----------------------
@@ -42,7 +32,7 @@ set cursorline " Show a dark outline on the current line
 
 set background=light
 colorscheme solarized
-set guifont=Consolas:h15 "TODO: Change font
+set guifont=Fira\ Code\ Retina:h13
 
 
 " Resize splits when the window is resized
@@ -71,10 +61,7 @@ set showmatch
 set incsearch "Search as characters are entered
 set hlsearch  "Highlight matches
 
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
-
+set noesckeys
 
 " ---------------------------------------
 "  Turn persistent undo on
@@ -93,13 +80,6 @@ endtry
 " --------
 "   MAPS
 " --------
-noremap <leader>h :LspHover<CR>
-noremap <leader>g :LspDefinition<CR>
-noremap <leader>r :LspReferences<CR>
-noremap <leader>n :LspNextError<CR>
-noremap <leader>p :LspPreviousError<CR>
-noremap <leader>f :LspDocumentFormat<CR>
-noremap <F6> :LspRename<CR>
 
 " Move visual blocks with > and <
 vnoremap < <gv
@@ -113,8 +93,3 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
-" Use hjkl
-noremap <up> <C-w><up>
-noremap <down> <C-w><down>
-noremap <left> <C-w><left>
-noremap <right> <C-w><right> 
