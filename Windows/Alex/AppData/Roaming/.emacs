@@ -16,11 +16,14 @@
 
 
 (setq inhibit-startup-screen t)
+(setq inhibit-startup-message t)
+(put 'inhibit-startup-echo-area-message 'saved-value t)
+(setq inhibit-startup-echo-area-message (user-login-name))
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode -1)
 (show-paren-mode t)
-(set-frame-font "Fira Code Retina-13" nil t)
+(set-frame-font "Fira Code Medium-13" nil t)
 
 (setq backup-directory-alist
 `((".*" . ,temporary-file-directory)))
@@ -31,10 +34,13 @@
 
 (setq visible-bell 1)
 
-(recentf-mode 1)
-(setq recentf-max-menu-items 25)
-(setq recentf-max-saved-items 25)
-(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+(use-package recentf
+    :defer 1
+    :bind ("\C-x\ \C-r" . recentf-open-files)
+    :config
+        (setq recentf-max-menu-items 25)
+        (setq recentf-max-saved-items 25)
+        (setq recentf-keep '(file-remote-p file-readable-p)))
 
 (prefer-coding-system 'utf-8)
 (setq coding-system-for-read 'utf-8)
@@ -113,7 +119,7 @@
     ("#8f4e8b" "#8f684e" "#c3a043" "#397460" "#54ab8e" "#20a6ab" "#3573b1" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (ox-gfm spacemacs-theme hungry-delete solarized-theme evil markdown-mode tramp use-package company company-c-headers company-math org-bullets smart-hungry-delete which-key smex helm-smex)))
+    (linum-relative ox-gfm spacemacs-theme hungry-delete solarized-theme evil markdown-mode tramp use-package company company-c-headers company-math org-bullets smart-hungry-delete which-key smex helm-smex)))
  '(vc-annotate-background "#f9f9f9")
  '(vc-annotate-color-map
    (quote

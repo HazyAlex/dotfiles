@@ -1,0 +1,17 @@
+[
+    {
+        "key": "ctrl+d",
+        "command": "macros.scrollDownAndCenter",
+        "when": "editorTextFocus && neovim.mode == normal"
+    },
+    {
+        "key": "ctrl+u",
+        "command": "macros.scrollUpAndCenter",
+        "when": "editorTextFocus && neovim.mode == normal"
+    },
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorTextFocus && neovim.mode == insert"
+    }
+]

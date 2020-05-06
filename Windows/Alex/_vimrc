@@ -3,9 +3,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
-    Plugin 'altercation/vim-colors-solarized'
 
     Plugin 'tpope/vim-surround'
+    Plugin 'junegunn/vim-easy-align'
+
+    Plugin 'mhartington/oceanic-next'
 call vundle#end()
 
 
@@ -30,8 +32,8 @@ syntax on
 
 set cursorline " Show a dark outline on the current line
 
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme OceanicNext
 set guifont=Fira\ Code\ Retina:h13
 
 
@@ -92,4 +94,10 @@ nnoremap k gk
 inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 

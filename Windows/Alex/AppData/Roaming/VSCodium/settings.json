@@ -1,21 +1,27 @@
 {
-    /// Extensions:
-    // Customize UI
-    // EditorConfig
-    // Highlight
-    // Hungry Delete
-    // Markdown preview enhanced
-    // TabOut
+    /// Extensions
     //
-    /// Themes:
-    // Tokyo Night
+    /// Movement:
+    // Neo Vim
+    // Hungry Delete
+    // TabOut
+    // Center Editor Window (SCROLLING in Neovim)
+    // Macros               (SCROLLING in Neovim)
+    //
+    /// Themes/Customization:
+    // Customize UI
+    // Highlight
     // Yi light
+    // Anirak
+    // Slime
     //
     /// Language specific:
     //
-    // (RUST)     ra-lsp
-    // (HASKELL)  Haskelly, Haskell Syntax Highlighting
-    //
+    // (C++)       c/c++
+    // (RUST)      ra-lsp
+    // (Qt/Python) Python + Qt for Python + Pyright + Python Indent + Visual Studio Intellisense
+    // (HASKELL)   Haskelly, Haskell Syntax Highlighting
+    // (Markdown)  Markdown preview enhanced
     //
     // ----
     //  RA
@@ -25,17 +31,28 @@
     "rust-analyzer.displayInlayHints": false,
     "rust-analyzer.cargo-watch.command": "clippy",
     "rust-analyzer.featureFlags": {
-        // Automatically insert `()` and `<>` when completing functions and types.
-        "completion.insertion.add-call-parenthesis": true,
-        // Enable completions like `.if`, `.match`, etc.
-        "completion.enable-postfix": true,
-        // Show notification when workspace is fully loaded
-        "notifications.workspace-loaded": false
+         // Automatically insert `()` and `<>` when completing functions and types.
+         "completion.insertion.add-call-parenthesis": true,
+         // Enable completions like `.if`, `.match`, etc.
+         "completion.enable-postfix": true,
+         // Show notification when workspace is fully loaded
+         "notifications.workspace-loaded": false
     },
+    // -------------
+    //  Python (Qt)
+    // -------------
+    "qtForPython.path.designer": "C:\\Qt\\5.14.2\\mingw73_64\\bin\\designer.exe",
+    "qtForPython.path.pyrcc": "pyside2-rcc.exe -o \"${fileBasenameNoExtension}_rc.py\"",
+    "qtForPython.path.pyuic": "pyside2-uic.exe -o \"${fileDirname}\\ui_${fileBasenameNoExtension}.py\"",
+    "python.experiments.enabled": false,
+    "vsintellicode.python.completionsEnabled": true,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.jediEnabled": false,
     // ---------------------------
     //  Telemetry && Auto-updates
     // ---------------------------
     "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.enableExperiments": false,
     "extensions.autoUpdate": false,
     "extensions.autoCheckUpdates": false,
     "update.mode": "manual",
@@ -45,6 +62,7 @@
     // ----------
     //  Terminal
     // ----------
+    "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
     "terminal.integrated.drawBoldTextInBrightColors": false,
     "terminal.integrated.rendererType": "canvas",
     "terminal.integrated.cursorStyle": "block",
@@ -68,17 +86,16 @@
     "workbench.startupEditor": "none",
     "workbench.editor.tabSizing": "shrink",
     "workbench.panel.defaultLocation": "right",
-    "workbench.editor.enablePreview": false,
-    "workbench.activityBar.visible": false,
     "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": false,
     "workbench.settings.editor": "json",
     "workbench.settings.useSplitJSON": false,
     "workbench.editor.highlightModifiedTabs": true,
-    "workbench.colorTheme": "Tokyo Night Storm",
+    "workbench.colorTheme": "Slime",
     "workbench.colorCustomizations": {
         "[Tokyo Night Storm]": {
             "terminal.ansiBrightBlack": "#da0000"
-        }
+        },
     },
     // ----------
     //  Explorer
@@ -94,14 +111,17 @@
         "**/target/**": true
     },
     "breadcrumbs.enabled": true,
+    "search.quickOpen.history.filterSortOrder": "recency",
+    //"editor.definitionLinkOpensInPeek": "true",
     // --------
     //  Editor
     // --------
     "editor.cursorBlinking": "solid",
     "editor.cursorStyle": "block",
-    "editor.snippetSuggestions": "inline",
     "editor.formatOnSave": true,
     "editor.multiCursorPaste": "spread",
+    "editor.snippetSuggestions": "top",
+    "editor.suggestSelection": "first",
     "editor.folding": true,
     "editor.scrollBeyondLastLine": true,
     "editor.codeLens": true,
@@ -112,11 +132,11 @@
     "editor.fontLigatures": true,
     "editor.tokenColorCustomizations": {
         "[Yi Light]": {
-            "comments": "#be2020",
+            "comments": "#be2020"
         },
         "[Tokyo Night Storm]": {
             "comments": "#b5dbe8"
-        },
+        }
     },
     "editor.scrollbar.horizontal": "hidden",
     "editor.scrollbar.vertical": "hidden",
@@ -124,8 +144,8 @@
     // -------------
     //  CustomizeUI
     // -------------
-    "customizeUI.font.monospace": "Fira Code",
-    "customizeUI.font.regular": "Fira Code",
+    "customizeUI.font.monospace": "Fira Code Retina",
+    "customizeUI.font.regular": "Fira Code Retina",
     "customizeUI.fontSizeMap": {
         "13px": "14px",
         "monospace": "14px"
@@ -133,32 +153,57 @@
     "customizeUI.stylesheet": {
         ".tabs-container .tab": "height: 40px !important",
         ".tabs": "height: 35px !important",
-        "[aria-label='Editor actions']": "display: none !important;",
+        "[aria-label='Editor actions']": "display: none !important;"
     },
-    // -----
-    //  Vim
-    // -----
+    // --------
+    //  NeoVim
+    // --------
     "editor.lineNumbers": "relative",
-    "vim.camelCaseMotion.enable": true,
-    "vim.highlightedyank.enable": true,
-    "vim.visualModeKeyBindingsNonRecursive": [
-        {
-            "before": [
-                ">"
-            ],
-            "commands": [
-                "editor.action.indentLines"
-            ]
-        },
-        {
-            "before": [
-                "<"
-            ],
-            "commands": [
-                "editor.action.outdentLines"
-            ]
-        },
-    ],
+    "vscode-neovim.neovimPath": "C:\\Program Files\\Neovim\\bin\\nvim.exe",
+    "vscode-neovim.neovimInitPath": "C:\\Users\\Alex\\AppData\\Local\\nvim\\init.vim",
+    "vscode-neovim.useCtrlKeysForInsertMode": true, // TODO: ?
+    "vscode-neovim.mouseSelectionStartVisualMode": true,
+    // -------
+    //  C/C++
+    // -------
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.clang_format_fallbackStyle": "{BasedOnStyle: WebKit, UseTab: Never, IndentWidth: 4}",
+    "C_Cpp.enhancedColorization": "Enabled",
+    "C_Cpp.suggestSnippets": false,
+    // -----------
+    //  Scrolling
+    // -----------
+    //
+    // The "Neovim" extension leaves the scrolling up
+    //  to VSCodium but it's awful so I replaced it.
+    // (Needed extensions: macros, center-editor-window)
+    //
+    "macros.list": {
+        "scrollDownAndCenter": [
+            {
+                "command": "cursorMove",
+                "args": {
+                    "to": "down",
+                    "by": "line",
+                    "value": 20,
+                    "revealCursor": true
+                }
+            },
+            "center-editor-window.center"
+        ],
+        "scrollUpAndCenter": [
+            {
+                "command": "cursorMove",
+                "args": {
+                    "to": "up",
+                    "by": "line",
+                    "value": 20,
+                    "revealCursor": true
+                }
+            },
+            "center-editor-window.center"
+        ]
+    },
     // -----------
     //  Highlight
     // -----------
@@ -194,4 +239,6 @@
             }
         ]
     },
+    "markdown-preview-enhanced.codeBlockTheme": "github.css",
+    "markdown-preview-enhanced.usePandocParser": true
 }
