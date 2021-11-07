@@ -1,0 +1,117 @@
+[
+    // Notes
+    //  - Ctrl + k, Ctrl + s -> Show keyboard shortcuts with keybindings
+    //
+    // Terminal toggle
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus"
+    },
+    // Explorer view toggle
+    {
+        "key": "ctrl+0",
+        "command": "workbench.explorer.fileView.focus",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+0",
+        "command": "workbench.action.closeSidebar",
+        "when": "!editorTextFocus"
+    },
+    {
+        "key": "ctrl+0",
+        "command": "workbench.explorer.fileView.focus",
+        "when": "panelFocus"
+    },
+    // Disable ctrl+2 (split)
+    {
+        "key": "ctrl+2",
+        "command": ""
+    },
+    // Split editor
+    {
+        "key": "shift+\\",
+        "command": "workbench.action.splitEditor",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+    },
+    // Expand current file to fit the screen (when split)
+    {
+        "key": "shift+f",
+        "command": "workbench.action.toggleEditorWidths",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+    },
+    // Vim shift lines
+    {
+        "key": "shift+j",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+    },
+    {
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && vim.mode == 'Normal'",
+        "key": "shift+k"
+    },
+    // Multiple cursors
+    {
+        "key": "ctrl+d",
+        "command": "editor.action.addSelectionToNextFindMatch",
+        "when": "editorTextFocus && vim.mode == 'Insert' || vim.mode == 'Visual'"
+    },
+    {
+        "key": "ctrl+shift+d",
+        "command": "editor.action.moveSelectionToNextFindMatch",
+        "when": "editorTextFocus && vim.mode == 'Visual'"
+    },
+    // Tab out or reident extension
+    {
+        "key": "tab",
+        "command": "tabOutOrReindent",
+        "when": "editorTextFocus && vim.mode =='Insert' && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible && !inSnippetMode"
+    },
+    // Fold on org-mode documents
+    {
+        "key": "tab",
+        "command": "editor.toggleFold",
+        "when": "editorTextFocus && vim.mode == 'Normal' && editorLangId == org"
+    },
+    // Follow links on Foam/Markdown documents
+    {
+        "key": "ctrl+g",
+        "command": "editor.action.openLink",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+g",
+        "command": "editor.action.openLink",
+        "when": "editorTextFocus && vim.mode == 'Normal'"
+    }
+]
+
+/*
+// Move visually:
+{
+  "key": "up",
+  "command": "cursorUp",
+  "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+},
+{
+  "key": "down",
+  "command": "cursorDown",
+  "when": "editorTextFocus && vim.active && !inDebugRepl && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+},
+{
+  "key": "k",
+  "command": "cursorUp",
+  "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+},
+{
+  "key": "j",
+  "command": "cursorDown",
+  "when": "editorTextFocus && vim.active && !inDebugRepl && vim.mode == 'Normal' && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
+}
+*/

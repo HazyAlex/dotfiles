@@ -1,0 +1,366 @@
+{
+    /// Extensions
+    //
+    /// Movement:
+    //    * Vim
+    //    * Hungry Delete
+    //    * Tab Out or Reindent
+    //
+    /// Visual customization:
+    //    * Project Dashboard
+    //    * Customize UI
+    //    * Highlight
+    //    * Error Lens
+    //    * TODO Highlight
+    //
+    /// Themes
+    //    * Make Apps Theme, Relaxed, Slime, Snazzy Light, Kary Pro
+    //
+    //
+    /// Language specific:
+    //    * (Foam)      Foam for VSCode, Markdown All in One, Markdown Notes, Markdown Preview Enhanced, Paste Image, Spell Right
+    //    * (Org)       Auto fold, Org mode
+    //    * (C++)       c/c++, clang-format
+    //    * (RUST)      rust-analyzer
+    //    * (Markdown)  Markdown preview enhanced
+    //    * (JS)        Prettier, Svelte, Vetur
+
+    // ----
+    //  RA
+    // ----
+    "rust-analyzer.inlayHints.parameterHints": false,
+    "rust-analyzer.inlayHints.typeHints": false,
+    "rust-analyzer.completion.postfix.enable": true,
+    "rust-analyzer.inlayHints.chainingHints": false,
+    "rust-analyzer.lens.enable": true,
+    "rust-analyzer.lens.run": true,
+    "rust-analyzer.notifications.cargoTomlNotFound": false,
+    // ---------------------------
+    //  Telemetry && Auto-updates
+    // ---------------------------
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "workbench.enableExperiments": false,
+    "extensions.autoUpdate": false,
+    "extensions.autoCheckUpdates": false,
+    "update.mode": "manual",
+    "update.showReleaseNotes": true,
+    "telemetry.telemetryLevel": "off",
+    "npm.fetchOnlinePackageInfo": false,
+    // ----------
+    //  Terminal
+    // ----------
+    // https://code.visualstudio.com/updates/v1_61#_custom-title-and-description
+    "terminal.integrated.shellArgs.windows": ["-NoLogo"],
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "args": ["-NoLogo"]
+        }
+    },
+    "terminal.integrated.tabs.enabled": false,
+    "terminal.integrated.localEchoLatencyThreshold": -1,
+    "terminal.integrated.scrollback": 2000,
+    "terminal.integrated.showLinkHover": true,
+    //
+    "terminal.integrated.cursorStyle": "block",
+    "terminal.integrated.fontSize": 16,
+    "terminal.fontFamily": "Fira Mono Retina",
+    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.fontWeight": "200",
+    "terminal.integrated.fontWeightBold": "400",
+    // --------
+    //  Window
+    // --------
+    "window.restoreWindows": "one", // TODO: Try it
+    "window.titleBarStyle": "custom",
+    "window.menuBarVisibility": "classic",
+    "window.customMenuBarAltFocus": false,
+    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}",
+    // -----------
+    //  Workbench
+    // -----------
+    "workbench.panel.opensMaximized": "preserve",
+    "workbench.startupEditor": "none",
+    "workbench.editor.tabSizing": "shrink",
+    "workbench.sideBar.location": "right",
+    "workbench.tree.indent": 20,
+    "workbench.tree.renderIndentGuides": "onHover",
+    "workbench.panel.defaultLocation": "right",
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": false,
+    "workbench.settings.editor": "json",
+    "workbench.list.smoothScrolling": false,
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.untitled.hint": "hidden",
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.colorCustomizations": {
+        "[Relaxed]": {
+            "textLink.activeForeground": "#e06c75",
+            "textLink.foreground": "#41a6d9"
+        },
+        "[Quiet Light]": {
+            "statusBar.background": "#ede8ef",
+            "statusBar.foreground": "#5e5e5e"
+        },
+        "[Snazzy Light]": {
+            "statusBar.background": "#3a3a3a",
+            "terminal.ansiBrightBlack": "#008f00",
+            "terminal.ansiBrightYellow": "#cf9000",
+            "terminal.ansiBrightGreen": "#444444"
+        },
+        "[Kary Pro Colors － Dark]": {
+            "dropdown.background": "#202020",
+            "statusBar.background": "#1A1A1A",
+            "statusBar.foreground": "#CECECE",
+            "statusBar.noFolderBackground": "#1A1A1A",
+            "statusBar.noFolderForeground": "#CECECE",
+            //"tab.activeBorder": "#1A1ABF",
+            "editorCursor.background": "#1A1A1A",
+            "terminal.background": "#1A1A1A",
+            "menu.foreground": "#CECECE"
+        },
+        "[Kary Pro Colors － Light]": {
+            "menu.background": "#F7F7F7",
+            "statusBar.background": "#F7F7F7",
+            "statusBar.foreground": "#000",
+            "statusBar.noFolderBackground": "#F7F7F7",
+            "statusBar.noFolderForeground": "#000",
+            "editorCursor.foreground": "#313131",
+            "terminal.background": "#F7F7F7",
+            "terminalCursor.foreground": "#313131"
+        }
+    },
+    "editor.tokenColorCustomizations": {
+        "[Make Apps Theme]": {
+            "comments": {
+                "foreground": "#6C7A80",
+                "fontStyle": ""
+            }
+        },
+        "[Yi Light]": {
+            "comments": "#be2020"
+        },
+        "[Tokyo Night Storm]": {
+            "comments": "#b5dbe8"
+        },
+        "[Kary Pro Colors － Light]": {
+            "comments": "#A7A4A2"
+        }
+    },
+    // ----------
+    //  Explorer
+    // ----------
+    "breadcrumbs.enabled": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "vendor": true,
+        "**/dist": true,
+        "**/target/**": true
+    },
+    "scm.alwaysShowRepositories": true,
+    "search.quickOpen.history.filterSortOrder": "recency",
+    "editor.definitionLinkOpensInPeek": false,
+    // --------
+    //  Editor
+    // --------
+    "editor.cursorBlinking": "solid",
+    "editor.cursorStyle": "block",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.multiCursorPaste": "spread",
+    "editor.snippetSuggestions": "inline",
+    "editor.suggestSelection": "first",
+    "editor.suggest.insertMode": "insert",
+    "editor.autoClosingDelete": "always",
+    "editor.folding": true,
+    "editor.scrollBeyondLastLine": true,
+    "editor.codeLens": true,
+    "editor.renderWhitespace": "trailing",
+    "editor.lightbulb.enabled": false,
+    "editor.minimap.enabled": false,
+    "editor.fontFamily": "Iosevka Regular",
+    "editor.fontSize": 21,
+    "editor.fontLigatures": true,
+    "editor.accessibilitySupport": "off",
+    "editor.scrollbar.horizontal": "hidden",
+    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.verticalScrollbarSize": 0,
+    // -----
+    //  VIM
+    // -----
+    "editor.lineNumbers": "relative",
+    "vim.cursorStylePerMode.insert": "line",
+    "vim.foldfix": true,
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.color": "rgba(250, 250, 100, 0.3)",
+    "vim.highlightedyank.duration": 280,
+    "vim.useCtrlKeys": true,
+    "vim.leader": "<space>",
+    "vim.useSystemClipboard": false,
+    // ------
+    //  Foam
+    // ------
+    "markdown.preview.breaks": true,
+    "foam.edit.linkReferenceDefinitions": "off",
+    "foam.openDailyNote.onStartup": false,
+    "foam.openDailyNote.directory": "journal",
+    "foam.openDailyNote.titleFormat": "fullDate",
+    "foam.decorations.links.enable": true,
+    "foam.logging.level": "warn",
+    "foam.dateSnippets.afterCompletion": "navigateToNote",
+    "pasteImage.path": "${projectRoot}/attachments",
+    "pasteImage.showFilePathConfirmInputBox": true,
+    "spellright.notificationClass": "warning",
+    "spellright.language": ["en", "pt"],
+    "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+    "anki.log": "off",
+    "anki.defaultDeck": "Notes",
+    // -------------
+    //  CustomizeUI
+    // -------------
+    "customizeUI.font.monospace": "Iosevka Regular",
+    "customizeUI.font.regular": "Iosevka Regular",
+    "customizeUI.fontSizeMap": {
+        "13px": "15px",
+        "monospace": "15px",
+        "tab-title": "11px"
+    },
+    "customizeUI.stylesheet": {
+        ".tabs-container .tab": "height: 27px !important;",
+        ".tabs": "height: 27px !important;",
+        ".tab > .monaco-icon-label::before": "visibility: hidden !important;",
+        ".title-actions .actions-container": "display: none !important;",
+        ".actions-container .codicon-new-file": "display: none !important",
+        ".actions-container .codicon-new-folder": "display: none !important",
+        ".actions-container .codicon-collapse-all": "display: none !important",
+        ".editor-actions": "display: none !important;"
+    },
+    // -------------------
+    //  Project Dashboard
+    // -------------------
+    "dashboard.projectData": null,
+    "dashboard.showAddProjectButtonTile": false,
+    "dashboard.displayProjectPath": true,
+    "dashboard.storeProjectsInSettings": false,
+    "dashboard.openOnStartup": "empty workspace",
+    // -------------------
+    //  Language specific
+    // -------------------
+    "[c]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format"
+    },
+    "C_Cpp.default.cppStandard": "c++20",
+    "clang-format.fallbackStyle": "WebKit",
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.lineNumbers": "off",
+        "editor.overviewRulerBorder": false,
+        "editor.lineHeight": 28,
+        "editor.wrappingIndent": "indent",
+        "workbench.editor.languageDetection": false,
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "[org]": {
+        "editor.wordWrap": "on",
+        "editor.lineNumbers": "off"
+    },
+    "autofold.types": [
+        {
+            "ext": "org",
+            "level": 1
+        }
+    ],
+    "[plaintext]": {
+        "editor.wordWrap": "on",
+        "editor.lineNumbers": "off",
+        "editor.quickSuggestions": {
+            "other": false,
+            "comments": false,
+            "strings": false
+        }
+    },
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    // -----------
+    //  Front-end
+    // -----------
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "vetur.ignoreProjectWarning": true,
+    "svelte.enable-ts-plugin": true,
+    "prettier.tabWidth": 4,
+    "prettier.printWidth": 100,
+    "prettier.jsxBracketSameLine": true,
+    "prettier.arrowParens": "avoid",
+    // -----------
+    //  TODO Tree
+    // -----------
+    "todo-tree.regex.regex": "(//)\\s*($TAGS).*(\\r\\n\\s*//\\s{2,}.*)*",
+    //"todo-tree.regex.regex": "(/\\*)\\s*($TAGS).*(\\n\\s*(//|/\\*|\\*\\*)\\s{2,}.*)*"
+    "todo-tree.ripgrep.ripgrepMaxBuffer": 1024,
+    "todo-tree.highlights.highlightDelay": 0,
+    "todo-tree.regex.regexCaseSensitive": false,
+
+    // TODO: Read through all of the issues on the github -> look for 'nested' TODOs
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "XXX",
+        "@Performance",
+        "@Measure",
+        "@Debug",
+        "@Note"
+    ],
+    "todo-tree.highlights.defaultHighlight": {
+        "type": "tag-and-subTag",
+        "foreground": "cyan"
+    },
+    "todo-tree.highlights.customHighlight": {
+        "TODO": {
+            "type": "text-and-comment",
+            "foreground": "yellow"
+        },
+        "FIXME": {
+            "type": "text",
+            "foreground": "black"
+        }
+    },
+
+    // ---------
+    //  PREVIEW
+    // ---------
+    "editor.cursorSmoothCaretAnimation": false, // TODO: Too slow.
+    "editor.suggest.preview": true,
+    // ------
+    //  Misc
+    // ------
+    "errorLens.delay": 0,
+    "security.workspace.trust.untrustedFiles": "open",
+    "markdown-preview-enhanced.codeBlockTheme": "github.css",
+    "markdown-preview-enhanced.usePandocParser": true,
+    "markdown-preview-enhanced.breakOnSingleNewLine": true,
+    "window.zoomLevel": -1,
+    "workbench.colorTheme": "Make Apps Theme"
+
+    // TODO: Implement https://github.com/linktohack/evil-commentary
+}

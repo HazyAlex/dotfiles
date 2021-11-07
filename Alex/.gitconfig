@@ -1,0 +1,27 @@
+[user]
+	email = HazyAlex@protonmail.com
+	name = HazyAlex
+
+[credential]
+	helper = store
+
+[winUpdater]
+	recentlySeenVersion = 2.26.0.windows.1
+
+[core]
+	autocrlf = false
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    features = decorations
+    syntax-theme = Github
+    dark = true
+    hunk-header-style = omit

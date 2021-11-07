@@ -1,0 +1,7 @@
+{
+    "no_warnings": {
+        "prefix": "no_warnings",
+        "body": "#![cfg_attr(debug_assertions, allow(dead_code))]",
+        "description": "Disables dead_code warnings"
+    }
+}
