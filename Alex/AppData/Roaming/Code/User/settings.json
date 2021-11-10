@@ -233,7 +233,8 @@
         ".tabs-container .tab": "height: 27px !important;",
         ".tabs": "height: 27px !important;",
         ".tab > .monaco-icon-label::before": "visibility: hidden !important;",
-        ".title-actions .actions-container": "display: none !important;",
+        // zen, but conflicts with the terminal:
+        // ".title-actions .actions-container": "display: none !important;",
         ".actions-container .codicon-new-file": "display: none !important",
         ".actions-container .codicon-new-folder": "display: none !important",
         ".actions-container .codicon-collapse-all": "display: none !important",
@@ -298,9 +299,6 @@
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
@@ -318,14 +316,17 @@
     "todo-tree.ripgrep.ripgrepMaxBuffer": 1024,
     "todo-tree.highlights.highlightDelay": 0,
     "todo-tree.regex.regexCaseSensitive": false,
-
+    "todo-tree.general.schemes": [
+        "vscode-userdata",
+        "file",
+        "ssh",
+        "untitled"
+    ],
     // TODO: Read through all of the issues on the github -> look for 'nested' TODOs
     "todo-tree.general.tags": [
-        "BUG",
-        "HACK",
-        "FIXME",
-        "TODO",
-        "XXX",
+        "BUG:",
+        "FIXME:",
+        "TODO:",
         "@Performance",
         "@Measure",
         "@Debug",
@@ -336,16 +337,15 @@
         "foreground": "cyan"
     },
     "todo-tree.highlights.customHighlight": {
-        "TODO": {
+        "TODO:": {
             "type": "text-and-comment",
             "foreground": "yellow"
         },
-        "FIXME": {
+        "FIXME:": {
             "type": "text",
             "foreground": "black"
         }
     },
-
     // ---------
     //  PREVIEW
     // ---------
@@ -359,8 +359,20 @@
     "markdown-preview-enhanced.codeBlockTheme": "github.css",
     "markdown-preview-enhanced.usePandocParser": true,
     "markdown-preview-enhanced.breakOnSingleNewLine": true,
+    "workbench.colorTheme": "Make Apps Theme",
     "window.zoomLevel": -1,
-    "workbench.colorTheme": "Make Apps Theme"
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["g", "y", "c"],
+            "commands": [
+                "editor.action.copyLinesDownAction",
+                "editor.action.commentLine",
+                "cancelSelection",
+                "extension.vim_escape",
+                "extension.vim_down"
+            ]
+        }
+    ],
 
     // TODO: Implement https://github.com/linktohack/evil-commentary
 }
