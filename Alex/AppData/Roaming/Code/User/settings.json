@@ -24,7 +24,6 @@
     //    * (RUST)      rust-analyzer
     //    * (Markdown)  Markdown preview enhanced
     //    * (JS)        Prettier, Svelte, Vetur
-
     // ----
     //  RA
     // ----
@@ -42,6 +41,7 @@
     "workbench.enableExperiments": false,
     "extensions.autoUpdate": false,
     "extensions.autoCheckUpdates": false,
+    "extensions.ignoreRecommendations": true,
     "update.mode": "manual",
     "update.showReleaseNotes": true,
     "telemetry.telemetryLevel": "off",
@@ -50,11 +50,15 @@
     //  Terminal
     // ----------
     // https://code.visualstudio.com/updates/v1_61#_custom-title-and-description
-    "terminal.integrated.shellArgs.windows": ["-NoLogo"],
+    "terminal.integrated.shellArgs.windows": [
+        "-NoLogo"
+    ],
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
-            "args": ["-NoLogo"]
+            "args": [
+                "-NoLogo"
+            ]
         }
     },
     "terminal.integrated.tabs.enabled": false,
@@ -80,9 +84,9 @@
     //  Workbench
     // -----------
     "workbench.panel.opensMaximized": "preserve",
+    "workbench.sideBar.location": "right",
     "workbench.startupEditor": "none",
     "workbench.editor.tabSizing": "shrink",
-    "workbench.sideBar.location": "right",
     "workbench.tree.indent": 20,
     "workbench.tree.renderIndentGuides": "onHover",
     "workbench.panel.defaultLocation": "right",
@@ -90,7 +94,7 @@
     "workbench.activityBar.visible": false,
     "workbench.settings.editor": "json",
     "workbench.list.smoothScrolling": false,
-    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreview": false,
     "workbench.editor.untitled.hint": "hidden",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.colorCustomizations": {
@@ -214,9 +218,6 @@
     "foam.dateSnippets.afterCompletion": "navigateToNote",
     "pasteImage.path": "${projectRoot}/attachments",
     "pasteImage.showFilePathConfirmInputBox": true,
-    "spellright.notificationClass": "warning",
-    "spellright.language": ["en", "pt"],
-    "spellright.documentTypes": ["markdown", "latex", "plaintext"],
     "anki.log": "off",
     "anki.defaultDeck": "Notes",
     // -------------
@@ -225,7 +226,7 @@
     "customizeUI.font.monospace": "Iosevka Regular",
     "customizeUI.font.regular": "Iosevka Regular",
     "customizeUI.fontSizeMap": {
-        "13px": "15px",
+        "13px": "16px",
         "monospace": "15px",
         "tab-title": "11px"
     },
@@ -257,6 +258,11 @@
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
+    "C_Cpp.autocompleteAddParentheses": true,
+    "C_Cpp.codeFolding": "Disabled",
+    "C_Cpp.formatting": "clangFormat",
+    "C_Cpp.vcpkg.enabled": false,
+    "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.default.cppStandard": "c++20",
     "clang-format.fallbackStyle": "WebKit",
     "[markdown]": {
@@ -293,6 +299,9 @@
     // -----------
     //  Front-end
     // -----------
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
@@ -311,11 +320,14 @@
     // -----------
     //  TODO Tree
     // -----------
+    "syntax.highlightComment": false,
     "todo-tree.regex.regex": "(//)\\s*($TAGS).*(\\r\\n\\s*//\\s{2,}.*)*",
     //"todo-tree.regex.regex": "(/\\*)\\s*($TAGS).*(\\n\\s*(//|/\\*|\\*\\*)\\s{2,}.*)*"
     "todo-tree.ripgrep.ripgrepMaxBuffer": 1024,
     "todo-tree.highlights.highlightDelay": 0,
     "todo-tree.regex.regexCaseSensitive": false,
+    "todo-tree.tree.scanMode": "open files",
+    "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.general.schemes": [
         "vscode-userdata",
         "file",
@@ -334,16 +346,20 @@
     ],
     "todo-tree.highlights.defaultHighlight": {
         "type": "tag-and-subTag",
-        "foreground": "cyan"
+        "foreground": "#4E4E4E",
+        "background": "#9DE3C0",
+        "borderRadius": "0px",
     },
     "todo-tree.highlights.customHighlight": {
         "TODO:": {
             "type": "text-and-comment",
-            "foreground": "yellow"
+            "foreground": "yellow",
+            "background": "#ffffff00",
         },
         "FIXME:": {
             "type": "text",
-            "foreground": "black"
+            "foreground": "black",
+            "background": "#ffffff00",
         }
     },
     // ---------
@@ -359,11 +375,14 @@
     "markdown-preview-enhanced.codeBlockTheme": "github.css",
     "markdown-preview-enhanced.usePandocParser": true,
     "markdown-preview-enhanced.breakOnSingleNewLine": true,
-    "workbench.colorTheme": "Make Apps Theme",
-    "window.zoomLevel": -1,
+    "workbench.colorTheme": "custom-theme",
     "vim.visualModeKeyBindings": [
         {
-            "before": ["g", "y", "c"],
+            "before": [
+                "g",
+                "y",
+                "c"
+            ],
             "commands": [
                 "editor.action.copyLinesDownAction",
                 "editor.action.commentLine",
@@ -373,6 +392,4 @@
             ]
         }
     ],
-
-    // TODO: Implement https://github.com/linktohack/evil-commentary
 }
