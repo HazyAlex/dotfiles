@@ -41,6 +41,7 @@
     "workbench.enableExperiments": false,
     "extensions.autoUpdate": false,
     "extensions.autoCheckUpdates": false,
+    "extensions.ignoreRecommendations": true,
     "update.mode": "manual",
     "update.showReleaseNotes": true,
     "telemetry.telemetryLevel": "off",
@@ -83,9 +84,9 @@
     //  Workbench
     // -----------
     "workbench.panel.opensMaximized": "preserve",
+    "workbench.sideBar.location": "right",
     "workbench.startupEditor": "none",
     "workbench.editor.tabSizing": "shrink",
-    "workbench.sideBar.location": "right",
     "workbench.tree.indent": 20,
     "workbench.tree.renderIndentGuides": "onHover",
     "workbench.panel.defaultLocation": "right",
@@ -225,7 +226,7 @@
     "customizeUI.font.monospace": "Iosevka Regular",
     "customizeUI.font.regular": "Iosevka Regular",
     "customizeUI.fontSizeMap": {
-        "13px": "15px",
+        "13px": "16px",
         "monospace": "15px",
         "tab-title": "11px"
     },
@@ -257,6 +258,11 @@
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format"
     },
+    "C_Cpp.autocompleteAddParentheses": true,
+    "C_Cpp.codeFolding": "Disabled",
+    "C_Cpp.formatting": "clangFormat",
+    "C_Cpp.vcpkg.enabled": false,
+    "C_Cpp.workspaceParsingPriority": "low",
     "C_Cpp.default.cppStandard": "c++20",
     "clang-format.fallbackStyle": "WebKit",
     "[markdown]": {
@@ -293,6 +299,9 @@
     // -----------
     //  Front-end
     // -----------
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
     },
@@ -337,18 +346,19 @@
     ],
     "todo-tree.highlights.defaultHighlight": {
         "type": "tag-and-subTag",
-        "foreground": "#BDB395",
+        "foreground": "#9DE3C0",
         "borderRadius": "0px",
     },
     "todo-tree.highlights.customHighlight": {
         "TODO:": {
             "type": "text-and-comment",
             "foreground": "yellow",
-            "background": "#ffffff00"
+            "background": "#ffffff00",
         },
         "FIXME:": {
             "type": "text",
-            "foreground": "black"
+            "foreground": "black",
+            "background": "#ffffff00",
         }
     },
     // ---------
@@ -364,8 +374,7 @@
     "markdown-preview-enhanced.codeBlockTheme": "github.css",
     "markdown-preview-enhanced.usePandocParser": true,
     "markdown-preview-enhanced.breakOnSingleNewLine": true,
-    "workbench.colorTheme": "Make Apps Theme",
-    "window.zoomLevel": -1,
+    "workbench.colorTheme": "custom-theme",
     "vim.visualModeKeyBindings": [
         {
             "before": [
