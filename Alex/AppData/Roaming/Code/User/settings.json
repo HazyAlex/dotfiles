@@ -24,7 +24,6 @@
     //    * (RUST)      rust-analyzer
     //    * (Markdown)  Markdown preview enhanced
     //    * (JS)        Prettier, Svelte, Vetur
-
     // ----
     //  RA
     // ----
@@ -50,11 +49,15 @@
     //  Terminal
     // ----------
     // https://code.visualstudio.com/updates/v1_61#_custom-title-and-description
-    "terminal.integrated.shellArgs.windows": ["-NoLogo"],
+    "terminal.integrated.shellArgs.windows": [
+        "-NoLogo"
+    ],
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
             "source": "PowerShell",
-            "args": ["-NoLogo"]
+            "args": [
+                "-NoLogo"
+            ]
         }
     },
     "terminal.integrated.tabs.enabled": false,
@@ -90,7 +93,7 @@
     "workbench.activityBar.visible": false,
     "workbench.settings.editor": "json",
     "workbench.list.smoothScrolling": false,
-    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreview": false,
     "workbench.editor.untitled.hint": "hidden",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.colorCustomizations": {
@@ -214,9 +217,6 @@
     "foam.dateSnippets.afterCompletion": "navigateToNote",
     "pasteImage.path": "${projectRoot}/attachments",
     "pasteImage.showFilePathConfirmInputBox": true,
-    "spellright.notificationClass": "warning",
-    "spellright.language": ["en", "pt"],
-    "spellright.documentTypes": ["markdown", "latex", "plaintext"],
     "anki.log": "off",
     "anki.defaultDeck": "Notes",
     // -------------
@@ -311,11 +311,14 @@
     // -----------
     //  TODO Tree
     // -----------
+    "syntax.highlightComment": false,
     "todo-tree.regex.regex": "(//)\\s*($TAGS).*(\\r\\n\\s*//\\s{2,}.*)*",
-    //"todo-tree.regex.regex": "(/\\*)\\s*($TAGS).*(\\n\\s*(//|/\\*|\\*\\*)\\s{2,}.*)*"
+    // "todo-tree.regex.regex": "(/\\*)\\s*($TAGS).*(\\n\\s*(//|/\\*|\\*\\*)\\s{2,}.*)*",
     "todo-tree.ripgrep.ripgrepMaxBuffer": 1024,
     "todo-tree.highlights.highlightDelay": 0,
     "todo-tree.regex.regexCaseSensitive": false,
+    "todo-tree.tree.scanMode": "open files",
+    "todo-tree.filtering.includeHiddenFiles": true,
     "todo-tree.general.schemes": [
         "vscode-userdata",
         "file",
@@ -334,12 +337,14 @@
     ],
     "todo-tree.highlights.defaultHighlight": {
         "type": "tag-and-subTag",
-        "foreground": "cyan"
+        "foreground": "#BDB395",
+        "borderRadius": "0px",
     },
     "todo-tree.highlights.customHighlight": {
         "TODO:": {
             "type": "text-and-comment",
-            "foreground": "yellow"
+            "foreground": "yellow",
+            "background": "#ffffff00"
         },
         "FIXME:": {
             "type": "text",
@@ -363,7 +368,11 @@
     "window.zoomLevel": -1,
     "vim.visualModeKeyBindings": [
         {
-            "before": ["g", "y", "c"],
+            "before": [
+                "g",
+                "y",
+                "c"
+            ],
             "commands": [
                 "editor.action.copyLinesDownAction",
                 "editor.action.commentLine",
@@ -373,6 +382,4 @@
             ]
         }
     ],
-
-    // TODO: Implement https://github.com/linktohack/evil-commentary
 }

@@ -16,17 +16,11 @@
     {
         "key": "ctrl+0",
         "command": "workbench.explorer.fileView.focus",
-        "when": "editorFocus"
     },
     {
         "key": "ctrl+0",
-        "command": "workbench.action.closeSidebar",
-        "when": "!editorTextFocus"
-    },
-    {
-        "key": "ctrl+0",
-        "command": "workbench.explorer.fileView.focus",
-        "when": "panelFocus"
+        "command": "workbench.action.toggleSidebarVisibility",
+        "when": "!editorFocus"
     },
     // Disable ctrl+2 (split)
     {
@@ -91,7 +85,6 @@
         "when": "editorTextFocus && vim.mode == 'Normal'"
     }
 ]
-
 /*
 // Move visually:
 {
