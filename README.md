@@ -22,7 +22,7 @@ Some of these tools are only available on Windows.
 
 ### Editors
 
-- VSCode (VSCodium when I need the WSL extension.)
+- VSCodium (VSCode when I need the WSL extension.)
 - Emacs (light explorer edits, super fast startup thanks to server-mode)
 - Neovim (quick terminal edits)
 - Android Studio (android projects only)
