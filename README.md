@@ -24,8 +24,7 @@ Some of these tools are only available on Windows.
 
 - VSCodium (VSCode when I need the WSL extension.)
 - Emacs (light explorer edits, super fast startup thanks to server-mode)
-- Neovim (quick terminal edits)
-- Android Studio (android projects only)
+- Neovim (quick terminal edits) (currently using: Neovide)
 
 ### Monitoring
 
@@ -39,6 +38,9 @@ Some of these tools are only available on Windows.
 - Transmission
 - Anki
 - Blender
+- GlazeWM
+- windows-terminal-quake
+- QuickLook
 - foobar2000
 - musikcube
 - streamlink
