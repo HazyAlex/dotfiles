@@ -38,6 +38,7 @@ Some of these tools are only available on Windows.
 - Transmission
 - Anki
 - Blender
+- ShareX
 - GlazeWM
 - windows-terminal-quake
 - QuickLook
