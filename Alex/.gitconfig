@@ -5,9 +5,6 @@
 [credential]
 	helper = store
 
-[winUpdater]
-	recentlySeenVersion = 2.26.0.windows.1
-
 [core]
 	autocrlf = false
 
@@ -20,8 +17,10 @@
 [interactive]
     diffFilter = delta --color-only --features=interactive
 
+[add.interactive]
+    useBuiltin = false # required for git 2.37.0
+
 [delta]
     features = decorations
-    syntax-theme = Github
     dark = true
     hunk-header-style = omit

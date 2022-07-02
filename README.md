@@ -24,7 +24,7 @@ Some of these tools are only available on Windows.
 
 - VSCodium (VSCode when I need the WSL extension.)
 - Emacs (light explorer edits, super fast startup thanks to server-mode)
-- Neovim (quick terminal edits) (currently using: Neovide)
+- Neovim (quick terminal edits) (currently using Neovide)
 
 ### Monitoring
 
@@ -34,12 +34,13 @@ Some of these tools are only available on Windows.
 
 ### Other software
 
+- Keypirinha
+- SyncTrayzor
 - Taskbar-Twitch
 - Transmission
 - Anki
 - Blender
 - ShareX
-- GlazeWM
 - windows-terminal-quake
 - QuickLook
 - foobar2000
