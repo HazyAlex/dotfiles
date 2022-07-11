@@ -23,7 +23,7 @@
 [delta]
     features = decorations
     dark = true
-    hunk-header-style = omit
+    hunk-header-style = line-number
 
 [fetch]
     prune = true
