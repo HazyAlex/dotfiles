@@ -3,11 +3,14 @@
     //  TODO
     // ------
     //
+    // Dashboard: https://marketplace.visualstudio.com/items?itemName=stateful.marquee
+    // Background animations https://marketplace.visualstudio.com/items?itemName=TheCodemonkey.synthwave-x-fluoromachine-epic-animations
     // Custom buttons at the end of the tabs: https://marketplace.visualstudio.com/items?itemName=jerrygoyal.shortcut-menu-bar
     // Statistics on code usage: https://marketplace.visualstudio.com/items?itemName=softwaredotcom.swdc-vscode
     // Align code: https://marketplace.visualstudio.com/items?itemName=wwm.better-align
     // Gitlab: https://marketplace.visualstudio.com/items?itemName=GitLab.gitlab-workflow
     // Console log automatically: https://marketplace.visualstudio.com/items?itemName=ChakrounAnas.turbo-console-log
+    // Graph JSON data: https://marketplace.visualstudio.com/items?itemName=AykutSarac.jsoncrack-vscode
     //
     // ----------------------------
     //  Telemetry and Auto-updates
@@ -36,7 +39,7 @@
     "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
     "terminal.integrated.localEchoLatencyThreshold": -1,
-    "terminal.integrated.scrollback": 2000,
+    "terminal.integrated.scrollback": 10000,
     "terminal.integrated.showLinkHover": true,
     //
     "terminal.integrated.cursorStyle": "block",
@@ -68,7 +71,6 @@
     "workbench.panel.defaultLocation": "right",
     "workbench.activityBar.visible": false,
     "workbench.layoutControl.enabled": false,
-    "workbench.editor.enablePreview": true,
     "workbench.editor.untitled.hint": "hidden",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.colorCustomizations": {
@@ -149,12 +151,14 @@
     },
     "scm.alwaysShowRepositories": true,
     "search.quickOpen.history.filterSortOrder": "recency",
+    "search.decorations.badges": false,
     "editor.definitionLinkOpensInPeek": false,
     // --------
     //  Editor
     // --------
     "editor.cursorBlinking": "solid",
     "editor.cursorStyle": "block",
+    "editor.renderLineHighlight": "gutter",
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "file",
     "editor.multiCursorPaste": "spread",
@@ -217,9 +221,9 @@
     "customizeUI.font.monospace": "Iosevka Regular",
     "customizeUI.font.regular": "Iosevka Regular",
     "customizeUI.fontSizeMap": {
-        "13px": "16px",
+        "13px": "15px",
         "monospace": "15px",
-        "tab-title": "11px"
+        "tab-title": "10px"
     },
     "customizeUI.stylesheet": {
         // Disable tabs
@@ -236,12 +240,14 @@
         ".tabs": "height: 27px !important;",
         ".tab > .monaco-icon-label::before": "visibility: hidden !important;",
         //
+        // Remove tab actions:
+        ".editor-actions": "display: none !important;",
+        // ".actions-container .codicon-new-file": "display: none !important",
+        // ".actions-container .codicon-new-folder": "display: none !important",
+        // ".actions-container .codicon-collapse-all": "display: none !important",
+        //
         // Zen mode, but conflicts with the terminal:
         // ".title-actions .actions-container": "display: none !important;",
-        ".actions-container .codicon-new-file": "display: none !important",
-        ".actions-container .codicon-new-folder": "display: none !important",
-        ".actions-container .codicon-collapse-all": "display: none !important",
-        ".editor-actions": "display: none !important;"
     },
     // -------------------
     //  Project Dashboard
@@ -263,32 +269,32 @@
     // -----
     //  C++
     // -----
-    "[c]": {
-        "editor.defaultFormatter": "xaver.clang-format"
-    },
-    "[cpp]": {
-        "editor.defaultFormatter": "xaver.clang-format"
-    },
-    "C_Cpp.autocompleteAddParentheses": true,
-    "C_Cpp.codeFolding": "Disabled",
-    "C_Cpp.formatting": "clangFormat",
-    "C_Cpp.vcpkg.enabled": false,
-    "C_Cpp.workspaceParsingPriority": "low",
-    "C_Cpp.default.cppStandard": "c++20",
-    "clang-format.fallbackStyle": "WebKit",
+    // "[c]": {
+    //     "editor.defaultFormatter": "xaver.clang-format"
+    // },
+    // "[cpp]": {
+    //     "editor.defaultFormatter": "xaver.clang-format"
+    // },
+    // "C_Cpp.autocompleteAddParentheses": true,
+    // "C_Cpp.codeFolding": "Disabled",
+    // "C_Cpp.formatting": "clangFormat",
+    // "C_Cpp.vcpkg.enabled": false,
+    // "C_Cpp.workspaceParsingPriority": "low",
+    // "C_Cpp.default.cppStandard": "c++20",
+    // "clang-format.fallbackStyle": "WebKit",
     // ------
     //  Rust
     // ------
-    "rust-analyzer.completion.postfix.enable": true,
-    "rust-analyzer.lens.enable": true,
-    "rust-analyzer.lens.run": true,
-    "rust-analyzer.notifications.cargoTomlNotFound": false,
-    "rust-analyzer.inlayHints.chainingHints.enable": false,
-    "rust-analyzer.inlayHints.parameterHints.enable": false,
-    "rust-analyzer.inlayHints.typeHints.enable": false,
-    // ----------
-    //  Web dev.
-    // ----------
+    // "rust-analyzer.completion.postfix.enable": true,
+    // "rust-analyzer.lens.enable": true,
+    // "rust-analyzer.lens.run": true,
+    // "rust-analyzer.notifications.cargoTomlNotFound": false,
+    // "rust-analyzer.inlayHints.chainingHints.enable": false,
+    // "rust-analyzer.inlayHints.parameterHints.enable": false,
+    // "rust-analyzer.inlayHints.typeHints.enable": false,
+    // -----------------
+    //  Web development
+    // -----------------
     "files.associations": {
         "*.json": "jsonc"
     },
@@ -321,10 +327,12 @@
     "intelephense.environment.phpVersion": "8.1.0",
     "intelephense.diagnostics.undefinedMethods": false,
     "intelephense.diagnostics.undefinedFunctions": false,
+    "php.suggest.basic": false,
     // -----------
     //  TODO Tree
     // -----------
-    "todo-tree.regex.regex": "(//)\\s*($TAGS).*(\\r\\n\\s*//\\s{2,}.*)*",
+    // "todo-tree.regex.regex": "(//)\\s*($TAGS).*(\\r\\n\\s*//\\s{2,}.*)*", // old
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)", // museun
     // "todo-tree.regex.regex": "(/\\*)\\s*($TAGS).*(\\n\\s*(//|/\\*|\\*\\*)\\s{2,}.*)*",
     "todo-tree.ripgrep.ripgrepMaxBuffer": 1024,
     "todo-tree.highlights.highlightDelay": 0,
@@ -373,11 +381,6 @@
     // -----
     //  Git
     // -----
-    "gitlens.currentLine.enabled": false,
-    "gitlens.hovers.enabled": false,
-    "gitlens.hovers.currentLine.over": "line",
-    "gitlens.codeLens.enabled": false,
-    "gitlens.statusBar.enabled": false,
     "git.branchProtection": [
         "master",
         "staging",
@@ -386,6 +389,8 @@
     // ------------------
     //  Markdown / Notes
     // ------------------
+    "markdown.validate.enabled": true,
+    "markdown.experimental.updateLinksOnFileMove.enabled": "prompt",
     "pasteImage.path": "${currentFileDir}",
     "pasteImage.showFilePathConfirmInputBox": true,
     "markdown.preview.breaks": true,
@@ -413,50 +418,78 @@
         "editor.wordWrap": "on",
         "editor.lineNumbers": "off"
     },
-    "autofold.types": [
-        {
-            "ext": "org",
-            "level": 1
-        }
-    ],
     // ---------
     //  Preview
     // ---------
+    "implicitParentheses.enable": true, // TODO: Really slow on huge files.
     "editor.cursorSmoothCaretAnimation": false, // TODO: Too slow.
-    "editor.experimental.stickyScroll.enabled": true,
-    "implicitParentheses.enable": true, // TODO: Really slow on compiled files.
+    "editor.stickyScroll.enabled": true,
+    "explorer.incrementalNaming": "smart", // TODO: Or "simple" ?
+    "editor.hover.sticky": true,
     // ------
     //  Misc
     // ------
     "cSpell.userWords": [
         "aeternum",
+        "antiphishing",
+        "appbar",
+        "arentia",
+        "Arrayable",
+        "atools",
         "autofold",
         "axios",
+        "backoffice",
+        "Calculado",
         "codicon",
         "datatable",
+        "Dispatchable",
+        "farma",
         "Fira",
         "foldfix",
         "highlightedyank",
+        "IFNULL",
+        "IFTHENPAY",
         "intelephense",
         "Iosevka",
         "Kary",
         "Keizaal",
+        "Laravel",
+        "Maatwebsite",
+        "mbreference",
+        "mbway",
+        "mbwaykey",
+        "Minimo",
+        "MYPROVET",
+        "normalorder",
         "OLED",
+        "Pago",
         "Parens",
+        "petfood",
+        "pharma",
         "pinia",
+        "Propec",
+        "Provet",
+        "psicotropic",
+        "Psicotrópico",
+        "Queueable",
+        "referenceable",
+        "referencia",
         "rgba",
         "ripgrep",
         "scrollback",
+        "serializável",
+        "simposium",
+        "Spatie",
         "stylesheet",
+        "SUBENTITY",
         "userdata",
         "vcpkg",
         "vetur",
-        "vuetify"
+        "vuetify",
+        "webservice",
+        "webservices"
     ],
-    "vscode_custom_css.imports": [
-        "file:///C:/Users/Alex/.vscode/custom.css"
-    ],
-    "vscode_custom_css.statusbar": false,
-    "workbench.colorTheme": "Keizaal",
+    "cSpell.language": "en,pt",
     "workbench.iconTheme": "ayu",
+    "workbench.colorTheme": "Vitesse Dark Soft",
 }
