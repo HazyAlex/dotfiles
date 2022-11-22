@@ -1,8 +1,61 @@
 {
+    // ----------
+    //  Ext List
+    // ----------
+    // Vim
+    // Customize UI (+ Monkey Patch implicitly)
+    //
+    // C/C++
+    // Clang-Format
+    // Lua
+    // rust-analyzer
+    // VimL
+    //
+    // Auto Close Tag
+    // Auto Rename Tag
+    // Code Spell Checker
+    // DotENV
+    // ErrorLens
+    // ESLint
+    // Highlight Matching Tag
+    // Icônes
+    // Iconify IntelliSense
+    // Implicit Parentheses
+    // JavaScript Booster
+    // laravel-blade
+    // Markdown Preview Enhanced
+    // Paste Image
+    // PHP Intelephense
+    // Prettier ESLint
+    // SCSS Formatter
+    // Svg Preview
+    // Tab Out or Reindent
+    // Todo Tree
+    // vscode-js-template-literal
+    // vuetify-vscode
+    //
+    // Aylin
+    // Ayu
+    // Custom Theme (TODO: Export)
+    // Fluent Icons
+    // Kanagawa
+    // Kary Pro Colors
+    // Keizaal
+    // Make Apps Theme
+    // Material Icon Theme
+    // monokuro
+    // Pretty OLED
+    // Relaxed
+    // Rosé Pine
+    // Slime Theme
+    // Snazzy Light
+    // Tokyo Night
+    // Vitesse Theme
+    //
+    //
     // ------
     //  TODO
     // ------
-    //
     // Dashboard: https://marketplace.visualstudio.com/items?itemName=stateful.marquee
     // Background animations https://marketplace.visualstudio.com/items?itemName=TheCodemonkey.synthwave-x-fluoromachine-epic-animations
     // Custom buttons at the end of the tabs: https://marketplace.visualstudio.com/items?itemName=jerrygoyal.shortcut-menu-bar
@@ -109,13 +162,6 @@
             "terminal.background": "#F7F7F7",
             "terminalCursor.foreground": "#313131"
         },
-        "[Detox]": {
-            "statusBar.background": "#1a1a1a",
-            "statusBar.foreground": "#300",
-            "statusBar.noFolderBackground": "#1a1a1a",
-            "statusBar.noFolderForeground": "#fff",
-            "statusBarItem.remoteBackground": "#1a1a1a"
-        }
     },
     "editor.tokenColorCustomizations": {
         "[Make Apps Theme]": {
@@ -285,13 +331,12 @@
     // ------
     //  Rust
     // ------
-    // "rust-analyzer.completion.postfix.enable": true,
-    // "rust-analyzer.lens.enable": true,
-    // "rust-analyzer.lens.run": true,
-    // "rust-analyzer.notifications.cargoTomlNotFound": false,
-    // "rust-analyzer.inlayHints.chainingHints.enable": false,
-    // "rust-analyzer.inlayHints.parameterHints.enable": false,
-    // "rust-analyzer.inlayHints.typeHints.enable": false,
+    "rust-analyzer.completion.postfix.enable": true,
+    "rust-analyzer.lens.enable": false,
+    "rust-analyzer.notifications.cargoTomlNotFound": false,
+    "rust-analyzer.inlayHints.chainingHints.enable": true,
+    "rust-analyzer.inlayHints.parameterHints.enable": false,
+    "rust-analyzer.inlayHints.typeHints.enable": false,
     // -----------------
     //  Web development
     // -----------------
@@ -331,10 +376,8 @@
     // -----------
     //  TODO Tree
     // -----------
-    // "todo-tree.regex.regex": "(//)\\s*($TAGS).*(\\r\\n\\s*//\\s{2,}.*)*", // old
-    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)", // museun
-    // "todo-tree.regex.regex": "(/\\*)\\s*($TAGS).*(\\n\\s*(//|/\\*|\\*\\*)\\s{2,}.*)*",
-    "todo-tree.ripgrep.ripgrepMaxBuffer": 1024,
+    "todo-tree.regex.regex": "(//)\\s*($TAGS).*(\\r\\n\\s*//\\s{2,}.*)*",
+    "todo-tree.ripgrep.ripgrepMaxBuffer": 2048,
     "todo-tree.highlights.highlightDelay": 0,
     "todo-tree.regex.regexCaseSensitive": false,
     "todo-tree.tree.scanMode": "open files",
@@ -423,73 +466,14 @@
     // ---------
     "implicitParentheses.enable": true, // TODO: Really slow on huge files.
     "editor.cursorSmoothCaretAnimation": false, // TODO: Too slow.
-    "editor.stickyScroll.enabled": true,
+    "editor.stickyScroll.enabled": false,
     "explorer.incrementalNaming": "smart", // TODO: Or "simple" ?
     "editor.hover.sticky": true,
     // ------
     //  Misc
     // ------
-    "cSpell.userWords": [
-        "aeternum",
-        "antiphishing",
-        "appbar",
-        "arentia",
-        "Arrayable",
-        "atools",
-        "autofold",
-        "axios",
-        "backoffice",
-        "Calculado",
-        "codicon",
-        "datatable",
-        "Dispatchable",
-        "farma",
-        "Fira",
-        "foldfix",
-        "highlightedyank",
-        "IFNULL",
-        "IFTHENPAY",
-        "intelephense",
-        "Iosevka",
-        "Kary",
-        "Keizaal",
-        "Laravel",
-        "Maatwebsite",
-        "mbreference",
-        "mbway",
-        "mbwaykey",
-        "Minimo",
-        "MYPROVET",
-        "normalorder",
-        "OLED",
-        "Pago",
-        "Parens",
-        "petfood",
-        "pharma",
-        "pinia",
-        "Propec",
-        "Provet",
-        "psicotropic",
-        "Psicotrópico",
-        "Queueable",
-        "referenceable",
-        "referencia",
-        "rgba",
-        "ripgrep",
-        "scrollback",
-        "serializável",
-        "simposium",
-        "Spatie",
-        "stylesheet",
-        "SUBENTITY",
-        "userdata",
-        "vcpkg",
-        "vetur",
-        "vuetify",
-        "webservice",
-        "webservices"
-    ],
     "cSpell.language": "en,pt",
-    "workbench.iconTheme": "ayu",
-    "workbench.colorTheme": "Vitesse Dark Soft",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.productIconTheme": "fluent-icons",
+    "workbench.colorTheme": "Keizaal",
 }
