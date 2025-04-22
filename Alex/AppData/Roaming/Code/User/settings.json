@@ -3,7 +3,6 @@
     //  Ext List
     // ----------
     // Vim
-    // Customize UI (+ Monkey Patch implicitly)
     //
     // C/C++
     // Clang-Format
@@ -14,9 +13,9 @@
     // Auto Close Tag
     // Auto Rename Tag
     // Code Spell Checker
+    // Dashboard (bobmagicii.dashyeah)
     // DotENV
     // ErrorLens
-    // ESLint
     // Highlight Matching Tag
     // Icônes
     // Iconify IntelliSense
@@ -43,7 +42,6 @@
     // Keizaal
     // Make Apps Theme
     // Material Icon Theme
-    // monokuro
     // Pretty OLED
     // Relaxed
     // Rosé Pine
@@ -51,12 +49,12 @@
     // Snazzy Light
     // Tokyo Night
     // Vitesse Theme
-    //
+    // Moonlight 2
     //
     // ------
     //  TODO
     // ------
-    // Dashboard: https://marketplace.visualstudio.com/items?itemName=stateful.marquee
+    // Customize UI https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension
     // Background animations https://marketplace.visualstudio.com/items?itemName=TheCodemonkey.synthwave-x-fluoromachine-epic-animations
     // Custom buttons at the end of the tabs: https://marketplace.visualstudio.com/items?itemName=jerrygoyal.shortcut-menu-bar
     // Statistics on code usage: https://marketplace.visualstudio.com/items?itemName=softwaredotcom.swdc-vscode
@@ -89,29 +87,31 @@
             ]
         }
     },
+    "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
     "terminal.integrated.localEchoLatencyThreshold": -1,
+    "terminal.integrated.gpuAcceleration": "on",
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.showLinkHover": true,
-    //
     "terminal.integrated.cursorStyle": "block",
     "terminal.integrated.fontSize": 16,
     "terminal.fontFamily": "Fira Mono Retina",
-    "terminal.integrated.fontFamily": "monospace",
-    "terminal.integrated.fontWeight": "200",
+    "terminal.integrated.fontFamily": "Fira Mono Retina",
+    "terminal.integrated.fontWeight": "300",
     "terminal.integrated.fontWeightBold": "400",
-    "terminal.integrated.tabs.enabled": false,
     // --------
     //  Window
     // --------
     "window.restoreWindows": "none",
-    "window.titleBarStyle": "custom",
     "window.customMenuBarAltFocus": false,
-    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}",
+    "window.title": "${dirty}${activeFolderShort}/${activeEditorShort}${separator}${rootNameShort}${separator}",
+    "window.commandCenter": false,
+    "window.titleBarStyle": "custom",
     // -----------
     //  Workbench
     // -----------
+    "workbench.colorTheme": "Rosé Pine Moon",
     "workbench.reduceMotion": "on",
     "workbench.panel.opensMaximized": "preserve",
     "workbench.startupEditor": "none",
@@ -122,9 +122,13 @@
     "workbench.list.smoothScrolling": false,
     "workbench.sideBar.location": "right",
     "workbench.panel.defaultLocation": "right",
-    "workbench.activityBar.visible": false,
+    "workbench.tree.enableStickyScroll": true,
+    "workbench.tree.stickyScrollMaxItemCount": 7,
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.productIconTheme": "fluent-icons",
     "workbench.layoutControl.enabled": false,
-    "workbench.editor.untitled.hint": "hidden",
+    "workbench.editor.empty.hint": "hidden",
+    "workbench.activityBar.location": "hidden",
     "workbench.editor.highlightModifiedTabs": true,
     "workbench.colorCustomizations": {
         "[Relaxed]": {
@@ -180,13 +184,14 @@
             "comments": "#A7A4A2"
         }
     },
-    // ----------
-    //  Explorer
-    // ----------
-    "breadcrumbs.enabled": false,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.fileNesting.enabled": true,
+    "explorer.incrementalNaming": "simple",
+    "explorer.autoRevealExclude": {
+        "**/node_modules": true,
+        "**/vendor": true
+    },
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
@@ -195,6 +200,7 @@
         "**/dist": true,
         "**/target/**": true
     },
+    "chat.commandCenter.enabled": false,
     "scm.alwaysShowRepositories": true,
     "search.quickOpen.history.filterSortOrder": "recency",
     "search.decorations.badges": false,
@@ -212,15 +218,17 @@
     "editor.suggestSelection": "first",
     "editor.suggest.insertMode": "insert",
     "editor.autoClosingDelete": "always",
+    "editor.matchBrackets": "never",
+    "editor.minimap.enabled": false,
     "editor.folding": true,
+    "editor.suggest.selectionMode": "always",
     "editor.scrollBeyondLastLine": true,
     "editor.codeLens": true,
     "editor.semanticHighlighting.enabled": true,
     "editor.renderWhitespace": "trailing",
-    "editor.lightbulb.enabled": false,
-    "editor.minimap.enabled": false,
+    "editor.lightbulb.enabled": "off",
     "editor.fontFamily": "Iosevka",
-    "editor.fontSize": 18,
+    "editor.fontSize": 21,
     "editor.fontLigatures": true,
     "editor.accessibilitySupport": "off",
     "editor.scrollbar.horizontal": "hidden",
@@ -233,8 +241,11 @@
     "editor.guides.indentation": false,
     "editor.suggest.preview": true,
     "editor.unicodeHighlight.ambiguousCharacters": true,
+    "editor.stickyScroll.enabled": false,
+    "editor.hover.sticky": true,
+    "breadcrumbs.enabled": false,
     // -----
-    //  VIM
+    //  Vim
     // -----
     "editor.lineNumbers": "relative",
     "vim.cursorStylePerMode.insert": "line",
@@ -245,6 +256,7 @@
     "vim.useCtrlKeys": true,
     "vim.leader": "<space>",
     "vim.useSystemClipboard": false,
+    "vim.smartRelativeLine": true,
     "vim.visualModeKeyBindings": [
         {
             "before": [
@@ -261,118 +273,34 @@
             ]
         }
     ],
-    // -------------
-    //  CustomizeUI
-    // -------------
-    "customizeUI.font.monospace": "Iosevka Regular",
-    "customizeUI.font.regular": "Iosevka Regular",
-    "customizeUI.fontSizeMap": {
-        "13px": "15px",
-        "monospace": "15px",
-        "tab-title": "10px"
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1,
     },
-    "customizeUI.stylesheet": {
-        // Disable tabs
-        // ".tabs": "display: none !important",
-        // ".editor-container": "height: 1131px !important",
-        // ".monaco-editor": "height: 1131px !important",
-        // ".overflow-guard": "height: 1131px !important",
-        // ".overflow-guard > div.monaco-scrollable-element.editor-scrollable.vs-dark": "height: 1131px !important",
-        // ".sidebar > div.composite.title > div.title-label": "display: none !important",
-        // ".vscode-custom-css": "display: none !important",
-        //
-        // Reduced size tabs
-        ".tabs-container .tab": "height: 27px !important;",
-        ".tabs": "height: 27px !important;",
-        ".tab > .monaco-icon-label::before": "visibility: hidden !important;",
-        //
-        // Remove tab actions:
-        ".editor-actions": "display: none !important;",
-        // ".actions-container .codicon-new-file": "display: none !important",
-        // ".actions-container .codicon-new-folder": "display: none !important",
-        // ".actions-container .codicon-collapse-all": "display: none !important",
-        //
-        // Zen mode, but conflicts with the terminal:
-        // ".title-actions .actions-container": "display: none !important;",
-    },
-    // -------------------
-    //  Project Dashboard
-    // -------------------
-    "dashboard.projectData": null,
-    "dashboard.showAddProjectButtonTile": false,
-    "dashboard.displayProjectPath": true,
-    "dashboard.storeProjectsInSettings": false,
-    "dashboard.openOnStartup": "empty workspace",
-    // -----
-    //  LSP
-    // -----
+    // ------------
+    //  Error Lens
+    // ------------
+    "errorLens.enabled": true,
     "errorLens.delay": 0,
     "errorLens.enabledDiagnosticLevels": [
         "warning",
         "info",
         "error"
     ],
-    // -----
-    //  C++
-    // -----
-    // "[c]": {
-    //     "editor.defaultFormatter": "xaver.clang-format"
-    // },
-    // "[cpp]": {
-    //     "editor.defaultFormatter": "xaver.clang-format"
-    // },
-    // "C_Cpp.autocompleteAddParentheses": true,
-    // "C_Cpp.codeFolding": "Disabled",
-    // "C_Cpp.formatting": "clangFormat",
-    // "C_Cpp.vcpkg.enabled": false,
-    // "C_Cpp.workspaceParsingPriority": "low",
-    // "C_Cpp.default.cppStandard": "c++20",
-    // "clang-format.fallbackStyle": "WebKit",
-    // ------
-    //  Rust
-    // ------
-    "rust-analyzer.completion.postfix.enable": true,
-    "rust-analyzer.lens.enable": false,
-    "rust-analyzer.notifications.cargoTomlNotFound": false,
-    "rust-analyzer.inlayHints.chainingHints.enable": true,
-    "rust-analyzer.inlayHints.parameterHints.enable": false,
-    "rust-analyzer.inlayHints.typeHints.enable": false,
-    // -----------------
-    //  Web development
-    // -----------------
-    "files.associations": {
-        "*.json": "jsonc"
-    },
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "[vue]": {
-        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-    },
-    "[css]": {
-        "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
-    },
+    // "errorLens.codeLensEnabled": true,
+    // "errorLens.codeLensOnClick": "showQuickFix",
+    // -------------------
+    //  Language settings
+    // -------------------
     "eslint.validate": [
         "javascript",
         "js",
         "vue",
         "typescript",
     ],
-    "prettier.tabWidth": 4,
-    "prettier.printWidth": 100,
-    "prettier.jsxBracketSameLine": true,
-    "prettier.arrowParens": "avoid",
-    "volar.formatting.printWidth": 100,
     "eslint.format.enable": true,
-    "vue3snippets.jsxBracketSameLine": false,
-    "vetur.ignoreProjectWarning": true,
-    "intelephense.environment.phpVersion": "8.1.0",
-    "intelephense.diagnostics.undefinedMethods": false,
-    "intelephense.diagnostics.undefinedFunctions": false,
-    "php.suggest.basic": false,
+    "files.associations": {
+        "*.json": "jsonc"
+    },
     // -----------
     //  TODO Tree
     // -----------
@@ -425,6 +353,7 @@
     //  Git
     // -----
     "git.branchProtection": [
+        "main",
         "master",
         "staging",
         "develop",
@@ -433,13 +362,9 @@
     //  Markdown / Notes
     // ------------------
     "markdown.validate.enabled": true,
-    "markdown.experimental.updateLinksOnFileMove.enabled": "prompt",
     "pasteImage.path": "${currentFileDir}",
     "pasteImage.showFilePathConfirmInputBox": true,
     "markdown.preview.breaks": true,
-    "markdown-preview-enhanced.codeBlockTheme": "github.css",
-    "markdown-preview-enhanced.usePandocParser": true,
-    "markdown-preview-enhanced.breakOnSingleNewLine": true,
     "[plaintext]": {
         "editor.wordWrap": "on",
         "editor.lineNumbers": "off",
@@ -464,16 +389,112 @@
     // ---------
     //  Preview
     // ---------
-    "implicitParentheses.enable": true, // TODO: Really slow on huge files.
-    "editor.cursorSmoothCaretAnimation": false, // TODO: Too slow.
-    "editor.stickyScroll.enabled": false,
-    "explorer.incrementalNaming": "smart", // TODO: Or "simple" ?
-    "editor.hover.sticky": true,
-    // ------
-    //  Misc
-    // ------
-    "cSpell.language": "en,pt",
-    "workbench.iconTheme": "material-icon-theme",
-    "workbench.productIconTheme": "fluent-icons",
-    "workbench.colorTheme": "Keizaal",
+    "editor.cursorSmoothCaretAnimation": "off", // TODO: Too slow.
+    "editor.experimental.asyncTokenization": true,
+    "editor.experimental.asyncTokenizationLogging": false,
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "g",
+                "u",
+            ],
+            "commands": [
+                "workbench.action.navigateBack"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "h"
+            ],
+            "commands": [
+                "editor.action.showDefinitionPreviewHover"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "d"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "D"
+            ],
+            "commands": [
+                "editor.action.revealDefinitionAside"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "p",
+                "d"
+            ],
+            "commands": [
+                "editor.action.peekDefinition"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "p",
+                "i"
+            ],
+            "commands": [
+                "editor.action.peekImplementation"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "q"
+            ],
+            "commands": [
+                "editor.action.quickFix"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "r"
+            ],
+            "commands": [
+                "editor.action.referenceSearch.trigger"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "t"
+            ],
+            "commands": [
+                "editor.action.goToTypeDefinition"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "p",
+                "t"
+            ],
+            "commands": [
+                "editor.action.peekTypeDefinition"
+            ]
+        },
+    ],
 }

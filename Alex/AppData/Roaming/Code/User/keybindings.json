@@ -2,7 +2,45 @@
     // Notes
     //  - Ctrl + k, Ctrl + s -> Show keyboard shortcuts with keybindings
     //
+    {
+        "key": "ctrl+1",
+        "command": "workbench.action.openEditorAtIndex1"
+    },
+    {
+        "key": "ctrl+2",
+        "command": "workbench.action.openEditorAtIndex2"
+    },
+    {
+        "key": "ctrl+3",
+        "command": "workbench.action.openEditorAtIndex3"
+    },
+    {
+        "key": "ctrl+4",
+        "command": "workbench.action.openEditorAtIndex4"
+    },
+    {
+        "key": "ctrl+5",
+        "command": "workbench.action.openEditorAtIndex5"
+    },
+    {
+        "key": "ctrl+6",
+        "command": "workbench.action.openEditorAtIndex6"
+    },
+    {
+        "key": "ctrl+7",
+        "command": "workbench.action.openEditorAtIndex7"
+    },
+    {
+        "key": "ctrl+8",
+        "command": "workbench.action.openEditorAtIndex8"
+    },
+    {
+        "key": "ctrl+9",
+        "command": "workbench.action.openEditorAtIndex9"
+    },
+    //
     // Terminal toggle
+    //
     {
         "key": "ctrl+\\",
         "command": "workbench.action.terminal.toggleTerminal"
@@ -12,7 +50,18 @@
         "command": "workbench.action.terminal.toggleTerminal",
         "when": "terminalFocus"
     },
+    {
+        "key": "ctrl+;",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+;",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus"
+    },
+    //
     // Explorer view toggle
+    //
     {
         "key": "ctrl+0",
         "command": "workbench.explorer.fileView.focus",
@@ -20,26 +69,38 @@
     {
         "key": "ctrl+0",
         "command": "workbench.action.toggleSidebarVisibility",
-        "when": "!editorFocus"
+        "when": "!inputFocus"
     },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen",
+    },
+    //
     // Disable ctrl+2 (split)
+    //
     {
         "key": "ctrl+2",
         "command": ""
     },
+    //
     // Split editor
+    //
     {
         "key": "shift+\\",
         "command": "workbench.action.splitEditor",
         "when": "editorTextFocus && vim.mode == 'Normal'"
     },
+    //
     // Expand current file to fit the screen (when split)
+    //
     {
         "key": "shift+f",
         "command": "workbench.action.toggleEditorWidths",
         "when": "editorTextFocus && vim.mode == 'Normal'"
     },
+    //
     // Vim shift lines
+    //
     {
         "key": "shift+j",
         "command": "editor.action.moveLinesDownAction",
@@ -50,7 +111,32 @@
         "when": "editorTextFocus && vim.mode == 'Normal'",
         "key": "shift+k"
     },
+    //
+    // Vim movement on hover popups
+    //
+    {
+        "key": "h",
+        "command": "editor.action.scrollLeftHover",
+        "when": "editorHoverFocused"
+    },
+    {
+        "key": "j",
+        "command": "editor.action.scrollDownHover",
+        "when": "editorHoverFocused"
+    },
+    {
+        "key": "k",
+        "command": "editor.action.scrollUpHover",
+        "when": "editorHoverFocused"
+    },
+    {
+        "key": "l",
+        "command": "editor.action.scrollRightHover",
+        "when": "editorHoverFocused"
+    },
+    //
     // Multiple cursors
+    //
     {
         "key": "ctrl+d",
         "command": "editor.action.addSelectionToNextFindMatch",
@@ -61,30 +147,24 @@
         "command": "editor.action.moveSelectionToNextFindMatch",
         "when": "editorTextFocus && vim.mode == 'Visual'"
     },
+    //
     // Tab out or reident extension
+    //
     {
         "key": "tab",
         "command": "tabOutOrReindent",
         "when": "editorTextFocus && vim.mode =='Insert' && !editorReadonly && !editorTabMovesFocus && !suggestWidgetVisible && !inSnippetMode"
     },
+    //
     // Fold on org-mode documents
+    //
     {
         "key": "tab",
         "command": "editor.toggleFold",
         "when": "editorTextFocus && vim.mode == 'Normal' && editorLangId == org"
     },
-    // Follow links on Foam/Markdown documents
-    {
-        "key": "ctrl+g",
-        "command": "editor.action.openLink",
-        "when": "editorTextFocus && vim.mode == 'Normal'"
-    },
-    {
-        "key": "alt+g",
-        "command": "editor.action.openLink",
-        "when": "editorTextFocus && vim.mode == 'Normal'"
-    }
 ]
+
 /*
 // Move visually:
 {
