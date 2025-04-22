@@ -1,22 +1,19 @@
 require 'neovide'
 require 'options'
 require 'plugins'
-require 'maps'
 
--- TODO:
+-- TODO: File tree
+-- https://github.com/nvim-telescope/telescope-file-browser.nvim
+-- https://github.com/nvim-neo-tree/neo-tree.nvim
 
--- completion:
--- use 'hrsh7th/cmp-nvim-lsp-signature-help' try this instead of the one we have
--- https://github.com/onsails/lspkind.nvim
+-- https://github.com/windwp/nvim-spectre ({ live_update = true, is_insert_mode = true, line_sep_start = '', line_sep = '' })
+-- https://github.com/rmagatti/goto-preview
+-- https://github.com/lukas-reineke/indent-blankline.nvim (indent guides, fn scope guides)
+-- https://github.com/nvim-telescope/telescope-fzf-native.nvim (is it worth it?)
+-- https://github.com/wellle/targets.vim
+-- https://github.com/smjonas/inc-rename.nvim
 
--- https://github.com/ThePrimeagen/vim-be-good
--- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#menu-type
--- use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' } -- https://github.com/sindrets/diffview.nvim
+-- https://github.com/mrjones2014/legendary.nvim
+
+-- https://github.com/TimUntersberger/neogit (git frontend)
 -- https://github.com/rhysd/git-messenger.vim
--- https://github.com/hrsh7th/nvim-pasta vs the one that uses telescope
--- https://github.com/mhartington/formatter.nvim eslint?
--- https://github.com/wellle/targets.vim crazy operator di' like changes
--- https://github.com/beauwilliams/focus.nvim vim splits on steroidcs
--- https://github.com/itchyny/calendar.vim
-
-vim.cmd('source $LocalAppData/nvim/keymaps.vim')
