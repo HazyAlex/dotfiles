@@ -1,15 +1,6 @@
 # Dotfiles
 
-Everything here is very WIP.
 Some of these tools are only available on Windows.
-
-### Linux utilities
-
-(usually add them to .cargo/bin)
-
-- htop
-- less
-- wget
 
 ### Cargo install
 
@@ -22,28 +13,40 @@ Some of these tools are only available on Windows.
 
 ### Editors
 
-- VSCodium (VSCode when I need the WSL extension.)
-- Emacs (light explorer edits, super fast startup thanks to server-mode)
-- Neovim (quick terminal edits) (currently using Neovide)
+- VSCodium
+- Zed (C/C-- projects)
+- Neovim (quick terminal edits, weekend projects) (currently using Neovide)
+- Emacs (editing larger files)
 
-### Monitoring
+### Benchmarks / Monitoring
 
 - HWMonitor
-- ProcExp64
-- WinDirStat
+- ProcExp64 (sysinternals)
+- WizTree
+- FurMark 2
 
 ### Other software
 
-- Keypirinha
-- SyncTrayzor
+- 7Zip
+- Anki
+- Deluge
+- Docker Desktop
+- EarTrumpet
+- HandBrake
+- HeidiSQL
+- IrfanView
+- Obsidian
+- PuTTY / PuTTYgen
+- QuickLook
+- Restfox
+- S3 Browser
+- ShareX
+- StartAllBack
 - Taskbar-Twitch
 - Transmission
-- Anki
-- Blender
-- ShareX
-- windows-terminal-quake
-- QuickLook
+- WireGuard
+- XPipe
 - foobar2000
+- mpv (create a `portable_config` folder next to the `.exe` and create a `mpv.conf`)
 - musikcube
-- streamlink
-- mpv
+- windows-terminal-quake
