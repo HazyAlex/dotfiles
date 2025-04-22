@@ -25,10 +25,3 @@ function global:prompt {
    write-host ' $' -n -f $cdelim
    return ' '
 }
-
-
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
