@@ -7,16 +7,25 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-echo "Installing Python and Ansible..."
-echo ""
-pacman -S --noconfirm python ansible
-echo ""
-echo "Done!"
+if ! command -v python &> /dev/null; then
+    echo "Installing Python.."
+    pacman -S --noconfirm python
+    echo "Done!"
+    echo ""
+fi
+
+if ! command -v ansible &> /dev/null; then
+    echo "Installing Ansible.."
+    pacman -S --noconfirm ansible
+    echo "Done!"
+    echo ""
+fi
+
 
 cd ansible
 
-echo "Available playbooks:"
-echo "1. Run all playbooks"
+echo "Available tasks:"
+echo "1. Run all tasks"
 echo "2. Core server configuration"
 echo "3. Docker installation"
 echo "4. Git configuration"
