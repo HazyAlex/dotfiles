@@ -8,7 +8,9 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 echo "Installing Python and Ansible..."
+echo ""
 pacman -S --noconfirm python ansible
+echo ""
 echo "Done!"
 
 cd ansible

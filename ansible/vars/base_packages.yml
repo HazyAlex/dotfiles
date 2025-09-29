@@ -1,18 +1,21 @@
 ---
 base_packages:
-  - git
+  - less
+  - rsync
   - wget
-  - openssh
-  - sudo
-  - ufw
-  - fail2ban
-  - base-devel
   - zip
   - unzip
+  - man-db
+  - sudo
+  - vim
+  - git
+  - base-devel
   - jq
   - ripgrep
   - fd
   - iputils
   - traceroute
-  - rsync
-  - vim
+  - dnsutils
+  - ufw
+  - openssh
+  - fail2ban
