@@ -1,0 +1,12 @@
+---
+- name: Configure Git
+  hosts: all
+  become: no
+  tasks:
+    - name: Copy .gitconfig to user home directory
+      copy:
+        src: "{{ playbook_dir }}/../Alex/.gitconfig"
+        dest: "{{ ansible_env.HOME }}/.gitconfig"
+        owner: "{{ ansible_user }}"
+        group: "{{ ansible_user }}"
+        mode: '0644'

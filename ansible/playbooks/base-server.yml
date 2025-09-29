@@ -1,0 +1,81 @@
+---
+- name: Base Server Configuration
+  hosts: all
+  become: yes
+  vars_files:
+    - ../vars/base_packages.yml
+  tasks:
+    - name: Update system
+      pacman:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Install essential packages
+      pacman:
+        name: "{{ base_packages }}"
+        state: present
+
+    - name: Start and enable SSH service
+      systemd:
+        name: sshd
+        state: started
+        enabled: yes
+
+    - name: Configure SSH hardening
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        line: "{{ item }}"
+        state: present
+      loop:
+        - "PermitRootLogin no"
+        - "PasswordAuthentication no"
+      notify: restart sshd
+
+    - name: Ensure UFW is enabled
+      ufw:
+        state: enabled
+        policy: deny
+        direction: incoming
+
+    - name: Allow SSH through UFW
+      ufw:
+        rule: allow
+        port: '22'
+        proto: tcp
+
+    - name: Allow HTTP and HTTPS through UFW
+      ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop:
+        - '80'
+        - '443'
+
+    - name: Configure fail2ban
+      copy:
+        content: |
+          [DEFAULT]
+          bantime = 3600
+          findtime = 600
+          maxretry = 3
+
+          [sshd]
+          enabled = true
+          port = ssh
+          logpath = /var/log/auth.log
+          maxretry = 3
+        dest: /etc/fail2ban/jail.local
+        mode: '0644'
+
+    - name: Start and enable fail2ban
+      systemd:
+        name: fail2ban
+        state: started
+        enabled: yes
+
+  handlers:
+    - name: restart sshd
+      systemd:
+        name: sshd
+        state: restarted

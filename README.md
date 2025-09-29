@@ -1,6 +1,12 @@
 # Dotfiles
 
-Some of these tools are only available on Windows.
+This repository holds configuration files and scripts ..
+
+## Linux
+
+[Click here for bootstrapping a server with my desired configuration](./ansible/ArchLinuxInstall.md).
+
+## Windows
 
 ### Cargo install
 
@@ -14,12 +20,13 @@ Some of these tools are only available on Windows.
 ### Editors
 
 - VSCodium
-- Zed (C/C-- projects)
+- Cursor
 - Neovim (quick terminal edits, weekend projects) (currently using Neovide)
 - Emacs (editing larger files)
 
 ### Benchmarks / Monitoring
 
+- CrystalDiskInfo
 - HWMonitor
 - ProcExp64 (sysinternals)
 - WizTree
@@ -42,6 +49,7 @@ Some of these tools are only available on Windows.
 - S3 Browser
 - ShareX
 - StartAllBack
+- SumatraPDF
 - Taskbar-Twitch
 - Transmission
 - WireGuard
