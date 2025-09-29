@@ -5,7 +5,7 @@
   tasks:
     - name: Copy .gitconfig to user home directory
       copy:
-        src: "{{ playbook_dir }}/../Alex/.gitconfig"
+        src: "{{ playbook_dir }}/../../Alex/.gitconfig"
         dest: "{{ ansible_env.HOME }}/.gitconfig"
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
