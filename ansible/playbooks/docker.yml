@@ -8,16 +8,41 @@
         name:
           - docker
           - docker-compose
+          - ctop
         state: present
-
-    - name: Start and enable the service
-      systemd:
-        name: docker
-        state: started
-        enabled: yes
 
     - name: Add the user to the docker group
       user:
         name: "{{ ansible_user_id }}"
         groups: docker
         append: yes
+
+    - name: Create /etc/docker directory if it does not exist already
+      file:
+        path: /etc/docker
+        state: directory
+        mode: '0755'
+
+    - name: Adjust max log size, prevent docker network from using 192.168.0.0/16
+      copy:
+        dest: '/etc/docker/daemon.json'
+        content: |
+          {
+            "log-driver": "json-file",
+            "log-opts": {
+              "max-size": "50m",
+              "max-file": "5"
+            },
+            "default-address-pools": [
+              {
+                "base" : "172.16.0.0/12",
+                "size" : 24
+              }
+            ]
+          }
+
+    - name: Start and enable the service
+      systemd:
+        name: docker
+        state: started
+        enabled: yes

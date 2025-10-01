@@ -10,10 +10,28 @@
         update_cache: yes
         upgrade: yes
 
+    - name: archlinux-keyring - enable weekly update
+      systemd:
+        name: archlinux-keyring-wkd-sync.timer
+        enabled: yes
+        state: started
+
     - name: Install essential packages
       pacman:
         name: "{{ base_packages }}"
         state: present
+
+    - name: makepkg - enable parallel compilation"
+      lineinfile:
+        path: /etc/makepkg.conf
+        regexp: '#MAKEFLAGS="-j2"'
+        line: 'MAKEFLAGS="-j$(nproc)"'
+
+    - name: enable weekly SSD disks trim
+      systemd:
+        name: fstrim.timer
+        enabled: yes
+        state: started
 
     - name: Start and enable SSH service
       systemd:
@@ -31,12 +49,6 @@
         - "PasswordAuthentication no"
       notify: restart sshd
 
-    - name: Ensure UFW is enabled
-      ufw:
-        state: enabled
-        policy: deny
-        direction: incoming
-
     - name: Allow SSH through UFW
       ufw:
         rule: allow
@@ -51,6 +63,12 @@
       loop:
         - '80'
         - '443'
+
+    - name: Ensure UFW is enabled
+      ufw:
+        state: enabled
+        policy: deny
+        direction: incoming
 
     - name: Configure fail2ban
       copy:

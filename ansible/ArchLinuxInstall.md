@@ -31,6 +31,7 @@ Disk layout:
 13. [Wifi setup (part two) (optional)](#13-wifi-setup-part-two-optional)
 14. [Updating the system](#14-updating-the-system)
 15. [Creating a regular user](#15-creating-a-regular-user)
+16. [Run the bootstrap script](#16-run-the-bootstrap-script)
 
 ## 1. Wiping the partitions table
 
@@ -280,4 +281,14 @@ passwd {USER}
 
 # Enable sudo for wheel group
 # Uncomment "%wheel ALL=(ALL) ALL" in `/etc/sudoers`
+```
+
+## 16. Run the bootstrap script
+
+```
+# Log out (`exit`) and log back in with the newly created user (previous step).
+
+wget https://github.com/HazyAlex/dotfiles/linux-bootstrap.sh
+chmod u+x ./linux-bootstrap.sh
+./linux-bootstrap.sh
 ```

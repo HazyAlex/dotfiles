@@ -2,27 +2,22 @@
 
 set -e
 
-if [[ $EUID -ne 0 ]]; then
-    echo "This script must be run as root"
+if [[ $EUID -eq 0 ]]; then
+    echo "Do not run this script as root. Please run it as a regular user."
     exit 1
 fi
 
-if ! command -v python &> /dev/null; then
-    echo "Installing Python.."
-    pacman -S --noconfirm python
-    echo "Done!"
-    echo ""
+if ! command -v git &> /dev/null; then
+    sudo pacman -S --noconfirm git
 fi
 
 if ! command -v ansible &> /dev/null; then
-    echo "Installing Ansible.."
-    pacman -S --noconfirm ansible
-    echo "Done!"
-    echo ""
+    sudo pacman -S --noconfirm ansible
 fi
 
-
-cd ansible
+cd ~
+git clone https://github.com/HazyAlex/dotfiles.git
+cd dotfiles/ansible
 
 echo "Available tasks:"
 echo ""
@@ -36,18 +31,18 @@ read -p "Enter your selection: " choice
 
 case $choice in
     1)
-        ansible-playbook -i inventory/localhost.yml playbooks/base-server.yml
-        ansible-playbook -i inventory/localhost.yml playbooks/git.yml
-        ansible-playbook -i inventory/localhost.yml playbooks/docker.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/base-server.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/git.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
         ;;
     2)
-        ansible-playbook -i inventory/localhost.yml playbooks/base-server.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/base-server.yml
         ;;
     3)
-        ansible-playbook -i inventory/localhost.yml playbooks/docker.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
         ;;
     4)
-        ansible-playbook -i inventory/localhost.yml playbooks/git.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/git.yml
         ;;
     *)
         echo "Exiting..."

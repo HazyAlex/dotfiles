@@ -1,12 +1,12 @@
 [user]
-	email = HazyAlex@protonmail.com
-	name = HazyAlex
+    email = HazyAlex@protonmail.com
+    name = HazyAlex
 
 [credential]
-	helper = store
+    helper = store
 
 [core]
-	autocrlf = false
+    autocrlf = false
 
 [init]
     defaultBranch = main

@@ -1,5 +1,9 @@
 # Dotfiles
 
+TODO: Check if SSH can be hardened further (config)
+TODO: Install delta (git diff)
+TODO: Run everything on a regular user (not root)
+
 This repository holds configuration files and scripts ..
 
 ## Linux
