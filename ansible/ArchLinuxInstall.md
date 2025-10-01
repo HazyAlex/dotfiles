@@ -288,7 +288,7 @@ passwd {USER}
 ```
 # Log out (`exit`) and log back in with the newly created user (previous step).
 
-wget https://github.com/HazyAlex/dotfiles/linux-bootstrap.sh
+wget https://raw.githubusercontent.com/HazyAlex/dotfiles/refs/heads/main/linux-bootstrap.sh
 chmod u+x ./linux-bootstrap.sh
 ./linux-bootstrap.sh
 ```

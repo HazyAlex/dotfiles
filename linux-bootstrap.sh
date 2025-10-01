@@ -17,6 +17,7 @@ fi
 
 cd ~
 git clone https://github.com/HazyAlex/dotfiles.git
+git switch wip
 cd dotfiles/ansible
 
 echo "Available tasks:"
