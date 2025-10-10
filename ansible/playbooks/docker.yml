@@ -52,7 +52,3 @@
         name: docker
         state: started
         enabled: yes
-
-    - name: Refresh group membership
-      command: newgrp docker
-      become: no
