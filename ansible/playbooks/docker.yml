@@ -15,17 +15,13 @@
     - name: Get the username (before becoming root)
       command: whoami
       register: original_user
-      become: false
+      become: no
 
     - name: Add the user to the docker group
       user:
         name: "{{ original_user.stdout }}"
         groups: docker
         append: yes
-
-    - name: Refresh group membership
-      command: newgrp docker
-      become: false
 
     - name: Create /etc/docker directory if it does not exist already
       file:
@@ -56,3 +52,7 @@
         name: docker
         state: started
         enabled: yes
+
+    - name: Refresh group membership
+      command: newgrp docker
+      become: no
