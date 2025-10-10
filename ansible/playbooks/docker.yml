@@ -52,3 +52,11 @@
         name: docker
         state: started
         enabled: yes
+
+    - name: Display important note about docker group
+      debug:
+        msg: |
+          IMPORTANT: Docker installation complete!
+
+          To use docker immediately, run: newgrp docker
+          Or restart your terminal session.

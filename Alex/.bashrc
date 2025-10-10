@@ -41,7 +41,7 @@ alias rd="rmdir"
 alias cls="clear"
 
 alias whoami="whoami && curl 4.ident.me"
-alias please="sudo $(history -p !!)"
+alias please="sudo !!"
 
 alias ls="eza"
 alias ll="eza -la"
