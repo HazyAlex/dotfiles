@@ -42,6 +42,7 @@ case $choice in
         ansible-playbook -K -i inventory/localhost.yml playbooks/git.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/bash.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
+        exec newgrp docker
         ansible-playbook -K -i inventory/localhost.yml playbooks/services.yml
         ;;
     2)
@@ -55,6 +56,7 @@ case $choice in
         ;;
     5)
         ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
+        exec newgrp docker
         ;;
     6)
         ansible-playbook -K -i inventory/localhost.yml playbooks/services.yml

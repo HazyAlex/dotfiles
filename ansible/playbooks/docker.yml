@@ -53,7 +53,7 @@
         state: started
         enabled: yes
 
-    - name: Display important note about docker group
+    - name: Display important note about the docker group
       debug:
         msg: |
           IMPORTANT: Docker installation complete!
