@@ -29,6 +29,7 @@
               ports:
                 - "{{ uptime_kuma_address }}:{{ uptime_kuma_port }}:3001"
               volumes:
+                - /var/run/docker.sock:/var/run/docker.sock:ro
                 - {{ uptime_kuma_volume }}:/app/data
               restart: always
           volumes:
