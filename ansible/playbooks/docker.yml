@@ -55,8 +55,8 @@
 
     - name: Display important note about the docker group
       debug:
-        msg: |
-          IMPORTANT: Docker installation complete!
-          
-          To use docker immediately, run: newgrp docker
-          Or restart your terminal session.
+        msg:
+          - "IMPORTANT: Docker installation complete!"
+          - ""
+          - "To use docker immediately, run: newgrp docker"
+          - "Or restart your terminal session."
