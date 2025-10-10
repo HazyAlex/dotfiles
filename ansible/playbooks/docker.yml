@@ -12,9 +12,14 @@
           - ctop
         state: present
 
+    - name: Get the username (before becoming root)
+      command: whoami
+      register: original_user
+      become: false
+
     - name: Add the user to the docker group
       user:
-        name: "{{ ansible_user_id }}"
+        name: "{{ original_user.stdout }}"
         groups: docker
         append: yes
 
