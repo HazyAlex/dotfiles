@@ -16,9 +16,12 @@ if ! command -v ansible &> /dev/null; then
 fi
 
 cd ~
-git clone https://github.com/HazyAlex/dotfiles.git
+if [ ! -d "dotfiles" ]; then
+    git clone https://github.com/HazyAlex/dotfiles.git
+fi
 cd dotfiles
 git switch wip
+git pull
 cd ansible
 
 echo "Available tasks:"

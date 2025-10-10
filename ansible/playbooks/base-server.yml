@@ -51,15 +51,15 @@
 
     - name: Create .ssh directory for ansible user
       file:
-        path: "/home/{{ ansible_user }}/.ssh"
+        path: "/home/{{ ansible_user_id }}/.ssh"
         state: directory
         mode: '0700'
-        owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
 
     - name: Add SSH public key to authorized_keys
       authorized_key:
-        user: "{{ ansible_user }}"
+        user: "{{ ansible_user_id }}"
         key: "{{ ssh_public_key }}"
         state: present
       when: ssh_public_key != ""
