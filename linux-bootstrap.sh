@@ -17,15 +17,18 @@ fi
 
 cd ~
 git clone https://github.com/HazyAlex/dotfiles.git
+cd dotfiles
 git switch wip
-cd dotfiles/ansible
+cd ansible
 
 echo "Available tasks:"
 echo ""
 echo "1. Run all tasks"
 echo "2. Core server configuration"
-echo "3. Docker installation"
-echo "4. Git configuration"
+echo "3. Git configuration"
+echo "4. Bash configuration"
+echo "5. Docker installation"
+echo "6. Services configuration"
 echo ""
 
 read -p "Enter your selection: " choice
@@ -34,16 +37,27 @@ case $choice in
     1)
         ansible-playbook -K -i inventory/localhost.yml playbooks/base-server.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/git.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/bash.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/services.yml
         ;;
     2)
         ansible-playbook -K -i inventory/localhost.yml playbooks/base-server.yml
         ;;
     3)
-        ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/git.yml
         ;;
     4)
-        ansible-playbook -K -i inventory/localhost.yml playbooks/git.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/bash.yml
+        ;;
+    5)
+        ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
+        ;;
+    6)
+        ansible-playbook -K -i inventory/localhost.yml playbooks/services.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/uptime-kuma.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/dozzle.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/glances.yml
         ;;
     *)
         echo "Exiting..."

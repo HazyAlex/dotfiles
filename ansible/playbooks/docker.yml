@@ -2,6 +2,7 @@
 - name: Install and Configure Docker
   hosts: all
   become: yes
+
   tasks:
     - name: Install Docker
       pacman:

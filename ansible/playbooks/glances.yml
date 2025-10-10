@@ -1,0 +1,46 @@
+---
+- name: Deploy "glances"
+  become: true
+
+  vars:
+    glances_image: nicolargo/glances:latest
+    glances_address: 0.0.0.0
+    glances_port: 61208
+    glances_dir: /opt/glances
+    glances_container_name: glances
+
+  tasks:
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ glances_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ glances_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            glances:
+              image: "{{ glances_image }}"
+              container_name: "{{ glances_container_name }}"
+              environment:
+                GLANCES_OPT: "-w"
+                TZ: "{{ ansible_date_time.tz }}"
+              volumes:
+                - /var/run/docker.sock:/var/run/docker.sock:ro
+              pid: "host"
+              ports:
+                - "{{ glances_address }}:{{ glances_port }}:{{ glances_port }}"
+              restart: unless-stopped
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ glances_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always
+
+

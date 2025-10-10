@@ -2,6 +2,7 @@
 - name: Configure Git
   hosts: all
   become: no
+
   tasks:
     - name: Copy .gitconfig to user home directory
       copy:

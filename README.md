@@ -1,28 +1,36 @@
 # Dotfiles
 
-This repository holds configuration files and scripts ..
+This repository includes documentation, configuration files, and scripts for my Linux and Windows setups.
 
 ## Linux
 
-[Click here for bootstrapping a server with my desired configuration](./ansible/ArchLinuxInstall.md).
+- [Arch Linux playbooks for automated server setup and configuration.](./ansible/ArchLinuxInstall.md)
+  - System configuration
+  - Bash + Git configuration
+  - SSH + fail2ban
+  - UFW
+  - Docker
+  - Services ([click here to see the available playbooks](./ansible/playbooks/))
 
 ## Windows
+
+Below is a list of recommended software (some of them have config files in this repository).
 
 ### Cargo install
 
 - bat
-- delta
+- delta (git-delta)
 - fd
 - tokei
 - measure (copy and rename it to `ms`)
-- rg
+- rg (ripgrep)
 
 ### Editors
 
-- VSCodium
 - Cursor
-- Neovim (quick terminal edits, weekend projects) (currently using Neovide)
 - Emacs (editing larger files)
+- Neovim (quick terminal edits, weekend projects) (currently using Neovide as a GUI)
+- VSCodium
 
 ### Benchmarks / Monitoring
 
@@ -55,6 +63,6 @@ This repository holds configuration files and scripts ..
 - WireGuard
 - XPipe
 - foobar2000
-- mpv (create a `portable_config` folder next to the `.exe` and create a `mpv.conf`)
+- mpv (create a `portable_config` folder next to the `.exe` and copy the `mpv.conf` in there)
 - musikcube
 - windows-terminal-quake

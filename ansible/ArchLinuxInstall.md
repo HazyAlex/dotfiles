@@ -292,3 +292,5 @@ wget https://raw.githubusercontent.com/HazyAlex/dotfiles/refs/heads/main/linux-b
 chmod u+x ./linux-bootstrap.sh
 ./linux-bootstrap.sh
 ```
+
+You'll be asked for a SSH public key - this step is optional but useful if you wish to SSH into the server later on.

@@ -1,0 +1,13 @@
+---
+- name: Configure Bash
+  hosts: all
+  become: no
+
+  tasks:
+    - name: Copy .bashrc to the user's home
+      copy:
+        src: "{{ playbook_dir }}/../../Alex/.bashrc"
+        dest: "{{ ansible_env.HOME }}/.bashrc"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+        mode: '0644'

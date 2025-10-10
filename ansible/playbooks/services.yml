@@ -1,0 +1,10 @@
+---
+- name: Bootstrap the services
+  become: true
+
+  tasks:
+    - name: Ensure that the services directory exists
+      ansible.builtin.file:
+        path: "/opt"
+        state: directory
+        mode: "0755"

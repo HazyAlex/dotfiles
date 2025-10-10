@@ -1,0 +1,44 @@
+---
+- name: Deploy "dozzle"
+  become: true
+
+  vars:
+    dozzle_image: amir20/dozzle:latest
+    dozzle_address: 0.0.0.0
+    dozzle_port: 8080
+    dozzle_dir: /opt/dozzle
+    dozzle_container_name: dozzle
+
+  tasks:
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ dozzle_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ dozzle_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            dozzle:
+              image: "{{ dozzle_image }}"
+              container_name: "{{ dozzle_container_name }}"
+              environment:
+                DOZZLE_NO_ANALYTICS: "true"
+              volumes:
+                - /var/run/docker.sock:/var/run/docker.sock:ro
+              ports:
+                - "{{ dozzle_address }}:{{ dozzle_port }}:8080"
+              restart: unless-stopped
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ dozzle_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always
+
+
