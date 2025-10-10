@@ -50,6 +50,7 @@
         - "PasswordAuthentication no"
 
     - name: Create .ssh directory for ansible user
+      become: no
       file:
         path: "/home/{{ ansible_user_id }}/.ssh"
         state: directory
@@ -58,6 +59,7 @@
         group: "{{ ansible_user_id }}"
 
     - name: Add SSH public key to authorized_keys
+      become: no
       authorized_key:
         user: "{{ ansible_user_id }}"
         key: "{{ ssh_public_key }}"
