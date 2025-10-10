@@ -294,3 +294,5 @@ chmod u+x ./linux-bootstrap.sh
 ```
 
 You'll be asked for a SSH public key - this step is optional but useful if you wish to SSH into the server later on.
+
+NOTE: If you installed Docker, you'll need to run `newgrp docker` (or logout and login) in order to use the docker command.

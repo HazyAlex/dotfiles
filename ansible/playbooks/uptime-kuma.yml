@@ -1,5 +1,6 @@
 ---
 - name: Deploy "uptime-kuma"
+  hosts: all
   become: true
 
   vars:
