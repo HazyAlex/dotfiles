@@ -1,0 +1,48 @@
+---
+- name: Deploy "cloudflare-ddns"
+  hosts: all
+  become: true
+
+  vars_files:
+    - ../group_vars/cloudflare-ddns.yml
+
+  vars:
+    cloudflare_ddns_image: favonia/cloudflare-ddns:1.15.1
+    cloudflare_ddns_dir: /opt/cloudflare-ddns
+
+  tasks:
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ cloudflare_ddns_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ cloudflare_ddns_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            cloudflare-ddns:
+              container_name: cloudflare-ddns
+              image: "{{ cloudflare_ddns_image }}"
+              environment:
+                - CLOUDFLARE_API_TOKEN={{ cloudflare_api_token }}
+                - DOMAINS={{ domains }}
+                - UPDATE_CRON={{ update_cron }}
+                - PROXIED={{ proxied }}
+                - HEALTHCHECK_URL={{ healthcheck_url }}
+                - UPTIMEKUMA={{ uptime_kuma }}
+              network_mode: host
+              read_only: true
+              cap_drop: [all]
+              security_opt: [no-new-privileges:true]
+              restart: unless-stopped
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ cloudflare_ddns_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always

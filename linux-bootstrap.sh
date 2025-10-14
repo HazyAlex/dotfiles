@@ -32,6 +32,7 @@ echo "3. Git configuration"
 echo "4. Bash configuration"
 echo "5. Docker installation"
 echo "6. Services configuration"
+echo "7. Cloudflare DDNS"
 echo ""
 
 read -p "Enter your selection: " choice
@@ -61,6 +62,21 @@ case $choice in
         ansible-playbook -K -i inventory/localhost.yml playbooks/uptime-kuma.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/dozzle.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/glances.yml
+        ;;
+    7)
+        if [ ! -f "group_vars/cloudflare-ddns.yml" ]; then
+            echo ""
+            echo "⚠️ IMPORTANT: Before proceeding, make sure you have edited the Cloudflare DDNS configuration!"
+            echo ""
+            echo "An example is available in: dotfiles/ansible/group_vars/cloudflare-ddns.example.yml"
+            echo ""
+            echo "Copy the example file and edit it:"
+            echo "  cp dotfiles/ansible/group_vars/cloudflare-ddns.example.yml dotfiles/ansible/group_vars/cloudflare-ddns.yml"
+            echo ""
+            exit 1
+        fi
+
+        ansible-playbook -K -i inventory/localhost.yml playbooks/cloudflare-ddns.yml
         ;;
     *)
         echo "Exiting..."

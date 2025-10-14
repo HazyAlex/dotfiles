@@ -1,0 +1,38 @@
+#
+# Cloudflare DDNS Configuration
+#
+
+# [Required]
+# Cloudflare API Token
+# -----------------------------------------------------------------------------
+# Get your token from: https://dash.cloudflare.com/profile/api-tokens
+# Create a token with "Edit Zone DNS" permission for the domain you want to
+#  update.
+cloudflare_api_token: "your_api_token_here"
+
+# [Required]
+# Domains to update (comma-separated list)
+# -----------------------------------------------------------------------------
+domains: "subdomain.example.com,another.example.com"
+
+# [Optional]
+# Update schedule (cron format)
+# -----------------------------------------------------------------------------
+update_cron: "*/5 * * * *"
+
+# [Optional]
+# Proxy settings
+# -----------------------------------------------------------------------------
+# Tell Cloudflare to cache webpages and hide your IP
+proxied: "true"
+
+# [Optional]
+# Healthcheck URL
+# -----------------------------------------------------------------------------
+# healthcheck_url: "https://hc-ping.com/your-uuid"
+
+# [Optional]
+# Uptime Kuma URL
+# -----------------------------------------------------------------------------
+# Receive notifications when it fails to update IP addresses
+# uptime_kuma: "https://your-uptime-kuma.com/push/your-id"
