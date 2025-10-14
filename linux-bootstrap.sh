@@ -54,6 +54,7 @@ case $choice in
         ansible-playbook -K -i inventory/localhost.yml playbooks/uptime-kuma.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/dozzle.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/glances.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/watchyourlan.yml
         ;;
     6)
         if [ ! -f "group_vars/cloudflare-ddns.yml" ]; then

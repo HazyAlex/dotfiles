@@ -29,10 +29,12 @@ proxied: "true"
 # [Optional]
 # Healthcheck URL
 # -----------------------------------------------------------------------------
-# healthcheck_url: "https://hc-ping.com/your-uuid"
+# Example: "https://hc-ping.com/your-uuid"
+healthcheck_url: ""
 
 # [Optional]
 # Uptime Kuma URL
 # -----------------------------------------------------------------------------
 # Receive notifications when it fails to update IP addresses
-# uptime_kuma: "https://your-uptime-kuma.com/push/your-id"
+# Example: "https://your-uptime-kuma.com/push/your-id"
+uptime_kuma: ""
