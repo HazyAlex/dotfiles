@@ -5,6 +5,7 @@
 
   vars:
     watchyourlan_image: aceberg/watchyourlan:latest
+    watchyourlan_address: 0.0.0.0
     watchyourlan_port: 8840
     watchyourlan_dir: /opt/watchyourlan
     watchyourlan_volume: watchyourlan
@@ -28,15 +29,15 @@
               image: "{{ watchyourlan_image }}"
               container_name: watchyourlan
               ports:
-                - "{{ watchyourlan_port }}:8840"
+                - "{{ watchyourlan_address }}:{{ watchyourlan_port }}:8840"
               volumes:
                 - {{ watchyourlan_volume }}:/data/WatchYourLAN
               environment:
                 - TZ={{ watchyourlan_timezone }}
                 - IFACES={{ watchyourlan_interface }}
-                - HOST=0.0.0.0
+                - HOST={{ watchyourlan_address }}
                 - PORT={{ watchyourlan_port }}
-                - THEME=sand
+                - THEME=lumen
                 - COLOR=dark
               network_mode: host
               restart: unless-stopped
