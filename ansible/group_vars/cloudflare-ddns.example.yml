@@ -18,7 +18,7 @@ domains: "subdomain.example.com,another.example.com"
 # [Optional]
 # Update schedule (cron format)
 # -----------------------------------------------------------------------------
-update_cron: "*/5 * * * *"
+update_cron: "*/15 * * * *"
 
 # [Optional]
 # Proxy settings
