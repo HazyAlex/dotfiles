@@ -28,8 +28,6 @@
             watchyourlan:
               image: "{{ watchyourlan_image }}"
               container_name: watchyourlan
-              ports:
-                - "{{ watchyourlan_address }}:{{ watchyourlan_port }}:8840"
               volumes:
                 - {{ watchyourlan_volume }}:/data/WatchYourLAN
               environment:
