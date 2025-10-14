@@ -26,13 +26,12 @@ cd ansible
 
 echo "Available tasks:"
 echo ""
-echo "1. Run all tasks"
-echo "2. Core server configuration"
-echo "3. Git configuration"
-echo "4. Bash configuration"
-echo "5. Docker installation"
-echo "6. Services configuration"
-echo "7. Cloudflare DDNS"
+echo "1. Core server configuration"
+echo "2. Git configuration"
+echo "3. Bash configuration"
+echo "4. Docker installation"
+echo "5. Services configuration"
+echo "6. Cloudflare DDNS"
 echo ""
 
 read -p "Enter your selection: " choice
@@ -40,30 +39,23 @@ read -p "Enter your selection: " choice
 case $choice in
     1)
         ansible-playbook -K -i inventory/localhost.yml playbooks/base-server.yml
-        ansible-playbook -K -i inventory/localhost.yml playbooks/git.yml
-        ansible-playbook -K -i inventory/localhost.yml playbooks/bash.yml
-        ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
-        ansible-playbook -K -i inventory/localhost.yml playbooks/services.yml
         ;;
     2)
-        ansible-playbook -K -i inventory/localhost.yml playbooks/base-server.yml
-        ;;
-    3)
         ansible-playbook -K -i inventory/localhost.yml playbooks/git.yml
         ;;
-    4)
+    3)
         ansible-playbook -K -i inventory/localhost.yml playbooks/bash.yml
         ;;
-    5)
+    4)
         ansible-playbook -K -i inventory/localhost.yml playbooks/docker.yml
         ;;
-    6)
+    5)
         ansible-playbook -K -i inventory/localhost.yml playbooks/services.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/uptime-kuma.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/dozzle.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/glances.yml
         ;;
-    7)
+    6)
         if [ ! -f "group_vars/cloudflare-ddns.yml" ]; then
             echo ""
             echo "⚠️ IMPORTANT: Before proceeding, make sure you have edited the Cloudflare DDNS configuration!"
