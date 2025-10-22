@@ -1,0 +1,59 @@
+---
+- name: Deploy "airsonic-advanced"
+  hosts: all
+  become: true
+
+  vars:
+    airsonic_image: airsonicadvanced/airsonic-advanced:latest
+    airsonic_address: 0.0.0.0
+    airsonic_port: 4040
+    airsonic_dir: /opt/airsonic-advanced
+    airsonic_data_volume: airsonic-data
+
+  tasks:
+    - name: Prompt for base media path
+      ansible.builtin.set_fact:
+        base_media_path: "{{ lookup('prompt', 'Enter the base media path (e.g. /srv/media):') }}"
+
+    - name: Derive media subpaths from base path
+      ansible.builtin.set_fact:
+        airsonic_music_path: "{{ base_media_path }}/music"
+        airsonic_podcast_path: "{{ base_media_path }}/podcasts"
+        airsonic_playlists_path: "{{ base_media_path }}/playlists"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ airsonic_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ airsonic_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            airsonic-advanced:
+              image: "{{ airsonic_image }}"
+              container_name: airsonic-advanced
+              ports:
+                - "{{ airsonic_address }}:{{ airsonic_port }}:4040"
+              environment:
+                TZ: "{{ ansible_date_time.tz }}"
+              volumes:
+                - {{ airsonic_data_volume }}:/var/airsonic
+                - {{ airsonic_music_path }}:/var/music:ro
+                - {{ airsonic_podcast_path }}:/var/podcast
+                - {{ airsonic_playlists_path }}:/var/playlists
+              restart: unless-stopped
+          volumes:
+            {{ airsonic_data_volume }}:
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ airsonic_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always
+

@@ -1,0 +1,56 @@
+---
+- name: Deploy "linkding"
+  hosts: all
+  become: true
+
+  vars:
+    linkding_image: sissbruecker/linkding:latest
+    linkding_address: 0.0.0.0
+    linkding_port: 9090
+    linkding_dir: /opt/linkding
+    linkding_volume: linkding
+
+  tasks:
+    - name: Prompt for linkding superuser username
+      ansible.builtin.set_fact:
+        linkding_username: "{{ lookup('prompt', 'Enter username for linkding superuser:') }}"
+
+    - name: Prompt for linkding superuser password
+      ansible.builtin.set_fact:
+        linkding_password: "{{ lookup('password', prompt='Enter password for linkding superuser (' + linkding_username + '):', confirm=True) }}"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ linkding_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ linkding_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            linkding:
+              image: "{{ linkding_image }}"
+              container_name: linkding
+              ports:
+                - "{{ linkding_address }}:{{ linkding_port }}:9090"
+              volumes:
+                - {{ linkding_volume }}:/etc/linkding/data
+              environment:
+                - LD_DISABLE_BACKGROUND_TASKS=False             # Disables background tasks like creating snapshots for bookmarks on Internet Archive
+                - LD_DISABLE_URL_VALIDATION=False               # Disables URL validation for bookmarks (i.e. non-FQDN URLs or non-http/https)
+                - LD_SUPERUSER_NAME={{ linkding_username }}
+                - LD_SUPERUSER_PASSWORD={{ linkding_password }}
+              restart: unless-stopped
+          volumes:
+            {{ linkding_volume }}:
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ linkding_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always

@@ -31,7 +31,7 @@
               volumes:
                 - /var/run/docker.sock:/var/run/docker.sock:ro
                 - {{ uptime_kuma_volume }}:/app/data
-              restart: always
+              restart: unless-stopped
           volumes:
             {{ uptime_kuma_volume }}:
 

@@ -1,0 +1,64 @@
+---
+- name: Deploy "jellyfin"
+  hosts: all
+  become: true
+
+  vars:
+    jellyfin_image: jellyfin/jellyfin:latest
+    jellyfin_address: 0.0.0.0
+    jellyfin_port: 8096
+    jellyfin_dir: /opt/jellyfin
+    jellyfin_config_volume: jellyfin-config
+    jellyfin_cache_volume: jellyfin-cache
+
+  tasks:
+    - name: Prompt for base media path
+      ansible.builtin.set_fact:
+        base_media_path: "{{ lookup('prompt', 'Enter the base media path (e.g. /srv/media):') }}"
+
+    - name: Derive media subpaths from base path
+      ansible.builtin.set_fact:
+        jellyfin_movies_path: "{{ base_media_path }}/movies"
+        jellyfin_tv_path: "{{ base_media_path }}/tv"
+        jellyfin_music_path: "{{ base_media_path }}/music"
+        jellyfin_books_path: "{{ base_media_path }}/books"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ jellyfin_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ jellyfin_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            jellyfin:
+              image: "{{ jellyfin_image }}"
+              container_name: jellyfin
+              ports:
+                - "{{ jellyfin_address }}:{{ jellyfin_port }}:8096/tcp"
+                - "7359:7359/udp"
+              environment:
+                TZ: "{{ ansible_date_time.tz }}"
+              volumes:
+                - {{ jellyfin_config_volume }}:/config
+                - {{ jellyfin_cache_volume }}:/cache
+                - {{ jellyfin_movies_path }}:/media/movies:ro
+                - {{ jellyfin_tv_path }}:/media/tv:ro
+                - {{ jellyfin_music_path }}:/media/music:ro
+                - {{ jellyfin_books_path }}:/media/books:ro
+              restart: unless-stopped
+          volumes:
+            {{ jellyfin_config_volume }}:
+            {{ jellyfin_cache_volume }}:
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ jellyfin_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always
