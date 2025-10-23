@@ -7,12 +7,14 @@ base_packages:
   - zip
   - unzip
   - man-db
-  - ripgrep
-  - fd
-  - bat
-  - duf
-  - eza
   - rsync
+  - ripgrep   # grep alternative
+  - fd        # find alternative
+  - bat       # cat alternative
+  - duf       # disk usage alternative
+  - eza       # ls alternative
+  - hyperfine # benchmark
+  - ncdu      # disk usage analyzer
 
   # Development utilities
   - vim
@@ -20,6 +22,8 @@ base_packages:
   - git-delta
   - base-devel
   - jq
+  - glow       # markdown viewer
+  - tokei      # code statistics
 
   # Networking utilities
   - net-tools
@@ -27,6 +31,7 @@ base_packages:
   - traceroute
   - dnsutils
   - nmap
+  - bluetui    # Bluetooth TUI manager
 
   # Security utilities
   - sudo
