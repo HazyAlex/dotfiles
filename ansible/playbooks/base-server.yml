@@ -1,7 +1,7 @@
 ---
 - name: Base Server Configuration
   hosts: all
-  become: yes
+  become: no
 
   vars_files:
     - ../vars/base_packages.yml
@@ -13,34 +13,40 @@
 
   tasks:
     - name: Update system
+      become: yes
       pacman:
         update_cache: yes
         upgrade: yes
 
     - name: archlinux-keyring - enable weekly update
+      become: yes
       systemd:
         name: archlinux-keyring-wkd-sync.timer
         enabled: yes
         state: started
 
     - name: Install essential packages
+      become: yes
       pacman:
         name: "{{ base_packages }}"
         state: present
 
     - name: makepkg - enable parallel compilation"
+      become: yes
       lineinfile:
         path: /etc/makepkg.conf
         regexp: '#MAKEFLAGS="-j2"'
         line: 'MAKEFLAGS="-j$(nproc)"'
 
     - name: enable weekly SSD disks trim
+      become: yes
       systemd:
         name: fstrim.timer
         enabled: yes
         state: started
 
     - name: Configure SSH hardening
+      become: yes
       lineinfile:
         path: /etc/ssh/sshd_config
         line: "{{ item }}"
@@ -50,7 +56,6 @@
         - "PasswordAuthentication no"
 
     - name: Create .ssh directory for ansible user
-      become: no
       file:
         path: "/home/{{ ansible_user_id }}/.ssh"
         state: directory
@@ -59,7 +64,6 @@
         group: "{{ ansible_user_id }}"
 
     - name: Add SSH public key to authorized_keys
-      become: no
       authorized_key:
         user: "{{ ansible_user_id }}"
         key: "{{ ssh_public_key }}"
@@ -67,12 +71,14 @@
       when: ssh_public_key != ""
 
     - name: Enable and (re)start the SSH service
+      become: yes
       systemd:
         name: sshd
         state: restarted
         enabled: yes
 
     - name: Allow SSH, HTTP and HTTPS through UFW
+      become: yes
       ufw:
         rule: allow
         port: "{{ item }}"
@@ -83,12 +89,14 @@
         - '443'
 
     - name: Ensure UFW is enabled
+      become: yes
       ufw:
         state: enabled
         policy: deny
         direction: incoming
 
     - name: Configure fail2ban
+      become: yes
       copy:
         content: |
           [DEFAULT]
@@ -105,6 +113,7 @@
         mode: '0644'
 
     - name: Start and enable fail2ban
+      become: yes
       systemd:
         name: fail2ban
         state: started
