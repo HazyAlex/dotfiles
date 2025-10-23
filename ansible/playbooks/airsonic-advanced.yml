@@ -10,11 +10,12 @@
     airsonic_dir: /opt/airsonic-advanced
     airsonic_data_volume: airsonic-data
 
-  tasks:
-    - name: Prompt for base media path
-      ansible.builtin.set_fact:
-        base_media_path: "{{ lookup('prompt', 'Enter the base media path (e.g. /srv/media):') }}"
+  vars_prompt:
+    - name: base_media_path
+      prompt: "Enter the base media path (e.g. /srv/media)"
+      private: no
 
+  tasks:
     - name: Derive media subpaths from base path
       ansible.builtin.set_fact:
         airsonic_music_path: "{{ base_media_path }}/music"

@@ -11,11 +11,12 @@
     jellyfin_config_volume: jellyfin-config
     jellyfin_cache_volume: jellyfin-cache
 
-  tasks:
-    - name: Prompt for base media path
-      ansible.builtin.set_fact:
-        base_media_path: "{{ lookup('prompt', 'Enter the base media path (e.g. /srv/media):') }}"
+  vars_prompt:
+    - name: base_media_path
+      prompt: "Enter the base media path (e.g. /srv/media)"
+      private: no
 
+  tasks:
     - name: Derive media subpaths from base path
       ansible.builtin.set_fact:
         jellyfin_movies_path: "{{ base_media_path }}/movies"

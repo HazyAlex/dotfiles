@@ -10,15 +10,16 @@
     linkding_dir: /opt/linkding
     linkding_volume: linkding
 
+  vars_prompt:
+    - name: linkding_username
+      prompt: "Enter username for linkding superuser"
+      private: no
+    - name: linkding_password
+      prompt: "Enter password for linkding superuser"
+      private: yes
+      confirm: yes
+
   tasks:
-    - name: Prompt for linkding superuser username
-      ansible.builtin.set_fact:
-        linkding_username: "{{ lookup('prompt', 'Enter username for linkding superuser:') }}"
-
-    - name: Prompt for linkding superuser password
-      ansible.builtin.set_fact:
-        linkding_password: "{{ lookup('password', prompt='Enter password for linkding superuser (' + linkding_username + '):', confirm=True) }}"
-
     - name: Ensure project directory exists
       ansible.builtin.file:
         path: "{{ linkding_dir }}"
