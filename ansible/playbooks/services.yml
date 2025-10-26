@@ -3,9 +3,15 @@
   hosts: all
   become: no
 
+  vars:
+    current_user: "{{ ansible_user_id }}"
+
   tasks:
     - name: Ensure that the services directory exists
       ansible.builtin.file:
         path: "/opt"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
+      become: yes
