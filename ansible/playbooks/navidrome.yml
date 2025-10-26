@@ -16,6 +16,17 @@
       private: no
 
   tasks:
+    - name: Get user UID
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ ansible_user_id }}"
+      register: user_info
+
+    - name: Set user UID and GID
+      ansible.builtin.set_fact:
+        uid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][1] }}"
+        gid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][2] }}"
+
     - name: Derive music path from base path
       ansible.builtin.set_fact:
         navidrome_music_path: "{{ base_media_path }}/music"
@@ -23,12 +34,6 @@
     - name: Ensure project directory exists
       ansible.builtin.file:
         path: "{{ navidrome_dir }}"
-        state: directory
-        mode: "0755"
-
-    - name: Ensure config directory exists
-      ansible.builtin.file:
-        path: "{{ navidrome_data_dir }}"
         state: directory
         mode: "0755"
 
@@ -49,7 +54,7 @@
             navidrome:
               image: "{{ navidrome_image }}"
               container_name: navidrome
-              user: "{{ ansible_user_id }}:{{ ansible_user_id }}"
+              user: "{{ uid }}:{{ gid }}"
               ports:
                 - "{{ navidrome_address }}:{{ navidrome_port }}:4533"
               environment:
