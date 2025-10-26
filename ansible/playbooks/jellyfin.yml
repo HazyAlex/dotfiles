@@ -1,14 +1,14 @@
 ---
 - name: Deploy "jellyfin"
   hosts: all
-  become: true
+  become: no
 
   vars:
     jellyfin_image: jellyfin/jellyfin:latest
     jellyfin_address: 0.0.0.0
     jellyfin_port: 8096
     jellyfin_dir: /opt/jellyfin
-    jellyfin_config_volume: jellyfin-config
+    jellyfin_data_dir: /opt/jellyfin/data
     jellyfin_cache_volume: jellyfin-cache
 
   vars_prompt:
@@ -30,6 +30,12 @@
         state: directory
         mode: "0755"
 
+    - name: Ensure config directory exists
+      ansible.builtin.file:
+        path: "{{ jellyfin_data_dir }}"
+        state: directory
+        mode: "0755"
+
     - name: Write the compose.yml
       ansible.builtin.copy:
         dest: "{{ jellyfin_dir }}/compose.yml"
@@ -45,15 +51,14 @@
               environment:
                 TZ: "{{ ansible_date_time.tz }}"
               volumes:
-                - {{ jellyfin_config_volume }}:/config
                 - {{ jellyfin_cache_volume }}:/cache
+                - {{ jellyfin_data_dir }}:/config
                 - {{ jellyfin_movies_path }}:/media/movies:ro
                 - {{ jellyfin_tv_path }}:/media/tv:ro
                 - {{ jellyfin_music_path }}:/media/music:ro
                 - {{ jellyfin_books_path }}:/media/books:ro
               restart: unless-stopped
           volumes:
-            {{ jellyfin_config_volume }}:
             {{ jellyfin_cache_volume }}:
 
     - name: Deploy the service

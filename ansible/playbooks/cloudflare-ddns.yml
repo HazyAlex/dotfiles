@@ -1,7 +1,7 @@
 ---
 - name: Deploy "cloudflare-ddns"
   hosts: all
-  become: true
+  become: no
 
   vars_files:
     - ../group_vars/cloudflare-ddns.yml

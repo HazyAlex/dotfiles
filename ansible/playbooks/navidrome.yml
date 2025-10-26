@@ -1,0 +1,68 @@
+---
+- name: Deploy "navidrome"
+  hosts: all
+  become: no
+
+  vars:
+    navidrome_image: deluan/navidrome:latest
+    navidrome_address: 0.0.0.0
+    navidrome_port: 4533
+    navidrome_dir: /opt/navidrome
+    navidrome_data_dir: /opt/navidrome/data
+
+  vars_prompt:
+    - name: base_media_path
+      prompt: "Enter the base media path (e.g. /srv/media)"
+      private: no
+
+  tasks:
+    - name: Derive music path from base path
+      ansible.builtin.set_fact:
+        navidrome_music_path: "{{ base_media_path }}/music"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ navidrome_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure config directory exists
+      ansible.builtin.file:
+        path: "{{ navidrome_data_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure data directory exists
+      ansible.builtin.file:
+        path: "{{ navidrome_data_dir }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ navidrome_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            navidrome:
+              image: "{{ navidrome_image }}"
+              container_name: navidrome
+              user: "{{ ansible_user_id }}:{{ ansible_user_id }}"
+              ports:
+                - "{{ navidrome_address }}:{{ navidrome_port }}:4533"
+              environment:
+                TZ: "{{ ansible_date_time.tz }}"
+              volumes:
+                - {{ navidrome_data_dir }}:/data
+                - {{ navidrome_music_path }}:/music:ro
+              restart: unless-stopped
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ navidrome_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always

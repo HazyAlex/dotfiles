@@ -1,7 +1,7 @@
 ---
 - name: Deploy "glances"
   hosts: all
-  become: true
+  become: no
 
   vars:
     glances_image: nicolargo/glances:latest

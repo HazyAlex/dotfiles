@@ -1,7 +1,7 @@
 ---
 - name: Bootstrap the services
   hosts: all
-  become: yes
+  become: no
 
   tasks:
     - name: Ensure that the services directory exists

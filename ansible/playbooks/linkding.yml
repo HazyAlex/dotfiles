@@ -1,14 +1,14 @@
 ---
 - name: Deploy "linkding"
   hosts: all
-  become: true
+  become: no
 
   vars:
     linkding_image: sissbruecker/linkding:latest
     linkding_address: 0.0.0.0
     linkding_port: 9090
     linkding_dir: /opt/linkding
-    linkding_volume: linkding
+    linkding_data_dir: /opt/linkding/data
 
   vars_prompt:
     - name: linkding_username
@@ -26,6 +26,12 @@
         state: directory
         mode: "0755"
 
+    - name: Ensure config directory exists
+      ansible.builtin.file:
+        path: "{{ linkding_data_dir }}"
+        state: directory
+        mode: "0755"
+
     - name: Write the compose.yml
       ansible.builtin.copy:
         dest: "{{ linkding_dir }}/compose.yml"
@@ -38,15 +44,13 @@
               ports:
                 - "{{ linkding_address }}:{{ linkding_port }}:9090"
               volumes:
-                - {{ linkding_volume }}:/etc/linkding/data
+                - {{ linkding_data_dir }}:/etc/linkding/data
               environment:
                 - LD_DISABLE_BACKGROUND_TASKS=False             # Disables background tasks like creating snapshots for bookmarks on Internet Archive
                 - LD_DISABLE_URL_VALIDATION=False               # Disables URL validation for bookmarks (i.e. non-FQDN URLs or non-http/https)
                 - LD_SUPERUSER_NAME={{ linkding_username }}
                 - LD_SUPERUSER_PASSWORD={{ linkding_password }}
               restart: unless-stopped
-          volumes:
-            {{ linkding_volume }}:
 
     - name: Deploy the service
       community.docker.docker_compose_v2:

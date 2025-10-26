@@ -1,14 +1,14 @@
 ---
 - name: Deploy "watchyourlan"
   hosts: all
-  become: true
+  become: no
 
   vars:
     watchyourlan_image: aceberg/watchyourlan:latest
     watchyourlan_address: 0.0.0.0
     watchyourlan_port: 8840
     watchyourlan_dir: /opt/watchyourlan
-    watchyourlan_volume: watchyourlan
+    watchyourlan_data_dir: /opt/watchyourlan/data
     watchyourlan_timezone: "{{ ansible_date_time.tz }}"
     watchyourlan_interface: "{{ ansible_default_ipv4.interface | default('eth0') }}"
 
@@ -16,6 +16,12 @@
     - name: Ensure project directory exists
       ansible.builtin.file:
         path: "{{ watchyourlan_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure config directory exists
+      ansible.builtin.file:
+        path: "{{ watchyourlan_data_dir }}"
         state: directory
         mode: "0755"
 
@@ -29,7 +35,7 @@
               image: "{{ watchyourlan_image }}"
               container_name: watchyourlan
               volumes:
-                - {{ watchyourlan_volume }}:/data/WatchYourLAN
+                - {{ watchyourlan_data_dir }}:/data/WatchYourLAN
               environment:
                 - TZ={{ watchyourlan_timezone }}
                 - IFACES={{ watchyourlan_interface }}
@@ -40,8 +46,6 @@
               network_mode: host
               restart: unless-stopped
               privileged: true
-          volumes:
-            {{ watchyourlan_volume }}:
 
     - name: Deploy the service
       community.docker.docker_compose_v2:
