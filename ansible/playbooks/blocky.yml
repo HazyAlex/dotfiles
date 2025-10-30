@@ -26,7 +26,7 @@
 
     - name: Write the blocky config.yml
       ansible.builtin.copy:
-        dest: "{{ blocky_config_dir }}/config.yml"
+        dest: "{{ blocky_data_dir }}/config.yml"
         mode: "0644"
         content: |
           upstreams:
@@ -58,7 +58,7 @@
               environment:
                 - TZ={{ ansible_date_time.tz }}
               volumes:
-                - {{ blocky_config_dir }}:/app/config:ro
+                - {{ blocky_data_dir }}:/app/config:ro
                 - /etc/localtime:/etc/localtime:ro
 
     - name: Deploy the service
