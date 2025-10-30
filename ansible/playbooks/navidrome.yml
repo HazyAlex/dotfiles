@@ -59,6 +59,7 @@
                 - "{{ navidrome_address }}:{{ navidrome_port }}:4533"
               environment:
                 TZ: "{{ ansible_date_time.tz }}"
+                ND_ENABLEINSIGHTSCOLLECTOR: false
               volumes:
                 - {{ navidrome_data_dir }}:/data
                 - {{ navidrome_music_path }}:/music:ro

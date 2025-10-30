@@ -1,0 +1,100 @@
+---
+- name: Deploy "wireguard"
+  hosts: all
+  become: no
+
+  vars:
+    wireguard_image: lscr.io/linuxserver/wireguard:latest
+    wireguard_dir: /opt/wireguard
+    wireguard_data_dir: /opt/wireguard/data
+    internal_subnet: "10.13.13.0/24"
+
+  vars_prompt:
+    - name: server_url
+      prompt: "Enter your server's public URL (e.g. wireguard.example.com)"
+      private: no
+
+    - name: dns_ip
+      prompt: "Enter DNS provider IP (default: the DNS of the internal network)"
+      private: no
+      default: "{{ internal_subnet.split('/')[0].rsplit('.', 1)[0] ~ '.1' }}"
+
+    - name: peers
+      prompt: "Enter comma-separated list of peer names (e.g. phone,laptop)"
+      private: no
+      default: "phone,laptop"
+
+  tasks:
+    - name: Get user UID
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ ansible_user_id }}"
+      register: user_info
+
+    - name: Set user UID and GID
+      ansible.builtin.set_fact:
+        uid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][1] }}"
+        gid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][2] }}"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ wireguard_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure data directory exists
+      ansible.builtin.file:
+        path: "{{ wireguard_data_dir }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ wireguard_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            wireguard:
+              image: "{{ wireguard_image }}"
+              container_name: wireguard
+              cap_add:
+                - NET_ADMIN
+                - SYS_MODULE
+              environment:
+                - PUID={{ uid }}
+                - PGID={{ gid }}
+                - TZ={{ ansible_date_time.tz }}
+                - SERVERURL={{ server_url }}
+                - SERVERPORT=51820
+                - PEERS={{ peers }}
+                - PEERDNS={{ dns_ip }}
+                - INTERNAL_SUBNET={{ internal_subnet }}
+                - ALLOWEDIPS=0.0.0.0/0,::/0
+                - LOG_CONFS=true
+              sysctls:
+                - net.ipv4.conf.all.src_valid_mark=1
+                - net.ipv6.conf.all.disable_ipv6=0
+              restart: unless-stopped
+              ports:
+                - "51820:51820/udp"
+              volumes:
+                - {{ wireguard_data_dir }}:/config
+                - /lib/modules:/lib/modules:ro
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ wireguard_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always
+
+    - name: Show post-setup info
+      ansible.builtin.debug:
+        msg:
+          - "To add a peer please follow the instructions below:"
+          - " - Show a QR code in the terminal: `docker exec -it wireguard /app/show-peer <peer_name>`"
+          - ""
+          - "WireGuard app → Add → Create from QR code, then scan."

@@ -47,6 +47,8 @@ alias ls="eza"
 alias ll="eza -la"
 alias df="duf"
 alias cat="bat"
+alias find="fd"
+alias md="glow"
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases

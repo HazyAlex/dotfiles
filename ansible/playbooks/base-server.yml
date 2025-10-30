@@ -11,6 +11,16 @@
       private: no
       default: ""
 
+    - name: internal_network
+      prompt: "Enter the internal network CIDR to allow all traffic from (e.g., 192.168.1.0/24)"
+      private: no
+      default: "192.168.1.0/24"
+
+    - name: enable_wireguard
+      prompt: "Allow WireGuard (UDP 51820) through UFW? (yes/no)"
+      private: no
+      default: "no"
+
   tasks:
     - name: Update system
       become: yes
@@ -49,11 +59,20 @@
       become: yes
       lineinfile:
         path: /etc/ssh/sshd_config
-        line: "{{ item }}"
+        line: "{{ item.key }} {{ item.value }}"
+        regexp: "^{{ item.key }}"
         state: present
       loop:
-        - "PermitRootLogin no"
-        - "PasswordAuthentication no"
+        - { key: "PermitRootLogin", value: "no" }
+        - { key: "PasswordAuthentication", value: "no" }
+        - { key: "PubkeyAuthentication", value: "yes" }
+        - { key: "MaxAuthTries", value: "3" }
+        - { key: "ClientAliveInterval", value: "600" }
+        - { key: "ClientAliveCountMax", value: "2" }
+        - { key: "X11Forwarding", value: "no" }
+        - { key: "AllowTcpForwarding", value: "no" }
+        - { key: "Compression", value: "no" }
+        - { key: "UseDNS", value: "no" }
 
     - name: Create .ssh directory for ansible user
       file:
@@ -77,16 +96,30 @@
         state: restarted
         enabled: yes
 
-    - name: Allow SSH, HTTP and HTTPS through UFW
+    - name: Allow all traffic from internal network
       become: yes
       ufw:
         rule: allow
-        port: "{{ item }}"
-        proto: tcp
+        from: "{{ internal_network }}"
+
+    - name: Allow SSH, HTTP and HTTPS from external network
+      become: yes
+      ufw:
+        rule: allow
+        port: "{{ item.port }}"
+        proto: "{{ item.proto }}"
       loop:
-        - '22'
-        - '80'
-        - '443'
+        - { port: '22', proto: 'tcp' }
+        - { port: '80', proto: 'tcp' }
+        - { port: '443', proto: 'tcp' }
+
+    - name: Allow WireGuard from external network (when enabled)
+      become: yes
+      ufw:
+        rule: allow
+        port: '51820'
+        proto: 'udp'
+      when: enable_wireguard | lower == 'yes'
 
     - name: Ensure UFW is enabled
       become: yes
@@ -118,3 +151,10 @@
         name: fail2ban
         state: started
         enabled: yes
+
+    - name: Enable and start systemd-timesyncd
+      become: yes
+      systemd:
+        name: systemd-timesyncd
+        enabled: yes
+        state: started

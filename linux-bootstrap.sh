@@ -32,6 +32,7 @@ echo "3. Bash configuration"
 echo "4. Docker installation"
 echo "5. Services configuration"
 echo "6. Cloudflare DDNS"
+echo "7. WireGuard (VPN)"
 echo ""
 
 read -p "Enter your selection: " choice
@@ -59,7 +60,7 @@ case $choice in
         ansible-playbook -K -i inventory/localhost.yml playbooks/navidrome.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/jellyfin.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/kavita.yml
-        ansible-playbook -K -i inventory/localhost.yml playbooks/homarr.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/blocky.yml
         ;;
     6)
         if [ ! -f "group_vars/cloudflare-ddns.yml" ]; then
@@ -75,6 +76,9 @@ case $choice in
         fi
 
         ansible-playbook -K -i inventory/localhost.yml playbooks/cloudflare-ddns.yml
+        ;;
+    7)
+        ansible-playbook -K -i inventory/localhost.yml playbooks/wireguard.yml
         ;;
     *)
         echo "Exiting..."

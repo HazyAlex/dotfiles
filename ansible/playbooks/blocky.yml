@@ -1,0 +1,71 @@
+---
+- name: Deploy "blocky"
+  hosts: all
+  become: no
+
+  vars:
+    blocky_image: spx01/blocky:latest
+    blocky_address: 0.0.0.0
+    blocky_dns_port: 53
+    blocky_http_port: 4000 # TODO: Check
+    blocky_dir: /opt/blocky
+    blocky_data_dir: /opt/blocky/data
+
+  tasks:
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ blocky_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure data directory exists
+      ansible.builtin.file:
+        path: "{{ blocky_data_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Write the blocky config.yml
+      ansible.builtin.copy:
+        dest: "{{ blocky_config_dir }}/config.yml"
+        mode: "0644"
+        content: |
+          upstreams:
+            groups:
+              default:
+                - 1.1.1.1
+                - 8.8.8.8
+            clientGroupsBlock:
+              default:
+                - ads
+          ports:
+            dns: 53
+            http: 4000
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ blocky_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            blocky:
+              image: "{{ blocky_image }}"
+              container_name: blocky
+              restart: unless-stopped
+              ports:
+                - "{{ blocky_address }}:{{ blocky_dns_port }}:53/tcp"
+                - "{{ blocky_address }}:{{ blocky_dns_port }}:53/udp"
+                - "{{ blocky_address }}:{{ blocky_http_port }}:4000/tcp"
+              environment:
+                - TZ={{ ansible_date_time.tz }}
+              volumes:
+                - {{ blocky_config_dir }}:/app/config:ro
+                - /etc/localtime:/etc/localtime:ro
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ blocky_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always
+
