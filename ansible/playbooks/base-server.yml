@@ -5,6 +5,7 @@
 
   vars_files:
     - ../vars/base_packages.yml
+
   vars_prompt:
     - name: ssh_public_key
       prompt: "Enter your SSH public key (press Enter to skip)"
@@ -15,11 +16,6 @@
       prompt: "Enter the internal network CIDR to allow all traffic from (e.g., 192.168.1.0/24)"
       private: no
       default: "192.168.1.0/24"
-
-    - name: enable_wireguard
-      prompt: "Allow WireGuard (UDP 51820) through UFW? (yes/no)"
-      private: no
-      default: "no"
 
   tasks:
     - name: Update system
@@ -112,14 +108,6 @@
         - { port: '22', proto: 'tcp' }
         - { port: '80', proto: 'tcp' }
         - { port: '443', proto: 'tcp' }
-
-    - name: Allow WireGuard from external network (when enabled)
-      become: yes
-      ufw:
-        rule: allow
-        port: '51820'
-        proto: 'udp'
-      when: enable_wireguard | lower == 'yes'
 
     - name: Ensure UFW is enabled
       become: yes

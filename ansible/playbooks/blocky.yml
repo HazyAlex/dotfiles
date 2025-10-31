@@ -34,6 +34,8 @@
               default:
                 - 1.1.1.1
                 - 8.8.8.8
+
+          blocking:
             clientGroupsBlock:
               default:
                 - ads
@@ -58,7 +60,7 @@
               environment:
                 - TZ={{ ansible_date_time.tz }}
               volumes:
-                - {{ blocky_data_dir }}:/app/config:ro
+                - {{ blocky_data_dir }}/config.yml:/app/config.yml:ro
                 - /etc/localtime:/etc/localtime:ro
 
     - name: Deploy the service

@@ -1,0 +1,57 @@
+---
+- name: Deploy "caddy"
+  hosts: all
+  become: no
+
+  vars:
+    caddy_image: lucaslorentz/caddy-docker-proxy:v2.10.0-alpine
+    caddy_dir: /opt/caddy
+    caddy_data_dir: /opt/caddy/data
+    caddy_network: caddy
+
+  tasks:
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ caddy_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure data directory exists
+      ansible.builtin.file:
+        path: "{{ caddy_data_dir }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ caddy_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            caddy:
+              image: "{{ caddy_image }}"
+              container_name: caddy
+              restart: unless-stopped
+              ports:
+                - "80:80"
+                - "443:443"
+              environment:
+                - CADDY_INGRESS_NETWORKS={{ caddy_network }}
+              volumes:
+                - {{ caddy_data_dir }}:/data
+                - /var/run/docker.sock:/var/run/docker.sock:ro
+              networks:
+                - "{{ caddy_network }}"
+          networks:
+            {{ caddy_network }}:
+              name: "{{ caddy_network }}"
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ caddy_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always

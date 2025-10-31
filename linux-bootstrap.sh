@@ -32,7 +32,8 @@ echo "3. Bash configuration"
 echo "4. Docker installation"
 echo "5. Services configuration"
 echo "6. Cloudflare DDNS"
-echo "7. WireGuard (VPN)"
+echo "7. Caddy (reverse proxy)"
+echo "8. WireGuard (VPN)"
 echo ""
 
 read -p "Enter your selection: " choice
@@ -78,6 +79,9 @@ case $choice in
         ansible-playbook -K -i inventory/localhost.yml playbooks/cloudflare-ddns.yml
         ;;
     7)
+        ansible-playbook -K -i inventory/localhost.yml playbooks/caddy.yml
+        ;;
+    8)
         ansible-playbook -K -i inventory/localhost.yml playbooks/wireguard.yml
         ;;
     *)

@@ -8,6 +8,7 @@
     wireguard_dir: /opt/wireguard
     wireguard_data_dir: /opt/wireguard/data
     internal_subnet: "10.13.13.0/24"
+    wireguard_port: 51820
 
   vars_prompt:
     - name: server_url
@@ -67,7 +68,7 @@
                 - PGID={{ gid }}
                 - TZ={{ ansible_date_time.tz }}
                 - SERVERURL={{ server_url }}
-                - SERVERPORT=51820
+                - SERVERPORT={{ wireguard_port }}
                 - PEERS={{ peers }}
                 - PEERDNS={{ dns_ip }}
                 - INTERNAL_SUBNET={{ internal_subnet }}
@@ -78,7 +79,7 @@
                 - net.ipv6.conf.all.disable_ipv6=0
               restart: unless-stopped
               ports:
-                - "51820:51820/udp"
+                - "{{ wireguard_port }}:{{ wireguard_port }}/udp"
               volumes:
                 - {{ wireguard_data_dir }}:/config
                 - /lib/modules:/lib/modules:ro
@@ -90,6 +91,13 @@
           - compose.yml
         state: present
         pull: always
+
+    - name: Allow WireGuard from external network (when enabled)
+      become: yes
+      ufw:
+        rule: allow
+        port: '{{ wireguard_port }}'
+        proto: 'udp'
 
     - name: Show post-setup info
       ansible.builtin.debug:
