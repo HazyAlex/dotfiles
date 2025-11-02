@@ -13,7 +13,7 @@ cloudflare_api_token: "your_api_token_here"
 # [Required]
 # Domains to update (comma-separated list)
 # -----------------------------------------------------------------------------
-domains: "subdomain.example.com,another.example.com"
+domains: "subdomain.example.com,*.example.com,example.com"
 
 # [Optional]
 # Update schedule (cron format)
@@ -23,7 +23,16 @@ update_cron: "*/15 * * * *"
 # [Optional]
 # Proxy settings
 # -----------------------------------------------------------------------------
-# Tell Cloudflare to cache webpages and hide your IP
+# Tell Cloudflare to cache webpages and hide your IP (among other things).
+# This can be a boolean expression involving domains. Here are some examples:
+#
+# PROXIED=is(example.org): proxy only the domain example.org
+# PROXIED=!is(example.org): proxy every managed domain except for example.org
+# PROXIED=is(example1.org) || sub(example2.org): proxy only the domain example1.org and subdomains of example2.org
+# PROXIED=is(example1.org) || is(example2.org) || is(example3.org): proxy only the domains example1.org, example2.org, and example3.org
+#
+# For example, if you're using WireGuard, you'll need to set PROXIED to "!is(wireguard.example.com)"
+#  to let WireGuard traffic bypass Cloudflare's proxy.
 proxied: "true"
 
 # [Optional]
