@@ -6,8 +6,8 @@
   vars:
     blocky_image: spx01/blocky:latest
     blocky_address: 0.0.0.0
-    blocky_dns_port: 53
-    blocky_http_port: 4000 # TODO: Check
+    blocky_ipv6_address: "::"
+    blocky_port: 53
     blocky_dir: /opt/blocky
     blocky_data_dir: /opt/blocky/data
 
@@ -36,12 +36,20 @@
                 - 8.8.8.8
 
           blocking:
+            denylists:
+              ads:
+                - https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt
+                - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+              adult:
+                - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/porn-only/hosts
+
             clientGroupsBlock:
               default:
                 - ads
+                - adult
+
           ports:
-            dns: 53
-            http: 4000
+            dns: "{{ blocky_port }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:
@@ -54,9 +62,10 @@
               container_name: blocky
               restart: unless-stopped
               ports:
-                - "{{ blocky_address }}:{{ blocky_dns_port }}:53/tcp"
-                - "{{ blocky_address }}:{{ blocky_dns_port }}:53/udp"
-                - "{{ blocky_address }}:{{ blocky_http_port }}:4000/tcp"
+                - "{{ blocky_address }}:{{ blocky_port }}:53/tcp"
+                - "{{ blocky_address }}:{{ blocky_port }}:53/udp"
+                - "{{ blocky_ipv6_address }}:{{ blocky_port }}:53/tcp"
+                - "{{ blocky_ipv6_address }}:{{ blocky_port }}:53/udp"
               environment:
                 - TZ={{ ansible_date_time.tz }}
               volumes:
