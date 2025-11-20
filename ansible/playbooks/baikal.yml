@@ -12,9 +12,10 @@
 
   vars_prompt:
     - name: baikal_specific_dir
-      prompt: "Enter Baikal's saved data folder path (e.g. /srv/baikal)"
+      prompt: "Enter Baikal's saved data folder path"
+      become: yes
+      default: /srv/baikal
       private: no
-      default: "/srv/baikal"
 
   tasks:
     - name: Get user UID

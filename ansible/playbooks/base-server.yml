@@ -13,7 +13,7 @@
       default: ""
 
     - name: internal_network
-      prompt: "Enter the internal network CIDR to allow all traffic from (e.g., 192.168.1.0/24)"
+      prompt: "Enter the internal network CIDR to allow all traffic from"
       private: no
       default: "192.168.1.0/24"
 
