@@ -13,7 +13,6 @@
   vars_prompt:
     - name: baikal_specific_dir
       prompt: "Enter Baikal's saved data folder path"
-      become: yes
       default: /srv/baikal
       private: no
 
@@ -44,6 +43,7 @@
         group: "{{ ansible_user_id }}"
 
     - name: Ensure saved data directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ baikal_specific_dir }}"
         state: directory
