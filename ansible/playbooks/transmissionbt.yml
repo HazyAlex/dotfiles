@@ -14,10 +14,12 @@
   vars_prompt:
     - name: downloads_path
       prompt: "Enter the downloads path (e.g. /srv/downloads)"
+      default: /srv/downloads
       private: no
 
     - name: watch_path
       prompt: "Enter the watch folder path (e.g. /srv/watch)"
+      default: /srv/watch
       private: no
 
   tasks:
