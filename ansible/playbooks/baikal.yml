@@ -1,0 +1,75 @@
+---
+- name: Deploy "baikal"
+  hosts: all
+  become: no
+
+  vars:
+    baikal_image: ckulka/baikal:nginx
+    baikal_address: 0.0.0.0
+    baikal_port: 80
+    baikal_dir: /opt/baikal
+    baikal_config_dir: /opt/baikal/config
+
+  vars_prompt:
+    - name: baikal_specific_dir
+      prompt: "Enter Baikal's saved data folder path (e.g. /srv/baikal)"
+      private: no
+      default: "/srv/baikal"
+
+  tasks:
+    - name: Get user UID
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ ansible_user_id }}"
+      register: user_info
+
+    - name: Set user UID and GID
+      ansible.builtin.set_fact:
+        uid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][1] }}"
+        gid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][2] }}"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ baikal_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure config directory exists
+      ansible.builtin.file:
+        path: "{{ baikal_config_dir }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Ensure saved data directory exists
+      ansible.builtin.file:
+        path: "{{ baikal_specific_dir }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ baikal_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            baikal:
+              image: "{{ baikal_image }}"
+              container_name: baikal
+              ports:
+                - "{{ baikal_address }}:{{ baikal_port }}:80"
+              volumes:
+                - {{ baikal_config_dir }}:/var/www/baikal/config
+                - {{ baikal_specific_dir }}:/var/www/baikal/Specific
+              restart: unless-stopped
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ baikal_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always

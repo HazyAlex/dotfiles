@@ -62,6 +62,9 @@ case $choice in
         ansible-playbook -K -i inventory/localhost.yml playbooks/jellyfin.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/kavita.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/blocky.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/gitea.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/transmissionbt.yml
+        ansible-playbook -K -i inventory/localhost.yml playbooks/baikal.yml
         ;;
     6)
         if [ ! -f "group_vars/cloudflare-ddns.yml" ]; then

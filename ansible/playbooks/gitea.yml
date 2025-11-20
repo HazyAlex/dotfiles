@@ -1,0 +1,68 @@
+---
+- name: Deploy "gitea"
+  hosts: all
+  become: no
+
+  vars:
+    gitea_image: gitea/gitea:latest
+    gitea_address: 0.0.0.0
+    gitea_port: 3000
+    gitea_ssh_port: 2222
+    gitea_dir: /opt/gitea
+    gitea_data_dir: /opt/gitea/data
+
+  tasks:
+    - name: Get user UID
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ ansible_user_id }}"
+      register: user_info
+
+    - name: Set user UID and GID
+      ansible.builtin.set_fact:
+        uid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][1] }}"
+        gid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][2] }}"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ gitea_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure data directory exists
+      ansible.builtin.file:
+        path: "{{ gitea_data_dir }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ gitea_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            gitea:
+              image: "{{ gitea_image }}"
+              container_name: gitea
+              user: "{{ uid }}:{{ gid }}"
+              ports:
+                - "{{ gitea_address }}:{{ gitea_port }}:3000"
+                - "{{ gitea_address }}:{{ gitea_ssh_port }}:2222"
+              environment:
+                TZ: "{{ ansible_date_time.tz }}"
+                USER_UID: "{{ uid }}"
+                USER_GID: "{{ gid }}"
+              volumes:
+                - {{ gitea_data_dir }}:/data
+              restart: unless-stopped
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ gitea_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always
+

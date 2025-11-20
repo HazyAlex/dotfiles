@@ -1,0 +1,95 @@
+---
+- name: Deploy "transmissionbt"
+  hosts: all
+  become: no
+
+  vars:
+    transmission_image: linuxserver/transmission:latest
+    transmission_address: 0.0.0.0
+    transmission_port: 9091
+    transmission_peer_port: 51413
+    transmission_dir: /opt/transmissionbt
+    transmission_config_dir: /opt/transmissionbt/config
+
+  vars_prompt:
+    - name: downloads_path
+      prompt: "Enter the downloads path (e.g. /srv/downloads)"
+      private: no
+
+    - name: watch_path
+      prompt: "Enter the watch folder path (e.g. /srv/watch)"
+      private: no
+
+  tasks:
+    - name: Get user UID
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ ansible_user_id }}"
+      register: user_info
+
+    - name: Set user UID and GID
+      ansible.builtin.set_fact:
+        uid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][1] }}"
+        gid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][2] }}"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ transmission_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure config directory exists
+      ansible.builtin.file:
+        path: "{{ transmission_config_dir }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Ensure downloads directory exists
+      ansible.builtin.file:
+        path: "{{ downloads_path }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Ensure watch directory exists
+      ansible.builtin.file:
+        path: "{{ watch_path }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ transmission_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            transmissionbt:
+              image: "{{ transmission_image }}"
+              container_name: transmissionbt
+              user: "{{ uid }}:{{ gid }}"
+              ports:
+                - "{{ transmission_address }}:{{ transmission_port }}:9091"
+                - "{{ transmission_address }}:{{ transmission_peer_port }}:51413/tcp"
+                - "{{ transmission_address }}:{{ transmission_peer_port }}:51413/udp"
+              environment:
+                TZ: "{{ ansible_date_time.tz }}"
+                PUID: "{{ uid }}"
+                PGID: "{{ gid }}"
+              volumes:
+                - {{ transmission_config_dir }}:/config
+                - {{ downloads_path }}:/downloads
+                - {{ watch_path }}:/watch
+              restart: unless-stopped
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ transmission_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always

@@ -1,0 +1,74 @@
+---
+- name: Deploy "siyuan"
+  hosts: all
+  become: no
+
+  vars:
+    siyuan_image: b3log/siyuan:latest
+    siyuan_address: 0.0.0.0
+    siyuan_port: 6806
+    siyuan_dir: /opt/siyuan
+    siyuan_data_dir: /opt/siyuan/data
+    siyuan_auth_code: "{{ siyuan_auth_code }}"
+
+  vars_prompt:
+    - name: siyuan_auth_code
+      prompt: "Enter the authentication code for siyuan"
+      private: yes
+      confirm: yes
+
+  tasks:
+    - name: Get user UID
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ ansible_user_id }}"
+      register: user_info
+
+    - name: Set user UID and GID
+      ansible.builtin.set_fact:
+        uid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][1] }}"
+        gid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][2] }}"
+
+    - name: Ensure project directory exists
+      ansible.builtin.file:
+        path: "{{ siyuan_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Ensure workspace directory exists
+      ansible.builtin.file:
+        path: "{{ siyuan_data_dir }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    - name: Write the compose.yml
+      ansible.builtin.copy:
+        dest: "{{ siyuan_dir }}/compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            siyuan:
+              image: "{{ siyuan_image }}"
+              container_name: siyuan
+              user: "{{ uid }}:{{ gid }}"
+              ports:
+                - "{{ siyuan_address }}:{{ siyuan_port }}:6806"
+              environment:
+                TZ: "{{ ansible_date_time.tz }}"
+                PUID: "{{ uid }}"
+                PGID: "{{ gid }}"
+                SIYUAN_ACCESS_AUTH_CODE: "{{ siyuan_auth_code }}"
+              volumes:
+                - {{ siyuan_data_dir }}:/siyuan/workspace
+              restart: unless-stopped
+
+    - name: Deploy the service
+      community.docker.docker_compose_v2:
+        project_src: "{{ siyuan_dir }}"
+        files:
+          - compose.yml
+        state: present
+        pull: always
+

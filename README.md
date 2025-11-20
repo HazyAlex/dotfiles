@@ -66,3 +66,12 @@ Below is a list of recommended software (some of them have config files in this 
 - mpv (create a `portable_config` folder next to the `.exe` and copy the `mpv.conf` in there)
 - musikcube
 - windows-terminal-quake
+
+## TODO
+
+Setup "siyuan-note" for external access if I ever need it.
+
+https://github.com/siyuan-note/siyuan?tab=readme-ov-file#-download-setup
+https://github.com/lucaslorentz/caddy-docker-proxy
+
+Backups: https://kopia.io/docs/repositories/
