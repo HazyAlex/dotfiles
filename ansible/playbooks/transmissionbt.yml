@@ -49,6 +49,7 @@
         group: "{{ ansible_user_id }}"
 
     - name: Ensure downloads directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ downloads_path }}"
         state: directory
@@ -57,6 +58,7 @@
         group: "{{ ansible_user_id }}"
 
     - name: Ensure watch directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ watch_path }}"
         state: directory
