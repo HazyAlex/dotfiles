@@ -51,7 +51,6 @@
             gitea:
               image: "{{ gitea_image }}"
               container_name: gitea
-              user: "{{ uid }}:{{ gid }}"
               ports:
                 - "{{ gitea_address }}:{{ gitea_port }}:3000"
                 - "{{ gitea_address }}:{{ gitea_ssh_port }}:2222"
@@ -70,4 +69,3 @@
           - compose.yml
         state: present
         pull: always
-
