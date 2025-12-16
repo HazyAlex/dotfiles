@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     jellyfin_image: jellyfin/jellyfin:latest
     jellyfin_address: 0.0.0.0
     jellyfin_port: 8096
@@ -25,17 +26,32 @@
         jellyfin_music_path: "{{ base_media_path }}/music"
         jellyfin_books_path: "{{ base_media_path }}/books"
 
+    - name: Ensure base media path exists
+      become: yes
+      ansible.builtin.file:
+        path: "{{ base_media_path }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
+
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ jellyfin_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Ensure config directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ jellyfin_data_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

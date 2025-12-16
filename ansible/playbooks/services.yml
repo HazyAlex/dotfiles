@@ -8,10 +8,10 @@
 
   tasks:
     - name: Ensure that the services directory exists
+      become: yes
       ansible.builtin.file:
         path: "/opt"
         state: directory
         mode: "0755"
         owner: "{{ current_user }}"
         group: "{{ current_user }}"
-      become: yes

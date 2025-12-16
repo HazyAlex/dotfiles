@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     caddy_image: lucaslorentz/caddy-docker-proxy:v2.10.0-alpine
     caddy_dir: /opt/caddy
     caddy_data_dir: /opt/caddy/data
@@ -11,18 +12,22 @@
 
   tasks:
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ caddy_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Ensure data directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ caddy_data_dir }}"
         state: directory
         mode: "0755"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

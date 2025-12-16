@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     kavita_image: jvmilazz0/kavita:latest
     kavita_address: 0.0.0.0
     kavita_port: 5000
@@ -17,6 +18,15 @@
       private: no
 
   tasks:
+    - name: Ensure base media path exists
+      become: yes
+      ansible.builtin.file:
+        path: "{{ base_media_path }}"
+        state: directory
+        mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
+
     - name: Derive media subpaths from base path
       ansible.builtin.set_fact:
         kavita_manga_path: "{{ base_media_path }}/manga"
@@ -24,16 +34,22 @@
         kavita_books_path: "{{ base_media_path }}/books"
 
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ kavita_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Ensure config directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ kavita_data_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

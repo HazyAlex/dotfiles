@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     glances_image: nicolargo/glances:latest
     glances_address: 0.0.0.0
     glances_port: 61208
@@ -12,10 +13,13 @@
 
   tasks:
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ glances_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

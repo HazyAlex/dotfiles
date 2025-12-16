@@ -15,6 +15,7 @@ base_packages:
   - eza       # ls alternative
   - hyperfine # benchmark
   - ncdu      # disk usage analyzer
+  - kitty     # terminal
 
   # Development utilities
   - vim

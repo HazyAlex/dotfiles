@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     blocky_image: spx01/blocky:latest
     blocky_address: 0.0.0.0
     blocky_ipv6_address: "::"
@@ -13,16 +14,22 @@
 
   tasks:
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ blocky_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Ensure data directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ blocky_data_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the blocky config.yml
       ansible.builtin.copy:

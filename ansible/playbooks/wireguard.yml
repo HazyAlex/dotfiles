@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     wireguard_image: lscr.io/linuxserver/wireguard:latest
     wireguard_dir: /opt/wireguard
     wireguard_data_dir: /opt/wireguard/data
@@ -29,7 +30,7 @@
     - name: Get user UID
       ansible.builtin.getent:
         database: passwd
-        key: "{{ ansible_user_id }}"
+        key: "{{ current_user }}"
       register: user_info
 
     - name: Set user UID and GID
@@ -38,18 +39,22 @@
         gid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][2] }}"
 
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ wireguard_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Ensure data directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ wireguard_data_dir }}"
         state: directory
         mode: "0755"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

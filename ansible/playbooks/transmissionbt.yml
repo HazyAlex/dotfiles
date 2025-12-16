@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     transmission_image: linuxserver/transmission:latest
     transmission_address: 0.0.0.0
     transmission_port: 9091
@@ -13,12 +14,12 @@
 
   vars_prompt:
     - name: downloads_path
-      prompt: "Enter the downloads path (e.g. /srv/downloads)"
+      prompt: "Enter the downloads path"
       default: /srv/downloads
       private: no
 
     - name: watch_path
-      prompt: "Enter the watch folder path (e.g. /srv/watch)"
+      prompt: "Enter the watch folder path"
       default: /srv/watch
       private: no
 
@@ -26,45 +27,49 @@
     - name: Get user UID
       ansible.builtin.getent:
         database: passwd
-        key: "{{ ansible_user_id }}"
+        key: "{{ current_user }}"
       register: user_info
 
     - name: Set user UID and GID
       ansible.builtin.set_fact:
-        uid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][1] }}"
-        gid: "{{ user_info.ansible_facts.getent_passwd[ansible_user_id][2] }}"
+        uid: "{{ user_info.ansible_facts.getent_passwd[current_user][1] }}"
+        gid: "{{ user_info.ansible_facts.getent_passwd[current_user][2] }}"
 
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ transmission_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Ensure config directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ transmission_config_dir }}"
         state: directory
         mode: "0755"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
-    - name: Ensure downloads directory exists
+    - name: Ensure downloads path exists
       become: yes
       ansible.builtin.file:
         path: "{{ downloads_path }}"
         state: directory
         mode: "0755"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
-    - name: Ensure watch directory exists
+    - name: Ensure watch path exists
       become: yes
       ansible.builtin.file:
         path: "{{ watch_path }}"
         state: directory
         mode: "0755"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

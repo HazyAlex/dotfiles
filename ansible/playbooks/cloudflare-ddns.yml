@@ -7,15 +7,19 @@
     - ../group_vars/cloudflare-ddns.yml
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     cloudflare_ddns_image: favonia/cloudflare-ddns:1.15.1
     cloudflare_ddns_dir: /opt/cloudflare-ddns
 
   tasks:
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ cloudflare_ddns_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

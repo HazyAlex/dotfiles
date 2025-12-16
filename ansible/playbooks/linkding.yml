@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     linkding_image: sissbruecker/linkding:latest
     linkding_address: 0.0.0.0
     linkding_port: 9090
@@ -22,16 +23,22 @@
 
   tasks:
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ linkding_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Ensure config directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ linkding_data_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

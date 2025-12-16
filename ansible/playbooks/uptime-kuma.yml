@@ -4,6 +4,7 @@
   become: no
 
   vars:
+    current_user: "{{ ansible_user_id }}"
     uptime_kuma_image: louislam/uptime-kuma:1
     uptime_kuma_address: 0.0.0.0
     uptime_kuma_port: 3001
@@ -12,16 +13,22 @@
 
   tasks:
     - name: Ensure project directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ uptime_kuma_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Ensure config directory exists
+      become: yes
       ansible.builtin.file:
         path: "{{ uptime_kuma_data_dir }}"
         state: directory
         mode: "0755"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:

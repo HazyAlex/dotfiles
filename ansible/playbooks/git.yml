@@ -3,11 +3,14 @@
   hosts: all
   become: no
 
+  vars:
+    current_user: "{{ ansible_user_id }}"
+
   tasks:
     - name: Copy .gitconfig to user home directory
       copy:
         src: "{{ playbook_dir }}/../../Alex/.gitconfig"
         dest: "{{ ansible_env.HOME }}/.gitconfig"
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
         mode: '0644'

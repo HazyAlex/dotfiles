@@ -6,6 +6,9 @@
   vars_files:
     - ../vars/base_packages.yml
 
+  vars:
+    current_user: "{{ ansible_user_id }}"
+
   vars_prompt:
     - name: ssh_public_key
       prompt: "Enter your SSH public key (press Enter to skip)"
@@ -72,15 +75,15 @@
 
     - name: Create .ssh directory for ansible user
       file:
-        path: "/home/{{ ansible_user_id }}/.ssh"
+        path: "/home/{{ current_user }}/.ssh"
         state: directory
         mode: '0700'
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: "{{ current_user }}"
+        group: "{{ current_user }}"
 
     - name: Add SSH public key to authorized_keys
       authorized_key:
-        user: "{{ ansible_user_id }}"
+        user: "{{ current_user }}"
         key: "{{ ssh_public_key }}"
         state: present
       when: ssh_public_key != ""
