@@ -36,6 +36,5 @@ base_packages:
 
   # Security utilities
   - sudo
-  - ufw
   - openssh
   - fail2ban

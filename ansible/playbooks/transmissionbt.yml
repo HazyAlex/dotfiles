@@ -6,7 +6,7 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     transmission_image: linuxserver/transmission:latest
-    transmission_address: 0.0.0.0
+    transmission_address: "{{ internal_bind_address }}"
     transmission_port: 9091
     transmission_peer_port: 51413
     transmission_dir: /opt/transmissionbt

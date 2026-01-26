@@ -97,13 +97,6 @@
         state: present
         pull: always
 
-    - name: Allow WireGuard from external network (when enabled)
-      become: yes
-      ufw:
-        rule: allow
-        port: '{{ wireguard_port }}'
-        proto: 'udp'
-
     - name: Show post-setup info
       ansible.builtin.debug:
         msg:

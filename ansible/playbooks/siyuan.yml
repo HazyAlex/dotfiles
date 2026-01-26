@@ -6,7 +6,7 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     siyuan_image: b3log/siyuan:latest
-    siyuan_address: 0.0.0.0
+    siyuan_address: "{{ internal_bind_address }}"
     siyuan_port: 6806
     siyuan_dir: /opt/siyuan
     siyuan_data_dir: /opt/siyuan/data

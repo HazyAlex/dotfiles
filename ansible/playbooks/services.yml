@@ -6,6 +6,12 @@
   vars:
     current_user: "{{ ansible_user_id }}"
 
+  vars_prompt:
+    - name: internal_bind_address
+      prompt: "Enter the server's IP address on the internal network (for binding internal services)"
+      private: no
+      default: "{{ ansible_default_ipv4.address }}"
+
   tasks:
     - name: Ensure that the services directory exists
       become: yes
@@ -15,3 +21,19 @@
         mode: "0755"
         owner: "{{ current_user }}"
         group: "{{ current_user }}"
+
+    - name: Ensure group_vars directory exists
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/../group_vars"
+        state: directory
+        mode: "0755"
+
+    - name: Write internal_bind_address to group_vars file
+      ansible.builtin.copy:
+        dest: "{{ playbook_dir }}/../group_vars/all.yml"
+        content: |
+          # ------------------------------
+          #  This file is auto-generated.
+          # ------------------------------
+          internal_bind_address: "{{ internal_bind_address }}"
+        mode: "0644"

@@ -6,7 +6,7 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     blocky_image: spx01/blocky:latest
-    blocky_address: 0.0.0.0
+    blocky_address: "{{ internal_bind_address }}"
     blocky_ipv6_address: "::"
     blocky_port: 53
     blocky_dir: /opt/blocky

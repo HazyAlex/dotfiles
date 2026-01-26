@@ -56,7 +56,6 @@ case $choice in
         ansible-playbook -K -i inventory/localhost.yml playbooks/uptime-kuma.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/dozzle.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/glances.yml
-        ansible-playbook -K -i inventory/localhost.yml playbooks/watchyourlan.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/linkding.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/navidrome.yml
         ansible-playbook -K -i inventory/localhost.yml playbooks/jellyfin.yml

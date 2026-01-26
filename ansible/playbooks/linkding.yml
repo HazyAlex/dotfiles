@@ -6,7 +6,7 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     linkding_image: sissbruecker/linkding:latest
-    linkding_address: 0.0.0.0
+    linkding_address: "{{ internal_bind_address }}"
     linkding_port: 9090
     linkding_dir: /opt/linkding
     linkding_data_dir: /opt/linkding/data

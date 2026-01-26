@@ -15,11 +15,6 @@
       private: no
       default: ""
 
-    - name: internal_network
-      prompt: "Enter the internal network CIDR to allow all traffic from"
-      private: no
-      default: "192.168.1.0/24"
-
   tasks:
     - name: Update system
       become: yes
@@ -94,30 +89,6 @@
         name: sshd
         state: restarted
         enabled: yes
-
-    - name: Allow all traffic from internal network
-      become: yes
-      ufw:
-        rule: allow
-        from: "{{ internal_network }}"
-
-    - name: Allow SSH, HTTP and HTTPS from external network
-      become: yes
-      ufw:
-        rule: allow
-        port: "{{ item.port }}"
-        proto: "{{ item.proto }}"
-      loop:
-        - { port: '22', proto: 'tcp' }
-        - { port: '80', proto: 'tcp' }
-        - { port: '443', proto: 'tcp' }
-
-    - name: Ensure UFW is enabled
-      become: yes
-      ufw:
-        state: enabled
-        policy: deny
-        direction: incoming
 
     - name: Configure fail2ban
       become: yes

@@ -6,7 +6,7 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     dozzle_image: amir20/dozzle:latest
-    dozzle_address: 0.0.0.0
+    dozzle_address: "{{ internal_bind_address }}"
     dozzle_port: 8080
     dozzle_dir: /opt/dozzle
     dozzle_container_name: dozzle
