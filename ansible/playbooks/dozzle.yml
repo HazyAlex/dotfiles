@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     dozzle_image: amir20/dozzle:latest
-    dozzle_address: "{{ internal_bind_address }}"
     dozzle_port: 8080
     dozzle_dir: /opt/dozzle
     dozzle_container_name: dozzle
@@ -35,7 +34,7 @@
               volumes:
                 - /var/run/docker.sock:/var/run/docker.sock:ro
               ports:
-                - "{{ dozzle_address }}:{{ dozzle_port }}:8080"
+                - "{{ dozzle_port }}:8080"
               restart: unless-stopped
 
     - name: Deploy the service

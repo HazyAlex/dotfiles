@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     linkding_image: sissbruecker/linkding:latest
-    linkding_address: "{{ internal_bind_address }}"
     linkding_port: 9090
     linkding_dir: /opt/linkding
     linkding_data_dir: /opt/linkding/data
@@ -50,7 +49,7 @@
               image: "{{ linkding_image }}"
               container_name: linkding
               ports:
-                - "{{ linkding_address }}:{{ linkding_port }}:9090"
+                - "{{ linkding_port }}:9090"
               volumes:
                 - {{ linkding_data_dir }}:/etc/linkding/data
               environment:

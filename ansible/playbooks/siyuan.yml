@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     siyuan_image: b3log/siyuan:latest
-    siyuan_address: "{{ internal_bind_address }}"
     siyuan_port: 6806
     siyuan_dir: /opt/siyuan
     siyuan_data_dir: /opt/siyuan/data
@@ -59,7 +58,7 @@
               container_name: siyuan
               user: "{{ uid }}:{{ gid }}"
               ports:
-                - "{{ siyuan_address }}:{{ siyuan_port }}:6806"
+                - "{{ siyuan_port }}:6806"
               environment:
                 TZ: "{{ ansible_date_time.tz }}"
                 PUID: "{{ uid }}"
@@ -76,4 +75,3 @@
           - compose.yml
         state: present
         pull: always
-

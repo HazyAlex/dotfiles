@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     glances_image: nicolargo/glances:latest
-    glances_address: "{{ internal_bind_address }}"
     glances_port: 61208
     glances_dir: /opt/glances
     glances_container_name: glances
@@ -37,7 +36,7 @@
                 - /var/run/docker.sock:/var/run/docker.sock:ro
               pid: "host"
               ports:
-                - "{{ glances_address }}:{{ glances_port }}:{{ glances_port }}"
+                - "{{ glances_port }}:{{ glances_port }}"
               restart: unless-stopped
 
     - name: Deploy the service

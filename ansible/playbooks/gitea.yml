@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     gitea_image: gitea/gitea:latest
-    gitea_address: "{{ internal_bind_address }}"
     gitea_port: 3000
     gitea_ssh_port: 2222
     gitea_dir: /opt/gitea
@@ -52,8 +51,8 @@
               image: "{{ gitea_image }}"
               container_name: gitea
               ports:
-                - "{{ gitea_address }}:{{ gitea_port }}:3000"
-                - "{{ gitea_address }}:{{ gitea_ssh_port }}:2222"
+                - "{{ gitea_port }}:3000"
+                - "{{ gitea_ssh_port }}:2222"
               environment:
                 TZ: "{{ ansible_date_time.tz }}"
                 USER_UID: "{{ uid }}"

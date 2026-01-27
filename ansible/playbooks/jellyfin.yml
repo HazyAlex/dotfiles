@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     jellyfin_image: jellyfin/jellyfin:latest
-    jellyfin_address: "{{ internal_bind_address }}"
     jellyfin_port: 8096
     jellyfin_dir: /opt/jellyfin
     jellyfin_data_dir: /opt/jellyfin/data
@@ -63,8 +62,8 @@
               image: "{{ jellyfin_image }}"
               container_name: jellyfin
               ports:
-                - "{{ jellyfin_address }}:{{ jellyfin_port }}:8096/tcp"
-                - "{{ jellyfin_address }}:7359:7359/udp"
+                - "{{ jellyfin_port }}:8096/tcp"
+                - "7359:7359/udp"
               environment:
                 TZ: "{{ ansible_date_time.tz }}"
               volumes:

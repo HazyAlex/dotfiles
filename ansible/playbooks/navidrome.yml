@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     navidrome_image: deluan/navidrome:latest
-    navidrome_address: "{{ internal_bind_address }}"
     navidrome_port: 4533
     navidrome_dir: /opt/navidrome
     navidrome_data_dir: /opt/navidrome/data
@@ -71,7 +70,7 @@
               container_name: navidrome
               user: "{{ uid }}:{{ gid }}"
               ports:
-                - "{{ navidrome_address }}:{{ navidrome_port }}:4533"
+                - "{{ navidrome_port }}:4533"
               environment:
                 TZ: "{{ ansible_date_time.tz }}"
                 ND_ENABLEINSIGHTSCOLLECTOR: false

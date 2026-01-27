@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     kavita_image: jvmilazz0/kavita:latest
-    kavita_address: "{{ internal_bind_address }}"
     kavita_port: 5000
     kavita_dir: /opt/kavita
     kavita_data_dir: /opt/kavita/data
@@ -61,7 +60,7 @@
               image: "{{ kavita_image }}"
               container_name: kavita
               ports:
-                - "{{ kavita_address }}:{{ kavita_port }}:5000"
+                - "{{ kavita_port }}:5000"
               environment:
                 TZ: "{{ ansible_date_time.tz }}"
               volumes:

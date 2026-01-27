@@ -6,7 +6,6 @@
   vars:
     current_user: "{{ ansible_user_id }}"
     uptime_kuma_image: louislam/uptime-kuma:1
-    uptime_kuma_address: "{{ internal_bind_address }}"
     uptime_kuma_port: 3001
     uptime_kuma_dir: /opt/uptime-kuma
     uptime_kuma_data_dir: /opt/uptime-kuma/data
@@ -40,7 +39,7 @@
               image: "{{ uptime_kuma_image }}"
               container_name: uptime-kuma
               ports:
-                - "{{ uptime_kuma_address }}:{{ uptime_kuma_port }}:3001"
+                - "{{ uptime_kuma_port }}:3001"
               volumes:
                 - /var/run/docker.sock:/var/run/docker.sock:ro
                 - {{ uptime_kuma_data_dir }}:/app/data
