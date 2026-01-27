@@ -5,14 +5,37 @@
 
   vars:
     current_user: "{{ ansible_user_id }}"
-
-  vars_prompt:
-    - name: internal_bind_address
-      prompt: "Enter the server's IP address on the internal network (for binding internal services)"
-      private: no
-      default: "{{ ansible_default_ipv4.address }}"
+    internal_bind_address: ""
 
   tasks:
+    - name: Determine internal IP address
+      set_fact:
+        detected_bind_address: "{{ ansible_default_ipv4.address }}"
+
+    - name: Ask for confirmation of auto-detected internal IP
+      pause:
+        prompt: "Auto-detected internal IP: {{ detected_bind_address }}. Is this correct? [y/N]"
+      register: internal_bind_confirm
+
+    - name: Use detected internal IP when confirmed
+      set_fact:
+        internal_bind_address: "{{ detected_bind_address }}"
+      when:
+        - internal_bind_confirm.user_input | lower in ['y', 'yes']
+
+    - name: Ask user to input internal IP when detected IP is not accepted
+      pause:
+        prompt: "Please enter the server's IP address on the internal network:"
+      register: manual_bind_address
+      when:
+        - internal_bind_confirm.user_input | lower not in ['y', 'yes']
+
+    - name: Use manually provided internal IP
+      set_fact:
+        internal_bind_address: "{{ manual_bind_address.user_input }}"
+      when:
+        - internal_bind_confirm.user_input | lower not in ['y', 'yes']
+
     - name: Ensure that the services directory exists
       become: yes
       ansible.builtin.file:
