@@ -9,6 +9,8 @@
     baikal_port: 5001
     baikal_dir: /opt/baikal
     baikal_config_dir: /opt/baikal/config
+    baikal_container_uid: "33"
+    baikal_container_gid: "33"
 
   vars_prompt:
     - name: baikal_specific_dir
@@ -43,8 +45,8 @@
         path: "{{ baikal_config_dir }}"
         state: directory
         mode: "0755"
-        owner: "{{ current_user }}"
-        group: "{{ current_user }}"
+        owner: "{{ baikal_container_uid }}"
+        group: "{{ baikal_container_gid }}"
 
     - name: Ensure saved data directory exists
       become: yes
@@ -52,8 +54,8 @@
         path: "{{ baikal_specific_dir }}"
         state: directory
         mode: "0755"
-        owner: "{{ current_user }}"
-        group: "{{ current_user }}"
+        owner: "{{ baikal_container_uid }}"
+        group: "{{ baikal_container_gid }}"
 
     - name: Write the compose.yml
       ansible.builtin.copy:
