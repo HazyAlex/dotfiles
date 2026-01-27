@@ -4,7 +4,7 @@
   become: no
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
     jellyfin_image: jellyfin/jellyfin:latest
     jellyfin_port: 8096
     jellyfin_dir: /opt/jellyfin

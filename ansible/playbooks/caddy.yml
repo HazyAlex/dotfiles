@@ -4,7 +4,7 @@
   become: no
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
     caddy_image: lucaslorentz/caddy-docker-proxy:v2.10.0-alpine
     caddy_dir: /opt/caddy
     caddy_data_dir: /opt/caddy/data

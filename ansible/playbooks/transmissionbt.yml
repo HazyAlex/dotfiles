@@ -4,7 +4,7 @@
   become: no
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
     transmission_image: linuxserver/transmission:latest
     transmission_port: 9091
     transmission_peer_port: 51413

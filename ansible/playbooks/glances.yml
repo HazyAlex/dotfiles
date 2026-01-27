@@ -4,7 +4,7 @@
   become: no
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
     glances_image: nicolargo/glances:latest
     glances_port: 61208
     glances_dir: /opt/glances

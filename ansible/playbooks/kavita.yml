@@ -4,7 +4,7 @@
   become: no
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
     kavita_image: jvmilazz0/kavita:latest
     kavita_port: 5000
     kavita_dir: /opt/kavita

@@ -7,7 +7,7 @@
     - ../vars/base_packages.yml
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
 
   vars_prompt:
     - name: ssh_public_key

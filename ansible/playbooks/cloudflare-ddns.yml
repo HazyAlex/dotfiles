@@ -7,7 +7,7 @@
     - ../group_vars/cloudflare-ddns.yml
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
     cloudflare_ddns_image: favonia/cloudflare-ddns:1.15.1
     cloudflare_ddns_dir: /opt/cloudflare-ddns
 

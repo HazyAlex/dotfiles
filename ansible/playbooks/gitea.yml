@@ -4,7 +4,7 @@
   become: no
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
     gitea_image: gitea/gitea:latest
     gitea_port: 3000
     gitea_ssh_port: 2222

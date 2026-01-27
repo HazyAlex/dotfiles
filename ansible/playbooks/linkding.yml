@@ -4,7 +4,7 @@
   become: no
 
   vars:
-    current_user: "{{ ansible_user_id }}"
+    current_user: "{{ ansible_facts['user_id'] }}"
     linkding_image: sissbruecker/linkding:latest
     linkding_port: 9090
     linkding_dir: /opt/linkding
