@@ -71,7 +71,7 @@
               environment:
                 - PUID={{ uid }}
                 - PGID={{ gid }}
-                - TZ={{ ansible_date_time.tz }}
+                - TZ={{ ansible_facts['date_time']['tz'] }}
                 - SERVERURL={{ server_url }}
                 - SERVERPORT={{ wireguard_port }}
                 - PEERS={{ peers }}

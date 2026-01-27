@@ -54,7 +54,7 @@
                 - "{{ gitea_port }}:3000"
                 - "{{ gitea_ssh_port }}:2222"
               environment:
-                TZ: "{{ ansible_date_time.tz }}"
+                TZ: "{{ ansible_facts['date_time']['tz'] }}"
                 USER_UID: "{{ uid }}"
                 USER_GID: "{{ gid }}"
               volumes:

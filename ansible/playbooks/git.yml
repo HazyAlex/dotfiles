@@ -10,7 +10,7 @@
     - name: Copy .gitconfig to user home directory
       copy:
         src: "{{ playbook_dir }}/../../Alex/.gitconfig"
-        dest: "{{ ansible_env.HOME }}/.gitconfig"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.gitconfig"
         owner: "{{ current_user }}"
         group: "{{ current_user }}"
         mode: '0644'

@@ -65,7 +65,7 @@
                 - "{{ jellyfin_port }}:8096/tcp"
                 - "7359:7359/udp"
               environment:
-                TZ: "{{ ansible_date_time.tz }}"
+                TZ: "{{ ansible_facts['date_time']['tz'] }}"
               volumes:
                 - {{ jellyfin_cache_volume }}:/cache
                 - {{ jellyfin_data_dir }}:/config

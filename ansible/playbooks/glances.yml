@@ -31,7 +31,7 @@
               container_name: "{{ glances_container_name }}"
               environment:
                 GLANCES_OPT: "-w"
-                TZ: "{{ ansible_date_time.tz }}"
+                TZ: "{{ ansible_facts['date_time']['tz'] }}"
               volumes:
                 - /var/run/docker.sock:/var/run/docker.sock:ro
               pid: "host"

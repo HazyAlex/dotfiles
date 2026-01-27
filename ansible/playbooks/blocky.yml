@@ -72,7 +72,7 @@
                 - "{{ blocky_port }}:53/tcp"
                 - "{{ blocky_port }}:53/udp"
               environment:
-                - TZ={{ ansible_date_time.tz }}
+                - TZ={{ ansible_facts['date_time']['tz'] }}
               volumes:
                 - {{ blocky_data_dir }}/config.yml:/app/config.yml:ro
                 - /etc/localtime:/etc/localtime:ro

@@ -85,7 +85,7 @@
                 - "{{ transmission_peer_port }}:51413/tcp"
                 - "{{ transmission_peer_port }}:51413/udp"
               environment:
-                TZ: "{{ ansible_date_time.tz }}"
+                TZ: "{{ ansible_facts['date_time']['tz'] }}"
                 PUID: "{{ uid }}"
                 PGID: "{{ gid }}"
               volumes:

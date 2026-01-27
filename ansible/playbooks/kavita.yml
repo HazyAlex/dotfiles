@@ -62,7 +62,7 @@
               ports:
                 - "{{ kavita_port }}:5000"
               environment:
-                TZ: "{{ ansible_date_time.tz }}"
+                TZ: "{{ ansible_facts['date_time']['tz'] }}"
               volumes:
                 - {{ kavita_data_dir }}:/kavita/config
                 - {{ kavita_manga_path }}:/manga

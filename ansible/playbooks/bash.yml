@@ -10,7 +10,7 @@
     - name: Copy .bashrc to the user's home
       copy:
         src: "{{ playbook_dir }}/../../Alex/.bashrc"
-        dest: "{{ ansible_env.HOME }}/.bashrc"
+        dest: "{{ ansible_facts['env']['HOME'] }}/.bashrc"
         owner: "{{ current_user }}"
         group: "{{ current_user }}"
         mode: '0644'
