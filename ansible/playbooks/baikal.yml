@@ -7,7 +7,7 @@
     current_user: "{{ ansible_user_id }}"
     baikal_image: ckulka/baikal:nginx
     baikal_address: "{{ internal_bind_address }}"
-    baikal_port: 80
+    baikal_port: 5001
     baikal_dir: /opt/baikal
     baikal_config_dir: /opt/baikal/config
 
