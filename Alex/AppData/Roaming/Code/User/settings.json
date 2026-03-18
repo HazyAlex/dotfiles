@@ -71,7 +71,6 @@
     "extensions.autoUpdate": false,
     "extensions.autoCheckUpdates": false,
     "extensions.ignoreRecommendations": true,
-    "update.mode": "manual",
     "update.showReleaseNotes": true,
     "telemetry.telemetryLevel": "off",
     "npm.fetchOnlinePackageInfo": false,
@@ -87,7 +86,6 @@
             ]
         }
     },
-    "terminal.integrated.tabs.enabled": false,
     "terminal.integrated.shellIntegration.enabled": true,
     "terminal.integrated.shellIntegration.decorationsEnabled": "overviewRuler",
     "terminal.integrated.localEchoLatencyThreshold": -1,
@@ -111,7 +109,6 @@
     // -----------
     //  Workbench
     // -----------
-    "workbench.colorTheme": "Rosé Pine Moon",
     "workbench.reduceMotion": "on",
     "workbench.panel.opensMaximized": "preserve",
     "workbench.startupEditor": "none",
@@ -126,7 +123,6 @@
     "workbench.tree.stickyScrollMaxItemCount": 7,
     "workbench.iconTheme": "material-icon-theme",
     "workbench.productIconTheme": "fluent-icons",
-    "workbench.layoutControl.enabled": false,
     "workbench.editor.empty.hint": "hidden",
     "workbench.activityBar.location": "hidden",
     "workbench.editor.highlightModifiedTabs": true,
@@ -151,7 +147,6 @@
             "statusBar.foreground": "#CECECE",
             "statusBar.noFolderBackground": "#1A1A1A",
             "statusBar.noFolderForeground": "#CECECE",
-            //"tab.activeBorder": "#1A1ABF",
             "editorCursor.background": "#1A1A1A",
             "terminal.background": "#1A1A1A",
             "menu.foreground": "#CECECE"
@@ -166,6 +161,21 @@
             "terminal.background": "#F7F7F7",
             "terminalCursor.foreground": "#313131"
         },
+        "[NERV]": {
+            "sideBar.border": "#0000",
+            "tab.border": "#0000",
+            "titleBar.border": "#0000",
+            "statusBar.border": "#0000",
+            "terminal.border": "#0000",
+            "activityBar.border": "#0000",
+            "panelTitle.border": "#0000",
+            "sideBarTitle.border": "#0000",
+            "commandCenter.border": "#0000",
+            "inlineChat.border": "#0000",
+            "tab.worktreeBorder": "#0000",
+            "panel.border": "#0000",
+            "editorGroup.border": "#0000",
+        }
     },
     "editor.tokenColorCustomizations": {
         "[Make Apps Theme]": {
@@ -184,6 +194,7 @@
             "comments": "#A7A4A2"
         }
     },
+    "breadcrumbs.enabled": false,
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.fileNesting.enabled": true,
@@ -200,14 +211,13 @@
         "**/dist": true,
         "**/target/**": true
     },
-    "chat.commandCenter.enabled": false,
     "scm.alwaysShowRepositories": true,
     "search.quickOpen.history.filterSortOrder": "recency",
     "search.decorations.badges": false,
-    "editor.definitionLinkOpensInPeek": false,
     // --------
     //  Editor
     // --------
+    "editor.definitionLinkOpensInPeek": false,
     "editor.cursorBlinking": "solid",
     "editor.cursorStyle": "block",
     "editor.renderLineHighlight": "gutter",
@@ -243,7 +253,6 @@
     "editor.unicodeHighlight.ambiguousCharacters": true,
     "editor.stickyScroll.enabled": false,
     "editor.hover.sticky": true,
-    "breadcrumbs.enabled": false,
     // -----
     //  Vim
     // -----
@@ -256,7 +265,6 @@
     "vim.useCtrlKeys": true,
     "vim.leader": "<space>",
     "vim.useSystemClipboard": false,
-    "vim.smartRelativeLine": true,
     "vim.visualModeKeyBindings": [
         {
             "before": [
@@ -273,9 +281,6 @@
             ]
         }
     ],
-    "extensions.experimental.affinity": {
-        "vscodevim.vim": 1,
-    },
     // ------------
     //  Error Lens
     // ------------
@@ -286,18 +291,34 @@
         "info",
         "error"
     ],
-    // "errorLens.codeLensEnabled": true,
-    // "errorLens.codeLensOnClick": "showQuickFix",
     // -------------------
     //  Language settings
     // -------------------
+    "php.suggest.basic": false,
+    "php.validate.enable": false,
+    "[php]": {
+        "editor.defaultFormatter": "msamgan.laravel-pint-vscode"
+    },
+    "intelephense.environment.phpVersion": "8.2.0",
+    "intelephense.diagnostics.undefinedMethods": false,
+    "intelephense.diagnostics.undefinedFunctions": false,
+    "intelephense.format.enable": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
     "eslint.validate": [
         "javascript",
         "js",
         "vue",
-        "typescript",
+        "typescript"
     ],
     "eslint.format.enable": true,
+    "[css]": {
+        "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
     "files.associations": {
         "*.json": "jsonc"
     },
@@ -316,7 +337,6 @@
         "ssh",
         "untitled"
     ],
-    // TODO: Read through all of the issues on the github -> look for 'nested' TODOs
     "todo-tree.general.tags": [
         "BUG:",
         "FIXME:",
@@ -330,23 +350,23 @@
     "todo-tree.highlights.defaultHighlight": {
         "type": "tag-and-subTag",
         "foreground": "#9DE3C0",
-        "borderRadius": "0px",
+        "borderRadius": "0px"
     },
     "todo-tree.highlights.customHighlight": {
         "@Internal": {
             "type": "tag-and-subTag",
             "foreground": "#d00",
-            "background": "#ffffff00",
+            "background": "#ffffff00"
         },
         "TODO:": {
             "type": "text-and-comment",
             "foreground": "#ff0",
-            "background": "#ffffff00",
+            "background": "#ffffff00"
         },
         "FIXME:": {
             "type": "text-and-comment",
             "foreground": "#ccc",
-            "background": "#ff777788",
+            "background": "#ff777788"
         }
     },
     // -----
@@ -356,7 +376,7 @@
         "main",
         "master",
         "staging",
-        "develop",
+        "develop"
     ],
     // ------------------
     //  Markdown / Notes
@@ -380,7 +400,7 @@
         "editor.overviewRulerBorder": false,
         "editor.lineHeight": 28,
         "editor.wrappingIndent": "indent",
-        "workbench.editor.languageDetection": false,
+        "workbench.editor.languageDetection": false
     },
     "[org]": {
         "editor.wordWrap": "on",
@@ -389,7 +409,20 @@
     // ---------
     //  Preview
     // ---------
-    "editor.cursorSmoothCaretAnimation": "off", // TODO: Too slow.
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "editor.cursorSmoothCaretAnimation": "off",
+    "vim.smartRelativeLine": true,
     "editor.experimental.asyncTokenization": true,
     "editor.experimental.asyncTokenizationLogging": false,
     "editor.gotoLocation.multipleDefinitions": "goto",
@@ -397,7 +430,7 @@
         {
             "before": [
                 "g",
-                "u",
+                "u"
             ],
             "commands": [
                 "workbench.action.navigateBack"
@@ -495,6 +528,27 @@
             "commands": [
                 "editor.action.peekTypeDefinition"
             ]
-        },
+        }
     ],
+    "cSpell.language": "en,pt",
+    "git.openRepositoryInParentFolders": "never",
+    "emmet.excludeLanguages": [
+        "markdown",
+        "php"
+    ],
+    "terminal.integrated.tabs.enabled": false,
+    "chat.commandCenter.enabled": false,
+    "workbench.colorTheme": "Rosé Pine Moon",
+    "remote.autoForwardPortsSource": "hybrid",
+    "rust-analyzer.lens.enable": false,
+    "rust-analyzer.inlayHints.chainingHints.enable": false,
+    "rust-analyzer.inlayHints.genericParameterHints.const.enable": false,
+    "rust-analyzer.inlayHints.impliedDynTraitHints.enable": false,
+    "rust-analyzer.inlayHints.typeHints.enable": false,
+    "debug.allowBreakpointsEverywhere": true,
+    "redhat.telemetry.enabled": false,
+    "clangd.enableCodeCompletion": false,
+    "editor.inlayHints.fontSize": 12,
+    "extensions.gallery.serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
+    "extensions.gallery.itemUrl": "https://marketplace.visualstudio.com/items",
 }
