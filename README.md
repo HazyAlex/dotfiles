@@ -65,6 +65,7 @@ Below is a list of recommended software (some of them have config files in this 
 - foobar2000
 - mpv (create a `portable_config` folder next to the `.exe` and copy the `mpv.conf` in there)
 - musikcube
+- Windhawk
 - windows-terminal-quake
 
 ## TODO

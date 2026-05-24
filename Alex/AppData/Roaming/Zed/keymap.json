@@ -1,0 +1,36 @@
+//
+// Zed keymap
+//
+// documentation: https://zed.dev/docs/key-bindings
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-;": "terminal_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-;": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-0": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "ctrl-0": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "ctrl-w q": "pane::CloseActiveItem"
+    }
+  }
+]

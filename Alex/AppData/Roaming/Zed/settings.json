@@ -1,0 +1,119 @@
+{
+    //
+    // Updates / Core
+    //
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
+    },
+    "auto_update": false,
+    //
+    // Vim
+    //
+    "vim_mode": true,
+    "vim": {
+        "use_system_clipboard": "never",
+        "toggle_relative_line_numbers": true
+    },
+    //
+    // UI
+    //
+    "scrollbar": {
+        "show": "never"
+    },
+    "scroll_beyond_last_line": "one_page",
+    "theme": {
+        "mode": "dark",
+        "light": "Rosé Pine Moon",
+        "dark": "Catppuccin Macchiato"
+    },
+    "ui_font_family": "Iosevka",
+    "ui_font_size": 17,
+    "buffer_font_size": 18,
+    "cursor_blink": false,
+    "current_line_highlight": "gutter",
+    "tabs": {
+        "close_position": "right",
+        "file_icons": true,
+        "git_status": true
+    },
+    "tab_bar": {
+        "show": true,
+        "show_nav_history_buttons": false
+    },
+    // "preview_tabs": {
+    //   "enabled": true,
+    //   "enable_preview_from_file_finder": false,
+    //   "enable_preview_from_code_navigation": false,
+    // }
+    "toolbar": {
+        "breadcrumbs": false,
+        "quick_actions": false
+    },
+    "terminal": {
+        "working_directory": "current_project_directory",
+        "blinking": "terminal_controlled",
+        "copy_on_select": false,
+        "dock": "right",
+        "env": {},
+        "line_height": "comfortable",
+        "button": false,
+        "toolbar": {
+            "title": true
+        },
+        "shell": {
+            "with_arguments": {
+                "program": "pwsh.exe",
+                "args": [
+                    "--noLogo"
+                ]
+            }
+        }
+    },
+    "project_panel": {
+        "button": true,
+        "default_width": 240,
+        "dock": "right",
+        "file_icons": true,
+        "folder_icons": true,
+        "git_status": true,
+        "indent_size": 20,
+        "auto_reveal_entries": true,
+        "auto_fold_dirs": true,
+        "scrollbar": {
+            "show": "never"
+        }
+    },
+    "assistant": {
+        "default_model": {
+            "provider": "openai",
+            "model": "gpt-4o"
+        },
+        "enabled": false,
+        "button": false,
+        "dock": "right",
+        "default_width": 640,
+        "default_height": 320,
+        "provider": "openai",
+        "version": "2"
+    },
+    "chat_panel": {
+        "button": false
+    },
+    "collaboration_panel": {
+        "button": false
+    },
+    "outline_panel": {
+        "button": false,
+        "dock": "right"
+    },
+    "features": {
+        "inline_completion_provider": "none"
+    },
+    // Git
+    "git": {
+        "inline_blame": {
+            "enabled": false
+        }
+    }
+}

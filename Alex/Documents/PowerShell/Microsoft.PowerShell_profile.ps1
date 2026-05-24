@@ -6,6 +6,14 @@ function GotoDir([string]$directory) {
         Set-Location "C:\dev"
         return
     }
+    if ($directory.ToUpper() -eq "TORRENTS") {
+        Set-Location "C:\Torrents"
+        return
+    }
+    if ($directory.ToUpper() -eq "MUSIC") {
+        Set-Location "C:\Torrents\Music"
+        return
+    }
 
     Set-Location $directory
 }
